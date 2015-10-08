@@ -59,6 +59,7 @@
     "radium": "^0.13.8",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-utils": "alexcurtis/react-utils"
+    "react-utils": "alexcurtis/react-utils",
+    "velocity-react": "^1.1.0"
   }
 }

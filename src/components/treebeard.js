@@ -2,6 +2,8 @@
 
 import React from 'react';
 import rutils from 'react-utils';
+import {VelocityComponent} from 'velocity-react';
+import defaultAnimations from '../../themes/animations';
 
 class TreeNode extends React.Component {
     constructor(props){
@@ -13,23 +15,35 @@ class TreeNode extends React.Component {
         var onToggled = this.props.onToggled;
         if(onToggled){ onToggled(this.props.node); }
         this.setState({ toggled: !this.state.toggled });
-        // add some cool animations ... maybe using react-velocity or something.
+    }
+    animations(){
+        return {
+            children: {
+                animation: { opacity: this.state.toggled ? 1 : 0 },
+                duration: 500
+            }
+        };
     }
     render(){
         const node = this.props.node;
+        const animations = this.animations();
         return (
             <li>
                 <a href="#" onClick={this.onClick}>
                     {node.name}
                 </a>
-                <ul style={{opacity: this.state.toggled ? 1 : 0}}>
-                    {rutils.children.map(node.children, (child) =>
-                        <TreeNode {...this._eventBubbles()}
-                            key={child.id}
-                            node={child}
-                        />
-                    )}
-                </ul>
+                <VelocityComponent
+                    animation={animations.children.animation}
+                    duration={animations.children.duration}>
+                    <ul>
+                        {rutils.children.map(node.children, (child) =>
+                            <TreeNode {...this._eventBubbles()}
+                                key={child.id}
+                                node={child}
+                            />
+                        )}
+                    </ul>
+                </VelocityComponent>
             </li>
         );
     }
@@ -40,7 +54,8 @@ class TreeNode extends React.Component {
 
 TreeNode.propTypes = {
     node: React.PropTypes.object.isRequired,
-    onToggled: React.PropTypes.func
+    onToggled: React.PropTypes.func,
+    animations: React.PropTypes.object
 };
 
 TreeNode.defaultProps = {
@@ -57,6 +72,7 @@ class TreeBeard extends React.Component {
                     <TreeNode
                         node={this.props.data}
                         onToggled={this.props.onToggled}
+                        animations={this.props.animations}
                     />
                 </ul>
             </div>
@@ -66,10 +82,12 @@ class TreeBeard extends React.Component {
 
 TreeBeard.propTypes = {
     data: React.PropTypes.object.isRequired,
+    animations: React.PropTypes.object,
     onToggled: React.PropTypes.func
 };
 
 TreeBeard.defaultProps = {
+    animations: defaultAnimations
 };
 
 export default TreeBeard;

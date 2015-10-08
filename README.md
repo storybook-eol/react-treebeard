@@ -1,5 +1,5 @@
 # react-spotlight
 
-React Spotlight Carousel Component
+React Tree View Component
 
 Work In Progress...
