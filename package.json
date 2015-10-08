@@ -1,0 +1,64 @@
+{
+  "name": "react-treebeard",
+  "version": "0.0.1",
+  "description": "React treebeard Carousel Component",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/karma start karma.conf.js",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --compilers js:babel/register -r ./test/support/env -R spec --recursive ./test",
+    "test-travis": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel/register -r ./test/support/env -R spec --recursive ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexcurtis/react-treebeard.git"
+  },
+  "keywords": [
+    "react",
+    "treeview"
+  ],
+  "author": "Alex Curtis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexcurtis/react-treebeard/issues"
+  },
+  "homepage": "https://github.com/alexcurtis/react-treebeard#readme",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "*",
+    "babel-eslint": "*",
+    "babel-loader": "*",
+    "chai": "^3.2.0",
+    "del": "*",
+    "eslint": "*",
+    "eslint-loader": "*",
+    "eslint-plugin-react": "*",
+    "gulp": "*",
+    "gulp-babel": "*",
+    "gulp-eslint": "*",
+    "gulp-open": "*",
+    "gulp-util": "^3.0.6",
+    "istanbul": "^0.3.19",
+    "istanbul-instrumenter-loader": "^0.1.3",
+    "karma": "^0.13.9",
+    "karma-babel-preprocessor": "^5.2.2",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-coverage": "^0.5.2",
+    "karma-mocha": "^0.2.0",
+    "karma-sourcemap-loader": "^0.3.5",
+    "karma-spec-reporter": "0.0.20",
+    "karma-webpack": "^1.7.0",
+    "mocha": "^2.3.2",
+    "node-libs-browser": "*",
+    "react-hot-loader": "*",
+    "sinon": "git+https://github.com/uberVU/Sinon.JS",
+    "sinon-chai": "^2.8.0",
+    "webpack": "*",
+    "webpack-dev-server": "*"
+  },
+  "dependencies": {
+    "radium": "^0.13.8",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-utils": "alexcurtis/react-utils"
+  }
+}

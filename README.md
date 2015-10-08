@@ -1,2 +1,5 @@
-# react-treebeard
-Tree View
+# react-spotlight
+
+React Spotlight Carousel Component
+
+Work In Progress...
