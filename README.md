@@ -1,4 +1,4 @@
-# react-spotlight
+# react-treebeard
 
 React Tree View Component
 

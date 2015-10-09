@@ -6,6 +6,8 @@ import Treebeard from '../src/index';
 
 import movies from './movies';
 
+const nodeLoadingElement = <p>loading</p>;
+
 class MovieTree extends React.Component {
     constructor(props){
         super(props);
@@ -18,6 +20,7 @@ class MovieTree extends React.Component {
             <Treebeard
                 data={movies}
                 onToggled={this.onToggled}
+                nodeLoadingElement={nodeLoadingElement}
             />
         );
     }
@@ -28,7 +31,6 @@ MovieTree.propTypes = {
 
 MovieTree.defaultProps = {
 };
-
 
 const content = document.getElementById('content');
 ReactDOM.render(<MovieTree/>, content);

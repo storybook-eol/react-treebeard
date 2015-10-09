@@ -14,7 +14,8 @@ export default {
             children: [
                 {
                     id: 3,
-                    name: 'CHILD 3'
+                    name: 'CHILD 3',
+                    loading: true
                 }
             ]
         }

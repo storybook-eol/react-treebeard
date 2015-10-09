@@ -21,23 +21,42 @@ class TreeNode extends React.Component {
             children: {
                 animation: { opacity: this.state.toggled ? 1 : 0 },
                 duration: 500
+            },
+            loading: {
+                animation: { opacity: this.state.toggled ? 1 : 0 },
+                duration: 500
             }
         };
     }
+    renderLoading(animations){
+        const loadingElement = this.props.loadingElement;
+        if(this.props.node.loading && loadingElement){
+            return (
+                <VelocityComponent
+                    animation={animations.loading.animation}
+                    duration={animations.loading.duration}>
+                    {loadingElement}
+                </VelocityComponent>
+            );
+        }
+    }
     render(){
         const node = this.props.node;
-        const animations = this.animations();
+        const anim = this.animations();
         return (
             <li>
                 <a href="#" onClick={this.onClick}>
                     {node.name}
                 </a>
+                {this.renderLoading(anim)}
                 <VelocityComponent
-                    animation={animations.children.animation}
-                    duration={animations.children.duration}>
+                    animation={anim.children.animation}
+                    duration={anim.children.duration}>
                     <ul>
                         {rutils.children.map(node.children, (child) =>
-                            <TreeNode {...this._eventBubbles()}
+                            <TreeNode
+                                {...this._eventBubbles()}
+                                {...this._elements()}
                                 key={child.id}
                                 node={child}
                             />
@@ -50,12 +69,16 @@ class TreeNode extends React.Component {
     _eventBubbles(){
         return { onToggled: this.props.onToggled };
     }
+    _elements(){
+        return { loadingElement: this.props.loadingElement };
+    }
 }
 
 TreeNode.propTypes = {
     node: React.PropTypes.object.isRequired,
     onToggled: React.PropTypes.func,
-    animations: React.PropTypes.object
+    animations: React.PropTypes.object,
+    loadingElement: React.PropTypes.element
 };
 
 TreeNode.defaultProps = {
@@ -73,6 +96,7 @@ class TreeBeard extends React.Component {
                         node={this.props.data}
                         onToggled={this.props.onToggled}
                         animations={this.props.animations}
+                        loadingElement={this.props.nodeLoadingElement}
                     />
                 </ul>
             </div>
@@ -83,7 +107,8 @@ class TreeBeard extends React.Component {
 TreeBeard.propTypes = {
     data: React.PropTypes.object.isRequired,
     animations: React.PropTypes.object,
-    onToggled: React.PropTypes.func
+    onToggled: React.PropTypes.func,
+    nodeLoadingElement: React.PropTypes.element
 };
 
 TreeBeard.defaultProps = {
