@@ -24,10 +24,6 @@ class TreeNode extends React.Component {
                     transformOriginY: ['42%', '42%']
                 },
                 duration: 300
-            },
-            loading: {
-                animation: { opacity: this.state.toggled ? 1 : 0 },
-                duration: 500
             }
         };
     }
@@ -35,7 +31,6 @@ class TreeNode extends React.Component {
         return (
             <li>
                 {this.renderHeader()}
-                {this.renderLoading()}
                 <VelocityTransitionGroup enter="slideDown" leave="slideUp">
                     {this.state.toggled ? this.renderChildren() : null}
                 </VelocityTransitionGroup>
@@ -60,6 +55,7 @@ class TreeNode extends React.Component {
     renderChildren(){
         return (
             <ul>
+                {this.renderLoading()}
                 {rutils.children.map(this.props.node.children, (child) =>
                     <TreeNode
                         {...this._eventBubbles()}
@@ -72,16 +68,9 @@ class TreeNode extends React.Component {
         );
     }
     renderLoading(){
-        const anim = this.animations();
         const loadingElement = this.props.loadingElement;
         if(this.props.node.loading && loadingElement){
-            return (
-                <VelocityComponent
-                    animation={anim.loading.animation}
-                    duration={anim.loading.duration}>
-                    {loadingElement}
-                </VelocityComponent>
-            );
+            return (<li>{loadingElement}</li>);
         }
     }
     _eventBubbles(){

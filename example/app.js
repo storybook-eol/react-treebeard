@@ -6,7 +6,7 @@ import Treebeard from '../src/index';
 
 import movies from './movies';
 
-const nodeLoadingElement = <p>loading</p>;
+const nodeLoadingElement = <div>loading...</div>;
 
 class MovieTree extends React.Component {
     constructor(props){
