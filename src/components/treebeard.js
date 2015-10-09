@@ -3,6 +3,7 @@
 import React from 'react';
 import rutils from 'react-utils';
 import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
+import decorators from './decorators';
 import defaultAnimations from '../../themes/animations';
 
 class TreeNode extends React.Component {
@@ -44,9 +45,7 @@ class TreeNode extends React.Component {
                 <VelocityComponent
                     duration={anim.toggle.duration}
                     animation={anim.toggle.animation}>
-                    <div>
-                        <i>V</i>
-                    </div>
+                    {this.props.toggleElement}
                 </VelocityComponent>
                 {this.props.node.name}
             </a>
@@ -77,7 +76,10 @@ class TreeNode extends React.Component {
         return { onToggled: this.props.onToggled };
     }
     _elements(){
-        return { loadingElement: this.props.loadingElement };
+        return {
+            loadingElement: this.props.loadingElement,
+            toggleElement: this.props.toggleElement
+        };
     }
 }
 
@@ -85,7 +87,8 @@ TreeNode.propTypes = {
     node: React.PropTypes.object.isRequired,
     onToggled: React.PropTypes.func,
     animations: React.PropTypes.object,
-    loadingElement: React.PropTypes.element
+    loadingElement: React.PropTypes.element,
+    toggleElement: React.PropTypes.element
 };
 
 TreeNode.defaultProps = {
@@ -103,7 +106,8 @@ class TreeBeard extends React.Component {
                         node={this.props.data}
                         onToggled={this.props.onToggled}
                         animations={this.props.animations}
-                        loadingElement={this.props.nodeLoadingElement}
+                        loadingElement={this.props.decorators.loading}
+                        toggleElement={this.props.decorators.toggle}
                     />
                 </ul>
             </div>
@@ -115,11 +119,12 @@ TreeBeard.propTypes = {
     data: React.PropTypes.object.isRequired,
     animations: React.PropTypes.object,
     onToggled: React.PropTypes.func,
-    nodeLoadingElement: React.PropTypes.element
+    decorators: React.PropTypes.array
 };
 
 TreeBeard.defaultProps = {
-    animations: defaultAnimations
+    animations: defaultAnimations,
+    decorators: decorators
 };
 
 export default TreeBeard;
