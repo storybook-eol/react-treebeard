@@ -6,7 +6,13 @@ export default {
     children: [
         {
             id: 1,
-            name: 'CHILD'
+            name: 'CHILD',
+            children: [
+                {
+                    id: 4,
+                    name: 'CHILD 4'
+                }
+            ]
         },
         {
             id: 2,

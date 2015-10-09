@@ -2,7 +2,7 @@
 
 import React from 'react';
 import rutils from 'react-utils';
-import {VelocityComponent} from 'velocity-react';
+import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 import defaultAnimations from '../../themes/animations';
 
 class TreeNode extends React.Component {
@@ -18,9 +18,12 @@ class TreeNode extends React.Component {
     }
     animations(){
         return {
-            children: {
-                animation: { opacity: this.state.toggled ? 1 : 0 },
-                duration: 500
+            toggle: {
+                animation: {
+                    rotateX: this.state.toggled ? 180 : 0,
+                    transformOriginY: ['42%', '42%']
+                },
+                duration: 300
             },
             loading: {
                 animation: { opacity: this.state.toggled ? 1 : 0 },
@@ -28,43 +31,58 @@ class TreeNode extends React.Component {
             }
         };
     }
-    renderLoading(animations){
+    render(){
+        return (
+            <li>
+                {this.renderHeader()}
+                {this.renderLoading()}
+                <VelocityTransitionGroup enter="slideDown" leave="slideUp">
+                    {this.state.toggled ? this.renderChildren() : null}
+                </VelocityTransitionGroup>
+            </li>
+        );
+    }
+    renderHeader(){
+        const anim = this.animations();
+        return (
+            <a href="#" onClick={this.onClick}>
+                <VelocityComponent
+                    duration={anim.toggle.duration}
+                    animation={anim.toggle.animation}>
+                    <div>
+                        <i>V</i>
+                    </div>
+                </VelocityComponent>
+                {this.props.node.name}
+            </a>
+        );
+    }
+    renderChildren(){
+        return (
+            <ul>
+                {rutils.children.map(this.props.node.children, (child) =>
+                    <TreeNode
+                        {...this._eventBubbles()}
+                        {...this._elements()}
+                        key={child.id}
+                        node={child}
+                    />
+                )}
+            </ul>
+        );
+    }
+    renderLoading(){
+        const anim = this.animations();
         const loadingElement = this.props.loadingElement;
         if(this.props.node.loading && loadingElement){
             return (
                 <VelocityComponent
-                    animation={animations.loading.animation}
-                    duration={animations.loading.duration}>
+                    animation={anim.loading.animation}
+                    duration={anim.loading.duration}>
                     {loadingElement}
                 </VelocityComponent>
             );
         }
-    }
-    render(){
-        const node = this.props.node;
-        const anim = this.animations();
-        return (
-            <li>
-                <a href="#" onClick={this.onClick}>
-                    {node.name}
-                </a>
-                {this.renderLoading(anim)}
-                <VelocityComponent
-                    animation={anim.children.animation}
-                    duration={anim.children.duration}>
-                    <ul>
-                        {rutils.children.map(node.children, (child) =>
-                            <TreeNode
-                                {...this._eventBubbles()}
-                                {...this._elements()}
-                                key={child.id}
-                                node={child}
-                            />
-                        )}
-                    </ul>
-                </VelocityComponent>
-            </li>
-        );
     }
     _eventBubbles(){
         return { onToggled: this.props.onToggled };
