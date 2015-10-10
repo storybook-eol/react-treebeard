@@ -2,9 +2,10 @@
 
 export default {
     tree: {
+        base: {
+        },
         node: {
             base: {
-
             },
             toggle: {
                 height: 50,

@@ -20,36 +20,36 @@ class TreeNode extends React.Component {
         this.setState({ toggled: !this.state.toggled });
     }
     animations(){
+        const animations = this.props.animations;
         return {
-            toggle: {
-                animation: {
-                    rotateZ: this.state.toggled ? 90 : 0
-                },
-                duration: 300
-            }
+            toggle: animations.toggle(this.state),
+            children: animations.children(this.state)
         };
     }
     render(){
+        const animations = this.animations();
+        let childAnimations = animations.children;
         return (
             <li>
-                {this.renderHeader()}
-                <VelocityTransitionGroup enter="slideDown" leave="slideUp">
+                {this.renderHeader(animations)}
+                <VelocityTransitionGroup
+                    enter={childAnimations.enter}
+                    leave={childAnimations.leave}>
                     {this.state.toggled ? this.renderChildren() : null}
                 </VelocityTransitionGroup>
             </li>
         );
     }
-    renderHeader(){
+    renderHeader(animations){
         const decorators = this.props.decorators;
         const style = this.props.style;
         const Node = <decorators.Node name={this.props.node.name}/>;
         if(this.props.node.end){ return Node; }
-        const anim = this.animations();
         return (
             <a href="#" onClick={this.onClick}>
                 <VelocityComponent
-                    duration={anim.toggle.duration}
-                    animation={anim.toggle.animation}>
+                    duration={animations.toggle.duration}
+                    animation={animations.toggle.animation}>
                     <decorators.Toggle {...style.toggle}/>
                 </VelocityComponent>
                 {Node}
@@ -66,6 +66,7 @@ class TreeNode extends React.Component {
                         key={child.id}
                         node={child}
                         decorators={this.props.decorators}
+                        animations={this.props.animations}
                         style={this.props.style}
                     />
                 )}
@@ -91,8 +92,8 @@ TreeNode.propTypes = {
     style: React.PropTypes.object.isRequired,
     node: React.PropTypes.object.isRequired,
     decorators: React.PropTypes.object.isRequired,
-    onToggled: React.PropTypes.func,
-    animations: React.PropTypes.object
+    animations: React.PropTypes.object.isRequired,
+    onToggled: React.PropTypes.func
 };
 
 TreeNode.defaultProps = {
