@@ -10,7 +10,8 @@ export default {
             children: [
                 {
                     id: 4,
-                    name: 'CHILD 4'
+                    name: 'CHILD 4',
+                    end: true
                 }
             ]
         },

@@ -39,15 +39,18 @@ class TreeNode extends React.Component {
         );
     }
     renderHeader(){
+        const decs = this.props.decorators;
+        const Node = <decs.Node name={this.props.node.name}/>;
+        if(this.props.node.end){ return Node; }
         const anim = this.animations();
         return (
             <a href="#" onClick={this.onClick}>
                 <VelocityComponent
                     duration={anim.toggle.duration}
                     animation={anim.toggle.animation}>
-                    {this.props.toggleElement}
+                    {decs.Toggle}
                 </VelocityComponent>
-                {this.props.node.name}
+                {Node}
             </a>
         );
     }
@@ -58,16 +61,16 @@ class TreeNode extends React.Component {
                 {rutils.children.map(this.props.node.children, (child) =>
                     <TreeNode
                         {...this._eventBubbles()}
-                        {...this._elements()}
                         key={child.id}
                         node={child}
+                        decorators={this.props.decorators}
                     />
                 )}
             </ul>
         );
     }
     renderLoading(){
-        const loadingElement = this.props.loadingElement;
+        const loadingElement = this.props.decorators.Loading;
         if(this.props.node.loading && loadingElement){
             return (<li>{loadingElement}</li>);
         }
@@ -75,20 +78,13 @@ class TreeNode extends React.Component {
     _eventBubbles(){
         return { onToggled: this.props.onToggled };
     }
-    _elements(){
-        return {
-            loadingElement: this.props.loadingElement,
-            toggleElement: this.props.toggleElement
-        };
-    }
 }
 
 TreeNode.propTypes = {
     node: React.PropTypes.object.isRequired,
+    decorators: React.PropTypes.object.isRequired,
     onToggled: React.PropTypes.func,
-    animations: React.PropTypes.object,
-    loadingElement: React.PropTypes.element,
-    toggleElement: React.PropTypes.element
+    animations: React.PropTypes.object
 };
 
 TreeNode.defaultProps = {
@@ -106,8 +102,7 @@ class TreeBeard extends React.Component {
                         node={this.props.data}
                         onToggled={this.props.onToggled}
                         animations={this.props.animations}
-                        loadingElement={this.props.decorators.loading}
-                        toggleElement={this.props.decorators.toggle}
+                        decorators={this.props.decorators}
                     />
                 </ul>
             </div>
@@ -119,7 +114,7 @@ TreeBeard.propTypes = {
     data: React.PropTypes.object.isRequired,
     animations: React.PropTypes.object,
     onToggled: React.PropTypes.func,
-    decorators: React.PropTypes.array
+    decorators: React.PropTypes.object
 };
 
 TreeBeard.defaultProps = {

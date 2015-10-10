@@ -2,17 +2,26 @@
 
 import React from 'react';
 
-const loading = (
+const Loading = (
     <div>loading...</div>
 );
 
-const toggle = (
+const Toggle = (
     <div>
         <i>V</i>
     </div>
 );
 
+const Node = (props) => {
+    return (
+        <div>
+            {props.name}
+        </div>
+    );
+};
+
 export default {
-    loading,
-    toggle
+    Loading,
+    Toggle,
+    Node
 };
