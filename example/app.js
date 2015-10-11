@@ -10,14 +10,15 @@ class MovieTree extends React.Component {
     constructor(props){
         super(props);
     }
-    onToggled(node){
-        console.log(node);
+    onToggle(node, toggled){
+        // Store Toggle State
+        node.toggled = toggled;
     }
     render(){
         return (
             <Treebeard
                 data={movies}
-                onToggled={this.onToggled}
+                onToggle={this.onToggle}
             />
         );
     }

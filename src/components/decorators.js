@@ -9,26 +9,30 @@ const Loading = () => {
 };
 
 const Toggle = (props) => {
-    const height = props.height;
-    const width = props.width;
+    const style = props.style;
+    const height = style.height;
+    const width = style.width;
     let midHeight = height * 0.5;
     let points = `0,0 0,${height} ${width},${midHeight}`;
     return (
-        <div style={{display: 'inline-block'}}>
+        <div style={style.base}>
             <svg height={height} width={width}>
                 <polygon
                     points={points}
-                    style={props.arrow}
+                    style={style.arrow}
                 />
             </svg>
         </div>
     );
 };
 
-const Node = (props) => {
+const Header = (props) => {
+    const style = props.style;
     return (
-        <div>
-            {props.name}
+        <div style={style.base}>
+            <div style={style.title}>
+                {props.name}
+            </div>
         </div>
     );
 };
@@ -36,5 +40,5 @@ const Node = (props) => {
 export default {
     Loading,
     Toggle,
-    Node
+    Header
 };

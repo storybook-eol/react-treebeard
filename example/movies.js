@@ -11,7 +11,7 @@ export default {
                 {
                     id: 4,
                     name: 'CHILD 4',
-                    end: true
+                    terminal: true
                 }
             ]
         },
