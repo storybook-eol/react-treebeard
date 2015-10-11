@@ -11,7 +11,7 @@ class MovieTree extends React.Component {
         super(props);
         this.onToggle = this.onToggle.bind(this);
     }
-    onParentToggled(node, toggled){
+    onSubTreeToggled(node, toggled){
         // Store Toggle State
         node.toggled = toggled;
     }
@@ -19,8 +19,8 @@ class MovieTree extends React.Component {
         console.log('terminal = ', node);
     }
     onToggle(node, toggled){
-        if(!node.terminal){ this.onParentToggled(node, toggled); }
-        else { this.onTerminalClicked(node); }
+        if(node.terminal){ this.onTerminalClicked(node); }
+        else { this.onSubTreeToggled(node, toggled); }
     }
     render(){
         return (
