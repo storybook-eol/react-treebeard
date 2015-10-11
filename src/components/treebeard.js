@@ -50,17 +50,23 @@ class TreeNode extends React.Component {
     renderHeader(animations){
         const decorators = this.props.decorators;
         const style = this.props.style;
-        const Header = <decorators.Header name={this.props.node.name} style={style.header}/>;
-        if(this.props.node.terminal){ return Header; }
+        const terminal = this.props.node.terminal;
         return (
             <a href="#" onClick={this.onClick}>
-                <VelocityComponent
-                    duration={animations.toggle.duration}
-                    animation={animations.toggle.animation}>
-                    <decorators.Toggle style={style.toggle}/>
-                </VelocityComponent>
-                {Header}
+                { !terminal ? this.renderToggle(animations) : '' }
+                <decorators.Header name={this.props.node.name} style={style.header}/>
             </a>
+        );
+    }
+    renderToggle(animations){
+        const decorators = this.props.decorators;
+        const style = this.props.style;
+        return (
+            <VelocityComponent
+                duration={animations.toggle.duration}
+                animation={animations.toggle.animation}>
+                <decorators.Toggle style={style.toggle}/>
+            </VelocityComponent>
         );
     }
     renderChildren(){

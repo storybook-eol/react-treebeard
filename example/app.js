@@ -9,10 +9,18 @@ import movies from './movies';
 class MovieTree extends React.Component {
     constructor(props){
         super(props);
+        this.onToggle = this.onToggle.bind(this);
     }
-    onToggle(node, toggled){
+    onParentToggled(node, toggled){
         // Store Toggle State
         node.toggled = toggled;
+    }
+    onTerminalClicked(node){
+        console.log('terminal = ', node);
+    }
+    onToggle(node, toggled){
+        if(!node.terminal){ this.onParentToggled(node, toggled); }
+        else { this.onTerminalClicked(node); }
     }
     render(){
         return (
