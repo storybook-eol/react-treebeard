@@ -27,44 +27,52 @@ class TreeNode extends React.Component {
         this.setState({ toggled: toggled });
     }
     animations(){
-        const animations = this.props.animations;
+        const props = this.props;
+        let animations = Object.assign({}, props.animations, props.node.animations);
         return {
             toggle: animations.toggle(this.state),
             children: animations.children(this.state)
         };
     }
+    decorators(){
+        // Merge Any Node Based Decorators Into The Pack
+        const props = this.props;
+        let nodeDecorators = props.node.decorators || {};
+        return Object.assign({}, props.decorators, nodeDecorators);
+    }
     render(){
+        const decorators = this.decorators();
         const animations = this.animations();
+        const toggled = this.state.toggled;
         return (
             <li style={this.props.style.base}>
-                {this.renderHeader(animations)}
-                {this.state.toggled ? this.renderChildren(animations) : null}
+                {this.renderHeader(decorators, animations)}
+                {toggled ? this.renderChildren(decorators, animations) : null}
             </li>
         );
     }
-    renderHeader(animations){
-        const decorators = this.props.decorators;
+    renderHeader(decorators, animations){
         const style = this.props.style;
         const terminal = this.props.node.terminal;
         return (
             <a href="#" onClick={this.onClick}>
-                { !terminal ? this.renderToggle(animations) : '' }
+                { !terminal ? this.renderToggle(decorators, animations) : '' }
                 <decorators.Header name={this.props.node.name} style={style.header}/>
             </a>
         );
     }
-    renderToggle(animations){
-        const decorators = this.props.decorators;
+    renderToggle(decorators, animations){
+        const Toggle = decorators.Toggle;
         const style = this.props.style;
         return (
             <VelocityComponent
                 duration={animations.toggle.duration}
                 animation={animations.toggle.animation}>
-                <decorators.Toggle style={style.toggle}/>
+                <Toggle style={style.toggle}/>
             </VelocityComponent>
         );
     }
-    renderChildren(animations){
+    renderChildren(decorators, animations){
         const childAnimations = animations.children;
         return (
             <ul style={this.props.style.subtree}>
@@ -72,7 +80,7 @@ class TreeNode extends React.Component {
                     enter={childAnimations.enter}
                     leave={childAnimations.leave}
                     runOnMount={true}>
-                    {this.renderLoading()}
+                    {this.renderLoading(decorators)}
                     {rutils.children.map(this.props.node.children, (child) =>
                         <TreeNode
                             {...this._eventBubbles()}

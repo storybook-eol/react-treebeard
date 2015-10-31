@@ -1,5 +1,5 @@
 # react-treebeard
 
-React Tree View Component
+React Fast, Efficient and Customisable Tree View Component
 
 Work In Progress...

@@ -18,6 +18,11 @@ export default {
         {
             id: 2,
             name: 'CHILD 2',
+            // decorators: {
+            //     Toggle: Toggle2,
+            //     Header: Header
+            // },
+            // animations: animations,
             children: [
                 {
                     id: 3,
