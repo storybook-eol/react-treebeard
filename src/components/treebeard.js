@@ -35,15 +35,10 @@ class TreeNode extends React.Component {
     }
     render(){
         const animations = this.animations();
-        let childAnimations = animations.children;
         return (
             <li style={this.props.style.base}>
                 {this.renderHeader(animations)}
-                <VelocityTransitionGroup
-                    enter={childAnimations.enter}
-                    leave={childAnimations.leave}>
-                    {this.state.toggled ? this.renderChildren() : null}
-                </VelocityTransitionGroup>
+                {this.state.toggled ? this.renderChildren(animations) : null}
             </li>
         );
     }
@@ -69,20 +64,26 @@ class TreeNode extends React.Component {
             </VelocityComponent>
         );
     }
-    renderChildren(){
+    renderChildren(animations){
+        const childAnimations = animations.children;
         return (
             <ul style={this.props.style.subtree}>
-                {this.renderLoading()}
-                {rutils.children.map(this.props.node.children, (child) =>
-                    <TreeNode
-                        {...this._eventBubbles()}
-                        key={child.id}
-                        node={child}
-                        decorators={this.props.decorators}
-                        animations={this.props.animations}
-                        style={this.props.style}
-                    />
-                )}
+                <VelocityTransitionGroup
+                    enter={childAnimations.enter}
+                    leave={childAnimations.leave}
+                    runOnMount={true}>
+                    {this.renderLoading()}
+                    {rutils.children.map(this.props.node.children, (child) =>
+                        <TreeNode
+                            {...this._eventBubbles()}
+                            key={child.id}
+                            node={child}
+                            decorators={this.props.decorators}
+                            animations={this.props.animations}
+                            style={this.props.style}
+                        />
+                    )}
+                </VelocityTransitionGroup>
             </ul>
         );
     }

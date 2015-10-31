@@ -37,6 +37,10 @@ const Header = (props) => {
     );
 };
 
+Header.propTypes = {
+    name: React.PropTypes.string.isRequired
+};
+
 export default {
     Loading,
     Toggle,

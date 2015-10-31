@@ -1,5 +1,9 @@
 'use strict';
 
+// More Advanced Pre-Canned UI Animations
+require('velocity-animate');
+require('velocity-animate/velocity.ui');
+
 export default {
     toggle: (state) => {
         return {
@@ -9,8 +13,10 @@ export default {
     },
     children: (/* state */) => {
         return {
-            enter: 'slideDown',
-            leave: 'slideUp'
+            enter: {
+                animation: 'transition.slideLeftIn',
+                stagger: 200
+            }
         };
     }
 };

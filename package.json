@@ -61,6 +61,7 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-utils": "alexcurtis/react-utils",
-    "velocity-react": "^1.1.0"
+    "velocity-react": "^1.1.1",
+    "velocity-animate": "^1.2.3"
   }
 }
