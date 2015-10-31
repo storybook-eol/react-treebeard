@@ -28,10 +28,10 @@ class TreeNode extends React.Component {
     }
     animations(){
         const props = this.props;
-        let animations = Object.assign({}, props.animations, props.node.animations);
+        let anim = Object.assign({}, props.animations, props.node.animations);
         return {
-            toggle: animations.toggle(this.state),
-            children: animations.children(this.state)
+            toggle: anim.toggle(this.state),
+            children: anim.children(this.state)
         };
     }
     decorators(){
@@ -55,9 +55,12 @@ class TreeNode extends React.Component {
         const style = this.props.style;
         const terminal = this.props.node.terminal;
         return (
-            <a href="#" onClick={this.onClick}>
+            <a href="#" onClick={this.onClick} style={style.link}>
                 { !terminal ? this.renderToggle(decorators, animations) : '' }
-                <decorators.Header name={this.props.node.name} style={style.header}/>
+                <decorators.Header
+                    name={this.props.node.name}
+                    style={style.header}
+                />
             </a>
         );
     }
@@ -100,7 +103,7 @@ class TreeNode extends React.Component {
         if(this.props.node.loading && Loading){
             return (
                 <li>
-                    <Loading/>
+                    <Loading style={this.props.style.loading}/>
                 </li>
             );
         }

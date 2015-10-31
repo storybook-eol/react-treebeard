@@ -2,10 +2,16 @@
 
 import React from 'react';
 
-const Loading = () => {
+const Loading = (props) => {
     return (
-        <div>loading...</div>
+        <div style={props.style}>
+            loading...
+        </div>
     );
+};
+
+Loading.propTypes = {
+    style: React.PropTypes.object
 };
 
 const Toggle = (props) => {
@@ -16,12 +22,14 @@ const Toggle = (props) => {
     let points = `0,0 0,${height} ${width},${midHeight}`;
     return (
         <div style={style.base}>
-            <svg height={height} width={width}>
-                <polygon
-                    points={points}
-                    style={style.arrow}
-                />
-            </svg>
+            <div style={style.wrapper}>
+                <svg height={height} width={width}>
+                    <polygon
+                        points={points}
+                        style={style.arrow}
+                    />
+                </svg>
+            </div>
         </div>
     );
 };

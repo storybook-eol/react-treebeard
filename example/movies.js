@@ -3,6 +3,7 @@
 export default {
     id: 0,
     name: 'INSERT ROOT TITLE HERE',
+    toggled: true,
     children: [
         {
             id: 1,
