@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'radium';
 import rutils from 'react-utils';
 import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 
@@ -8,6 +9,7 @@ import defaultDecorators from './decorators';
 import defaultTheme from '../../themes/default';
 import defaultAnimations from '../../themes/animations';
 
+@Radium
 class TreeNode extends React.Component {
     constructor(props){
         super(props);
@@ -54,8 +56,10 @@ class TreeNode extends React.Component {
     renderHeader(decorators, animations){
         const style = this.props.style;
         const terminal = this.props.node.terminal;
+        const active = this.props.node.active;
+        let linkStyle = [style.link, active ? style.activeLink : null];
         return (
-            <a href="#" onClick={this.onClick} style={style.link}>
+            <a href="#" onClick={this.onClick} style={linkStyle}>
                 { !terminal ? this.renderToggle(decorators, animations) : '' }
                 <decorators.Header
                     name={this.props.node.name}

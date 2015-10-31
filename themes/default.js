@@ -16,7 +16,11 @@ export default {
             },
             link: {
                 position: 'relative',
+                padding: '0px 5px',
                 display: 'block'
+            },
+            activeLink: {
+                background: '#31363F'
             },
             toggle: {
                 base: {

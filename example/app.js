@@ -9,6 +9,7 @@ import movies from './movies';
 class MovieTree extends React.Component {
     constructor(props){
         super(props);
+        this.state = {};
         this.onToggle = this.onToggle.bind(this);
     }
     onSubTreeToggled(node, toggled){
@@ -19,8 +20,11 @@ class MovieTree extends React.Component {
         console.log('terminal = ', node);
     }
     onToggle(node, toggled){
+        if(this.state.cursor){this.state.cursor.active = false;}
+        node.active = true;
         if(node.terminal){ this.onTerminalClicked(node); }
         else { this.onSubTreeToggled(node, toggled); }
+        this.setState({ cursor: node });
     }
     render(){
         return (
