@@ -6,8 +6,8 @@ import rutils from 'react-utils';
 import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 
 import defaultDecorators from './decorators';
-import defaultTheme from '../../themes/default';
-import defaultAnimations from '../../themes/animations';
+import defaultTheme from '../themes/default';
+import defaultAnimations from '../themes/animations';
 
 @Radium
 class TreeNode extends React.Component {
