@@ -134,3 +134,34 @@ let decorators = {
 
 <Treebeard data={...} decorators={decorators}/>
 ```
+
+### Data Attributes
+
+```javascript
+{
+    id: 'string/number',
+    name: 'string',
+    children: 'array',
+    loading: 'boolean',
+    terminal: 'boolean',
+    decorators: 'object',
+    animations: 'object'
+},
+```
+#### id
+The unique identifier for the node. Treebeard uses this value to efficiently build the treeview.
+
+#### name
+The name prop passed into the Header component.
+
+#### children
+The children attached to the node. This value populates the subtree at the specific node. Each child is built from the same basic data structure.
+
+#### loading
+Loading flag. It will populate the treeview with the loading component. Useful when asynchronously pulling the data into the treeview.
+
+#### terminal
+Terminates the node. There is no more data to load into the subtree. A Toggle will not be rendered. This is the end of the path.
+
+#### decorators / animations
+Attach specific decorators / animations to a node. Provides the low level functionality to create visuals on a node-by-node basis. These structures are the same as the top level props, described above.
