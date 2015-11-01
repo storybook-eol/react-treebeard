@@ -1,8 +1,6 @@
 # react-treebeard
 
-## React Tree View Component
-
-Fast, Efficient and Customisable.
+React Tree View Component. Fast, Efficient and Customisable.
 
 ### Install
 
@@ -105,4 +103,34 @@ Sets the treeview animations. See [velocity-react](https://github.com/twitter-fa
 #### decorators
 `React.PropTypes.object`
 
-Decorates the treeview. Here you can use your own Node Header, Toggle and Loading components. Defaults to `src/decorators`.
+Decorates the treeview. Here you can use your own Node Header, Toggle and Loading components. Defaults to `src/decorators`. See example below:
+
+```javascript
+let decorators = {
+    Loading: (props) => {
+        return (
+            <div style={props.style}>
+                loading...
+            </div>
+        );
+    },
+    Toggle: (props) => {
+        return (
+            <div style={props.style}>
+                <svg height={props.height} width={props.width}>
+                    // Vector Toggle Here
+                </svg>
+            </div>
+        );
+    },
+    Header: (props) => {
+        return (
+            <div style={props.style}>
+                {props.name}
+            </div>
+        );
+    }
+};
+
+<Treebeard data={...} decorators={decorators}/>
+```
