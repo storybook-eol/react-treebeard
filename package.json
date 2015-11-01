@@ -1,7 +1,7 @@
 {
   "name": "react-treebeard",
   "version": "1.0.0",
-  "description": "React treebeard Carousel Component",
+  "description": "Fast, Efficient and Customisable Tree View React Component",
   "main": "index.js",
   "scripts": {
     "prepublish": "npm run lib",
