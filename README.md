@@ -1,6 +1,8 @@
 # react-treebeard
 
-Fast, Efficient and Customisable Tree View React Component
+## React Tree View Component
+
+Fast, Efficient and Customisable.
 
 ### Install
 
