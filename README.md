@@ -79,3 +79,30 @@ class TreeExample extends React.Component {
 const content = document.getElementById('content');
 ReactDOM.render(<TreeExample/>, content);
 ```
+
+### Prop Values
+
+#### data
+`React.PropTypes.object.isRequired`
+
+Data that drives the tree view. State-driven effects can be built by manipulating the attributes in this object. An example can be found in `example/data.js`
+
+#### onToggle
+`React.PropTypes.func`
+
+Callback function when a node is toggled / clicked. Passes 2 attributes: the data node and it's toggled boolean state.
+
+#### style
+`React.PropTypes.object`
+
+Sets the treeview styling. Defaults to `src/themes/default`.
+
+#### animations
+`React.PropTypes.object`
+
+Sets the treeview animations. See [velocity-react](https://github.com/twitter-fabric/velocity-react) for more details. Defaults to `src/themes/animations`.
+
+#### decorators
+`React.PropTypes.object`
+
+Decorates the treeview. Here you can use your own Node Header, Toggle and Loading components. Defaults to `src/decorators`.
