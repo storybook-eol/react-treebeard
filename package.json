@@ -1,6 +1,6 @@
 {
   "name": "react-treebeard",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "React treebeard Carousel Component",
   "main": "index.js",
   "scripts": {
