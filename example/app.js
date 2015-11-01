@@ -2,11 +2,36 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Radium from 'radium';
 import Treebeard from '../src/index';
 
-import movies from './movies';
+import data from './data';
+import styles from './styles';
 
-class MovieTree extends React.Component {
+const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
+
+class NodeViewer extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    render(){
+        const style = styles.viewer;
+        let json = JSON.stringify(this.props.node, null, 4);
+        if(!json){ json = HELP_MSG; }
+        return (
+            <div style={style.base}>
+                {json}
+            </div>
+        );
+    }
+}
+
+NodeViewer.propTypes = {
+    node: React.PropTypes.object
+};
+
+@Radium
+class DemoTree extends React.Component {
     constructor(props){
         super(props);
         this.state = {};
@@ -28,19 +53,18 @@ class MovieTree extends React.Component {
     }
     render(){
         return (
-            <Treebeard
-                data={movies}
-                onToggle={this.onToggle}
-            />
+            <div>
+                <div style={styles.component}>
+                    <Treebeard data={data} onToggle={this.onToggle}/>
+                </div>
+                <div style={styles.component}>
+                    <NodeViewer node={this.state.cursor}/>
+                </div>
+            </div>
+
         );
     }
 }
 
-MovieTree.propTypes = {
-};
-
-MovieTree.defaultProps = {
-};
-
 const content = document.getElementById('content');
-ReactDOM.render(<MovieTree/>, content);
+ReactDOM.render(<DemoTree/>, content);

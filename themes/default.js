@@ -5,7 +5,8 @@ export default {
         base: {
             listStyle: 'none',
             backgroundColor: '#21252B',
-            padding: '20px',
+            margin: 0,
+            padding: 0,
             color: '#9DA5AB',
             fontFamily: 'lucida grande ,tahoma,verdana,arial,sans-serif',
             fontSize: '14px'
