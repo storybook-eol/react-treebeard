@@ -8,7 +8,11 @@ React Tree View Component. Fast, Efficient and Customisable.
 npm install react-treebeard --save
 ```
 
-### Example
+### [Example](http://alexcurtis.github.io/react-treebeard/)
+
+An online example from the `/example` directory can be found here: [Here](http://alexcurtis.github.io/react-treebeard/)
+
+### Quick Start
 ```javascript
 'use strict';
 
