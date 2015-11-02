@@ -88,10 +88,10 @@ class TreeNode extends React.Component {
                     leave={childAnimations.leave}
                     runOnMount={true}>
                     {this.renderLoading(decorators)}
-                    {rutils.children.map(this.props.node.children, (child) =>
+                    {rutils.children.map(this.props.node.children, (child, index) =>
                         <TreeNode
                             {...this._eventBubbles()}
-                            key={child.id}
+                            key={index}
                             node={child}
                             decorators={this.props.decorators}
                             animations={this.props.animations}

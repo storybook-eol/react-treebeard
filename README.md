@@ -21,36 +21,29 @@ import ReactDOM from 'react-dom';
 import Treebeard from 'react-treebeard';
 
 const data = {
-    id: 0,
     name: 'root',
     toggled: true,
     children: [
         {
-            id: 1,
             name: 'parent',
             children: [
                 {
-                    id: 2,
                     name: 'child',
                     terminal: true
                 }
             ]
         },
         {
-            id: 3,
             name: 'loading parent',
             loading: true
         },
         {
-            id: 4,
             name: 'parent',
             children: [
                 {
-                    id: 5,
                     name: 'nested parent',
                     children: [
                         {
-                            id: 6,
                             name: 'nested child',
                             terminal: true
                         }
@@ -143,7 +136,6 @@ let decorators = {
 
 ```javascript
 {
-    id: 'string/number',
     name: 'string',
     children: 'array',
     loading: 'boolean',
@@ -152,9 +144,6 @@ let decorators = {
     animations: 'object'
 },
 ```
-#### id
-The unique identifier for the node. Treebeard uses this value to efficiently build the treeview.
-
 #### name
 The name prop passed into the Header component.
 
