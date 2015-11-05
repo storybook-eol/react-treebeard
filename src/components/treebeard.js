@@ -10,6 +10,46 @@ import defaultTheme from '../themes/default';
 import defaultAnimations from '../themes/animations';
 
 @Radium
+class NodeHeader extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    render(){
+        const {style, animations, decorators} = this.props;
+        const terminal = this.props.node.terminal;
+        const active = this.props.node.active;
+        const linkStyle = [style.link, active ? style.activeLink : null];
+        return (
+            <a href="#" onClick={this.props.onClick} style={linkStyle}>
+                { !terminal ? this.renderToggle(decorators, animations) : '' }
+                <decorators.Header
+                    name={this.props.node.name}
+                    style={style.header}
+                />
+            </a>
+        );
+    }
+    renderToggle(decorators, animations){
+        const Toggle = decorators.Toggle;
+        const style = this.props.style;
+        return (
+            <VelocityComponent
+                duration={animations.toggle.duration}
+                animation={animations.toggle.animation}>
+                <Toggle style={style.toggle}/>
+            </VelocityComponent>
+        );
+    }
+}
+
+NodeHeader.propTypes = {
+    style: React.PropTypes.object.isRequired,
+    decorators: React.PropTypes.object.isRequired,
+    animations: React.PropTypes.object.isRequired,
+    onClick: React.PropTypes.func.isRequired,
+    node: React.PropTypes.object.isRequired
+};
+
 class TreeNode extends React.Component {
     constructor(props){
         super(props);
@@ -33,7 +73,8 @@ class TreeNode extends React.Component {
         let anim = Object.assign({}, props.animations, props.node.animations);
         return {
             toggle: anim.toggle(this.state),
-            children: anim.children(this.state)
+            children: anim.children(this.state),
+            drawer: anim.drawer(this.state)
         };
     }
     decorators(){
@@ -49,44 +90,26 @@ class TreeNode extends React.Component {
         return (
             <li style={this.props.style.base}>
                 {this.renderHeader(decorators, animations)}
-                {toggled ? this.renderChildren(decorators, animations) : null}
+                <VelocityTransitionGroup {...animations.drawer}>
+                    {toggled ? this.renderChildren(decorators, animations) : null}
+                </VelocityTransitionGroup>
             </li>
         );
     }
     renderHeader(decorators, animations){
-        const style = this.props.style;
-        const terminal = this.props.node.terminal;
-        const active = this.props.node.active;
-        let linkStyle = [style.link, active ? style.activeLink : null];
         return (
-            <a href="#" onClick={this.onClick} style={linkStyle}>
-                { !terminal ? this.renderToggle(decorators, animations) : '' }
-                <decorators.Header
-                    name={this.props.node.name}
-                    style={style.header}
-                />
-            </a>
+            <NodeHeader
+                decorators={decorators}
+                animations={animations}
+                style={this.props.style}
+                node={this.props.node}
+                onClick={this.onClick}
+            />
         );
     }
-    renderToggle(decorators, animations){
-        const Toggle = decorators.Toggle;
-        const style = this.props.style;
-        return (
-            <VelocityComponent
-                duration={animations.toggle.duration}
-                animation={animations.toggle.animation}>
-                <Toggle style={style.toggle}/>
-            </VelocityComponent>
-        );
-    }
-    renderChildren(decorators, animations){
-        const childAnimations = animations.children;
+    renderChildren(decorators){
         return (
             <ul style={this.props.style.subtree}>
-                <VelocityTransitionGroup
-                    enter={childAnimations.enter}
-                    leave={childAnimations.leave}
-                    runOnMount={true}>
                     {this.renderLoading(decorators)}
                     {rutils.children.map(this.props.node.children, (child, index) =>
                         <TreeNode
@@ -98,7 +121,6 @@ class TreeNode extends React.Component {
                             style={this.props.style}
                         />
                     )}
-                </VelocityTransitionGroup>
             </ul>
         );
     }

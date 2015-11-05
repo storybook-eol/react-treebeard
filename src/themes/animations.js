@@ -11,12 +11,27 @@ export default {
             duration: 300
         };
     },
+    drawer: (/* state */) => {
+        return {
+            enter: {
+                animation: 'slideDown'
+            },
+            leave: {
+                animation: 'slideUp'
+            }
+        };
+    },
     children: (/* state */) => {
         return {
             enter: {
                 animation: 'transition.slideLeftIn',
                 stagger: 200
-            }
+            },
+            leave: {
+                animation: 'transition.slideLeftOut',
+                stagger: 200
+            },
+            runOnMount: true
         };
     }
 };
