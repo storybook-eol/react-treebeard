@@ -73,7 +73,6 @@ class TreeNode extends React.Component {
         let anim = Object.assign({}, props.animations, props.node.animations);
         return {
             toggle: anim.toggle(this.state),
-            children: anim.children(this.state),
             drawer: anim.drawer(this.state)
         };
     }
@@ -110,17 +109,17 @@ class TreeNode extends React.Component {
     renderChildren(decorators){
         return (
             <ul style={this.props.style.subtree}>
-                    {this.renderLoading(decorators)}
-                    {rutils.children.map(this.props.node.children, (child, index) =>
-                        <TreeNode
-                            {...this._eventBubbles()}
-                            key={index}
-                            node={child}
-                            decorators={this.props.decorators}
-                            animations={this.props.animations}
-                            style={this.props.style}
-                        />
-                    )}
+                {this.renderLoading(decorators)}
+                {rutils.children.map(this.props.node.children, (child, index) =>
+                    <TreeNode
+                        {...this._eventBubbles()}
+                        key={index}
+                        node={child}
+                        decorators={this.props.decorators}
+                        animations={this.props.animations}
+                        style={this.props.style}
+                    />
+                )}
             </ul>
         );
     }

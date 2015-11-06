@@ -34,6 +34,10 @@ const Toggle = (props) => {
     );
 };
 
+Toggle.propTypes = {
+    style: React.PropTypes.object
+};
+
 const Header = (props) => {
     const style = props.style;
     return (
@@ -46,6 +50,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
+    style: React.PropTypes.object,
     name: React.PropTypes.string.isRequired
 };
 

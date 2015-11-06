@@ -1,6 +1,6 @@
 {
   "name": "react-treebeard",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "React Tree View Component",
   "main": "lib/index.js",
   "scripts": {
@@ -67,7 +67,6 @@
     "react": "^0.14.1",
     "react-dom": "^0.14.1",
     "react-utils": "github:alexcurtis/react-utils",
-    "velocity-animate": "^1.2.3",
     "velocity-react": "^1.1.1"
   }
 }

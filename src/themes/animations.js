@@ -1,9 +1,5 @@
 'use strict';
 
-// More Advanced Pre-Canned UI Animations
-require('velocity-animate');
-require('velocity-animate/velocity.ui');
-
 export default {
     toggle: (state) => {
         return {
@@ -14,24 +10,13 @@ export default {
     drawer: (/* state */) => {
         return {
             enter: {
-                animation: 'slideDown'
+                animation: 'slideDown',
+                duration: 300
             },
             leave: {
-                animation: 'slideUp'
+                animation: 'slideUp',
+                duration: 300
             }
-        };
-    },
-    children: (/* state */) => {
-        return {
-            enter: {
-                animation: 'transition.slideLeftIn',
-                stagger: 200
-            },
-            leave: {
-                animation: 'transition.slideLeftOut',
-                stagger: 200
-            },
-            runOnMount: true
         };
     }
 };
