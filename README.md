@@ -123,7 +123,7 @@ let decorators = {
     Header: (props) => {
         return (
             <div style={props.style}>
-                {props.name}
+                {props.node.name}
             </div>
         );
     }

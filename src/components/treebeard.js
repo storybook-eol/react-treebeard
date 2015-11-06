@@ -23,7 +23,7 @@ class NodeHeader extends React.Component {
             <a href="#" onClick={this.props.onClick} style={linkStyle}>
                 { !terminal ? this.renderToggle(decorators, animations) : '' }
                 <decorators.Header
-                    name={this.props.node.name}
+                    node={this.props.node}
                     style={style.header}
                 />
             </a>

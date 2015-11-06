@@ -43,7 +43,7 @@ const Header = (props) => {
     return (
         <div style={style.base}>
             <div style={style.title}>
-                {props.name}
+                {props.node.name}
             </div>
         </div>
     );
@@ -51,7 +51,7 @@ const Header = (props) => {
 
 Header.propTypes = {
     style: React.PropTypes.object,
-    name: React.PropTypes.string.isRequired
+    node: React.PropTypes.object.isRequired
 };
 
 export default {

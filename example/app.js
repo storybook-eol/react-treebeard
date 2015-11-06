@@ -7,8 +7,25 @@ import Treebeard from '../src/index';
 
 import data from './data';
 import styles from './styles';
+import decorators from '../src/components/decorators';
 
 const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
+
+// Example: Customising The Header Decorator To Include Icons
+decorators.Header = (props) => {
+    const style = props.style;
+    const iconType = props.node.terminal ? 'file-text' : 'folder';
+    const iconClass = `fa fa-${iconType}`;
+    const iconStyle = { marginRight: '5px' };
+    return (
+        <div style={style.base}>
+            <div style={style.title}>
+                <i className={iconClass} style={iconStyle}/>
+                {props.node.name}
+            </div>
+        </div>
+    );
+};
 
 class NodeViewer extends React.Component {
     constructor(props){
@@ -55,7 +72,11 @@ class DemoTree extends React.Component {
         return (
             <div>
                 <div style={styles.component}>
-                    <Treebeard data={data} onToggle={this.onToggle}/>
+                    <Treebeard
+                        data={data}
+                        onToggle={this.onToggle}
+                        decorators={decorators}
+                    />
                 </div>
                 <div style={styles.component}>
                     <NodeViewer node={this.state.cursor}/>
