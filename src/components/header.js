@@ -15,7 +15,11 @@ class NodeHeader extends React.Component {
         const active = this.props.node.active;
         const linkStyle = [style.link, active ? style.activeLink : null];
         return (
-            <a href="#" onClick={this.props.onClick} style={linkStyle}>
+            <a
+                href="#"
+                ref="hyperlink"
+                onClick={this.props.onClick}
+                style={linkStyle}>
                 { !terminal ? this.renderToggle(decorators, animations) : '' }
                 <decorators.Header
                     node={this.props.node}
@@ -28,7 +32,7 @@ class NodeHeader extends React.Component {
         const Toggle = decorators.Toggle;
         const style = this.props.style;
         return (
-            <VelocityComponent
+            <VelocityComponent ref="velocity"
                 duration={animations.toggle.duration}
                 animation={animations.toggle.animation}>
                 <Toggle style={style.toggle}/>
