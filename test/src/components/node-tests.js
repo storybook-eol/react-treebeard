@@ -192,7 +192,6 @@ describe('node component', () => {
 
     it('should pass velocity the drawer enter animation and duration props', () => {
         const animations = factory.createAnimations();
-        const TransitionGroup = require('velocity-react').VelocityTransitionGroup;
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                 animations={animations}
@@ -206,7 +205,6 @@ describe('node component', () => {
 
     it('should pass velocity the drawer leave animation and duration props', () => {
         const animations = factory.createAnimations();
-        const TransitionGroup = require('velocity-react').VelocityTransitionGroup;
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                 animations={animations}

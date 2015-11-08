@@ -31,7 +31,7 @@ module.exports = {
                         animation: 'animation-2',
                         duration: 2
                     },
-                    leave:{
+                    leave: {
                         animation: 'animation-3',
                         duration: 3
                     }

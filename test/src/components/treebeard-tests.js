@@ -2,7 +2,6 @@
 
 'use strict';
 
-const sinon = require('sinon');
 const React = require('react');
 const TestUtils = require('react-addons-test-utils');
 const TreeNode = require('../../../src/components/node');
