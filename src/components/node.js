@@ -43,9 +43,9 @@ class TreeNode extends React.Component {
         const animations = this.animations();
         const toggled = this.state.toggled;
         return (
-            <li style={this.props.style.base}>
+            <li style={this.props.style.base} ref="topLevel">
                 {this.renderHeader(decorators, animations)}
-                <VelocityTransitionGroup {...animations.drawer}>
+                <VelocityTransitionGroup {...animations.drawer} ref="velocity">
                     {toggled ? this.renderChildren(decorators, animations) : null}
                 </VelocityTransitionGroup>
             </li>
@@ -63,9 +63,9 @@ class TreeNode extends React.Component {
         );
     }
     renderChildren(decorators){
+        if(this.props.node.loading){ return this.renderLoading(decorators); }
         return (
-            <ul style={this.props.style.subtree}>
-                {this.renderLoading(decorators)}
+            <ul style={this.props.style.subtree} ref="subtree">
                 {rutils.children.map(this.props.node.children, (child, index) =>
                     <TreeNode
                         {...this._eventBubbles()}
@@ -79,15 +79,14 @@ class TreeNode extends React.Component {
             </ul>
         );
     }
-    renderLoading(){
-        const Loading = this.props.decorators.Loading;
-        if(this.props.node.loading && Loading){
-            return (
+    renderLoading(decorators){
+        return (
+            <ul style={this.props.style.subtree}>
                 <li>
-                    <Loading style={this.props.style.loading}/>
+                    <decorators.Loading style={this.props.style.loading}/>
                 </li>
-            );
-        }
+            </ul>
+        );
     }
     _eventBubbles(){
         return { onToggle: this.props.onToggle };

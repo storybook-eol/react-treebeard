@@ -79,7 +79,7 @@ describe('header component', () => {
         component.should.exist;
     });
 
-    it('should pass velocity the animation and duration props', () => {
+    it('should pass velocity the toggle animation and duration props', () => {
         const animations = { toggle: { duration: 1, animation: 'slideUp' } };
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
