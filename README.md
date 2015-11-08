@@ -1,5 +1,8 @@
 # react-treebeard
 
+[![Build Status](https://travis-ci.org/alexcurtis/react-treebeard.svg?branch=master)](https://travis-ci.org/alexcurtis/react-treebeard) [![Coverage Status](https://img.shields.io/coveralls/alexcurtis/react-treebeard.svg)](https://coveralls.io/r/alexcurtis/react-treebeard?branch=master)
+
+
 React Tree View Component. Fast, Efficient and Customisable.
 
 ### Install

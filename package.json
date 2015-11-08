@@ -8,8 +8,7 @@
     "lib": "npm run babel",
     "babel": "rimraf lib && babel src/ -d lib/",
     "test": "./node_modules/.bin/karma start karma.conf.js",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --compilers js:babel/register -r ./test/support/env -R spec --recursive ./test",
-    "test-travis": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel/register -r ./test/support/env -R spec --recursive ./test"
+    "test-travis": "./node_modules/karma/bin/karma start --browsers Firefox --single-run"
   },
   "repository": {
     "type": "git",
@@ -48,6 +47,7 @@
     "karma-babel-preprocessor": "^6.0.1",
     "karma-chrome-launcher": "^0.2.1",
     "karma-coverage": "^0.5.3",
+    "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.2.0",
     "karma-sourcemap-loader": "^0.3.6",
     "karma-spec-reporter": "0.0.22",

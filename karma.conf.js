@@ -26,13 +26,17 @@ module.exports = function(config) {
             require('karma-mocha'),
             require('karma-coverage'),
             require('karma-chrome-launcher'),
+            require('karma-firefox-launcher'),
             require('karma-sourcemap-loader'),
             require('karma-spec-reporter')
         ],
         reporters: ['spec', 'coverage'],
         coverageReporter: {
-            type: 'html',
-            dir: 'coverage/'
+            dir: 'coverage/',
+            reporters: [
+                { type: 'html', subdir: 'report-html' },
+                { type: 'lcov', subdir: 'report-lcov' }
+            ]
         },
         port: 9876,
         colors: true,

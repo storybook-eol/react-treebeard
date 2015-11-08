@@ -13,17 +13,15 @@ class TreeBeard extends React.Component {
     }
     render(){
         return (
-            <div>
-                <ul style={this.props.style.tree.base}>
-                    <TreeNode
-                        node={this.props.data}
-                        onToggle={this.props.onToggle}
-                        animations={this.props.animations}
-                        decorators={this.props.decorators}
-                        style={this.props.style.tree.node}
-                    />
-                </ul>
-            </div>
+            <ul style={this.props.style.tree.base} ref="treeBase">
+                <TreeNode
+                    node={this.props.data}
+                    onToggle={this.props.onToggle}
+                    animations={this.props.animations}
+                    decorators={this.props.decorators}
+                    style={this.props.style.tree.node}
+                />
+            </ul>
         );
     }
 }
