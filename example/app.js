@@ -3,11 +3,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Radium from 'radium';
-import Treebeard from '../src/index';
+import {Treebeard, decorators} from '../src/index';
 
 import data from './data';
 import styles from './styles';
-import decorators from '../src/components/decorators';
 
 const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
 

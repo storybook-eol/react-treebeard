@@ -20,7 +20,7 @@ An online example from the `/example` directory can be found here: [Here](http:/
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Treebeard from 'react-treebeard';
+import {Treebeard} from 'react-treebeard';
 
 const data = {
     name: 'root',
