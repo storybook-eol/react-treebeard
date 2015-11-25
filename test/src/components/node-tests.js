@@ -83,8 +83,8 @@ describe('node component', () => {
 
     it('should use the node animations if defined', () => {
         const nodeAnimations = {
-            toggle: sinon.stub().returns({ duration: 1, animation: 'any' }),
-            drawer: sinon.stub().returns({ duration: 1, animation: 'any' })
+            toggle: sinon.stub().returns({ duration: 0, animation: 'fadeIn' }),
+            drawer: sinon.stub().returns({ duration: 0, animation: 'fadeIn' })
         };
         const node = { animations: nodeAnimations };
         const treeNode = TestUtils.renderIntoDocument(
@@ -100,8 +100,8 @@ describe('node component', () => {
 
     it('should fallback to the prop animations if the node animations are not defined', () => {
         const animations = {
-            toggle: sinon.stub().returns({ duration: 1, animation: 'any' }),
-            drawer: sinon.stub().returns({ duration: 1, animation: 'any' })
+            toggle: sinon.stub().returns({ duration: 0, animation: 'fadeIn' }),
+            drawer: sinon.stub().returns({ duration: 0, animation: 'fadeIn' })
         };
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode

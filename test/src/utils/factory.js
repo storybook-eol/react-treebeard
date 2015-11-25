@@ -21,19 +21,19 @@ module.exports = {
         return {
             toggle: () => {
                 return {
-                    animation: 'animation-1',
-                    duration: 1
+                    animation: 'fadeOut',
+                    duration: 0
                 };
             },
             drawer: () => {
                 return {
                     enter: {
-                        animation: 'animation-2',
-                        duration: 2
+                        animation: 'slideDown',
+                        duration: 0
                     },
                     leave: {
-                        animation: 'animation-3',
-                        duration: 3
+                        animation: 'slideUp',
+                        duration: 0
                     }
                 };
             }

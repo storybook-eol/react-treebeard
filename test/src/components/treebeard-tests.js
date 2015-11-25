@@ -67,4 +67,17 @@ describe('treebeard component', () => {
         const defaultDecorators = require('../../../src/components/decorators');
         node.props.decorators.should.equal(defaultDecorators);
     });
+
+    it('should support rendering multiple nodes at the root level', () => {
+        const multipleRootNodes = [
+            { name: 'root-1', children: [] },
+            { name: 'root-2', children: [] }
+        ];
+        const treebeard = TestUtils.renderIntoDocument(
+            <Treebeard data={multipleRootNodes}/>
+        );
+        const nodes = TestUtils.scryRenderedComponentsWithType(treebeard, TreeNode);
+        nodes.length.should.equal(multipleRootNodes.length);
+    });
+
 });
