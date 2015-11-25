@@ -80,9 +80,9 @@ ReactDOM.render(<TreeExample/>, content);
 ### Prop Values
 
 #### data
-`React.PropTypes.object.isRequired`
+`React.PropTypes.oneOfType([React.PropTypes.object,React.PropTypes.array]).isRequired`
 
-Data that drives the tree view. State-driven effects can be built by manipulating the attributes in this object. An example can be found in `example/data.js`
+Data that drives the tree view. State-driven effects can be built by manipulating the attributes in this object. Also supports an array for multiple nodes at the root level. An example can be found in `example/data.js`
 
 #### onToggle
 `React.PropTypes.func`

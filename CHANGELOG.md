@@ -1,3 +1,12 @@
+1.0.11
+-------------------
+
+## Bugs
+- [Support for Multiple Nodes @ Root Level](https://github.com/alexcurtis/react-treebeard/issues/4)
+- Fixed non-critical animation errors in tests.
+
+
+
 1.0.10
 -------------------
 
