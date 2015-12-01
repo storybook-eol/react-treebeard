@@ -16,6 +16,7 @@ export default {
                 position: 'relative'
             },
             link: {
+                cursor: 'pointer',
                 position: 'relative',
                 padding: '0px 5px',
                 display: 'block'
