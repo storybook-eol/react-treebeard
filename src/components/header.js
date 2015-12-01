@@ -15,8 +15,7 @@ class NodeHeader extends React.Component {
         const active = this.props.node.active;
         const linkStyle = [style.link, active ? style.activeLink : null];
         return (
-            <a
-                href="javascript:;"
+            <div
                 ref="hyperlink"
                 onClick={this.props.onClick}
                 style={linkStyle}>
@@ -25,7 +24,7 @@ class NodeHeader extends React.Component {
                     node={this.props.node}
                     style={style.header}
                 />
-            </a>
+            </div>
         );
     }
     renderToggle(decorators, animations){
