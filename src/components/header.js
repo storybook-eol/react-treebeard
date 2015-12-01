@@ -16,7 +16,7 @@ class NodeHeader extends React.Component {
         const linkStyle = [style.link, active ? style.activeLink : null];
         return (
             <a
-                href="#"
+                href="javascript:;"
                 ref="hyperlink"
                 onClick={this.props.onClick}
                 style={linkStyle}>
