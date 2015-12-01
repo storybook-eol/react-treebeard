@@ -1,3 +1,7 @@
+1.0.13
+-------------------
+- Remove Hyperlink. Reverted ES-Lint Script Reporting.
+
 1.0.12
 -------------------
 - [# HRef Fix](https://github.com/alexcurtis/react-treebeard/issues/6)
