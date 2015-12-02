@@ -21,7 +21,7 @@ class TreeBeard extends React.Component {
         const getters = {
             childrenGetter: node=>Getter(node, this.props.childrenField),
             keyGetter: (node, index)=>Getter(node, this.props.keyField, index),
-            toggledGetter: node=>Getter(node, this.props.childrenField)
+            toggledGetter: node=>Getter(node, this.props.toggledField)
         }
 
         return (
