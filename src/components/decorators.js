@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import {VelocityComponent} from 'velocity-react';
 
 const Loading = (props) => {
     return (
@@ -20,7 +21,8 @@ const Toggle = (props) => {
     const width = style.width;
     let midHeight = height * 0.5;
     let points = `0,0 0,${height} ${width},${midHeight}`;
-    return (
+
+    var inner = props.children || (
         <div style={style.base}>
             <div style={style.wrapper}>
                 <svg height={height} width={width}>
@@ -32,9 +34,17 @@ const Toggle = (props) => {
             </div>
         </div>
     );
+
+    return (
+        <VelocityComponent duration={props.animations.duration}
+                           animation={props.animations.animation}>
+            {inner}
+        </VelocityComponent>
+    );
 };
 
 Toggle.propTypes = {
+    animations: React.PropTypes.object.isRequired,
     style: React.PropTypes.object
 };
 

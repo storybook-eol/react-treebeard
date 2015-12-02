@@ -34,6 +34,7 @@ class TreeBeard extends React.Component {
                         animations={this.props.animations}
                         decorators={this.props.decorators}
                         style={this.props.style.tree.node}
+                        renderNode={this.props.renderNode}
                         {...getters}
                     />
                 )}
@@ -50,7 +51,20 @@ TreeBeard.propTypes = {
     ]).isRequired,
     animations: React.PropTypes.object,
     onToggle: React.PropTypes.func,
-    decorators: React.PropTypes.object
+    decorators: React.PropTypes.object,
+    childrenField: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.func
+    ]),
+    toggledField: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.func
+    ]),
+    keyField: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.func
+    ]),
+    renderNode: React.PropTypes.func
 };
 
 TreeBeard.defaultProps = {

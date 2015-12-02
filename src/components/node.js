@@ -3,7 +3,6 @@
 import React from 'react';
 import rutils from 'react-utils';
 import {VelocityTransitionGroup} from 'velocity-react';
-
 import NodeHeader from './header';
 
 class TreeNode extends React.Component {
@@ -52,10 +51,12 @@ class TreeNode extends React.Component {
         );
     }
     renderHeader(decorators, animations){
-        const {childrenGetter} = this.props;
+        if(this.props.renderNode){
+            return this.props.renderNode(this.props, this.onClick, decorators, animations);
+        }
         return (
             <NodeHeader
-                childrenGetter={childrenGetter}
+                hasChildren={!!this.props.childrenGetter(this.props.node)}
                 decorators={decorators}
                 animations={animations}
                 style={this.props.style}
@@ -79,6 +80,7 @@ class TreeNode extends React.Component {
                         node={child}
                         decorators={this.props.decorators}
                         animations={this.props.animations}
+                        renderNode={this.props.renderNode}
                         style={this.props.style}
                     />
                 )}
