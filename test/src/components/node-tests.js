@@ -10,7 +10,7 @@ const factory = require('../utils/factory');
 
 const defaults = {
     style: {},
-    node: {},
+    node: { chilren: [] },
     animations: factory.createAnimations(),
     decorators: factory.createDecorators()
 };
@@ -121,7 +121,7 @@ describe('node component', () => {
             Toggle: ToggleDecorator,
             Header: HeaderDecorator
         };
-        const node = { decorators: nodeDecorators };
+        const node = { decorators: nodeDecorators, children: [] };
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode
                 {...defaults}
@@ -139,10 +139,12 @@ describe('node component', () => {
             Toggle: ToggleDecorator,
             Header: HeaderDecorator
         };
+        const node = { children: [] };
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode
                 {...defaults}
                 decorators={decorators}
+                node={node}
             />
         );
         TestUtils.findRenderedComponentWithType(treeNode, ToggleDecorator).should.exist;

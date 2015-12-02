@@ -13,7 +13,7 @@ const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
 // Example: Customising The Header Decorator To Include Icons
 decorators.Header = (props) => {
     const style = props.style;
-    const iconType = props.node.terminal ? 'file-text' : 'folder';
+    const iconType = props.node.children ? 'folder' : 'file-text';
     const iconClass = `fa fa-${iconType}`;
     const iconStyle = { marginRight: '5px' };
     return (
@@ -56,11 +56,12 @@ class DemoTree extends React.Component {
     onSubTreeToggled(node, toggled){
         // Store Toggle State
         node.toggled = toggled;
+        console.log('here');
     }
     onToggle(node, toggled){
         if(this.state.cursor){this.state.cursor.active = false;}
         node.active = true;
-        if(!node.terminal){ this.onSubTreeToggled(node, toggled); }
+        if(node.children){ this.onSubTreeToggled(node, toggled); }
         this.setState({ cursor: node });
     }
     render(){

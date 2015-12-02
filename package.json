@@ -2,7 +2,7 @@
   "name": "react-treebeard",
   "version": "1.0.13",
   "description": "React Tree View Component",
-  "main": "lib/index.js",
+  "main": "index.js",
   "scripts": {
     "prepublish": "npm run lib",
     "lib": "npm run babel",

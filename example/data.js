@@ -7,31 +7,17 @@ export default {
         {
             name: 'example',
             children: [
-                {
-                    name: 'app.js',
-                    terminal: true
-                },
-                {
-                    name: 'data.js',
-                    terminal: true
-                },
-                {
-                    name: 'index.html',
-                    terminal: true
-                },
-                {
-                    name: 'styles.js',
-                    terminal: true
-                },
-                {
-                    name: 'webpack.config.js',
-                    terminal: true
-                }
+                { name: 'app.js' },
+                { name: 'data.js' },
+                { name: 'index.html' },
+                { name: 'styles.js' },
+                { name: 'webpack.config.js' }
             ]
         },
         {
             name: 'node_modules',
-            loading: true
+            loading: true,
+            children: []
         },
         {
             name: 'src',
@@ -39,46 +25,22 @@ export default {
                 {
                     name: 'components',
                     children: [
-                        {
-                            name: 'decorators.js',
-                            terminal: true
-                        },
-                        {
-                            name: 'treebeard.js',
-                            terminal: true
-                        }
+                        { name: 'decorators.js' },
+                        { name: 'treebeard.js' }
                     ]
                 },
-                {
-                    name: 'index.js',
-                    terminal: true
-                }
+                { name: 'index.js' }
             ]
         },
         {
             name: 'themes',
             children: [
-                {
-                    name: 'animations.js',
-                    terminal: true
-                },
-                {
-                    name: 'default.js',
-                    terminal: true
-                }
+                { name: 'animations.js' },
+                { name: 'default.js' }
             ]
         },
-        {
-            name: 'Gulpfile.js',
-            terminal: true
-        },
-        {
-            name: 'index.js',
-            terminal: true
-        },
-        {
-            name: 'package.json',
-            terminal: true
-        }
+        { name: 'Gulpfile.js' },
+        { name: 'index.js' },
+        { name: 'package.json' }
     ]
 };

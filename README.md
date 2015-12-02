@@ -29,15 +29,13 @@ const data = {
         {
             name: 'parent',
             children: [
-                {
-                    name: 'child',
-                    terminal: true
-                }
+                { name: 'child' }
             ]
         },
         {
             name: 'loading parent',
-            loading: true
+            loading: true,
+            children: []
         },
         {
             name: 'parent',
@@ -45,10 +43,7 @@ const data = {
                 {
                     name: 'nested parent',
                     children: [
-                        {
-                            name: 'nested child',
-                            terminal: true
-                        }
+                        { name: 'nested child' }
                     ]
                 }
             ]
@@ -141,7 +136,6 @@ let decorators = {
     name: 'string',
     children: 'array',
     loading: 'boolean',
-    terminal: 'boolean',
     decorators: 'object',
     animations: 'object'
 },
@@ -150,13 +144,10 @@ let decorators = {
 The name prop passed into the Header component.
 
 #### children
-The children attached to the node. This value populates the subtree at the specific node. Each child is built from the same basic data structure.
+The children attached to the node. This value populates the subtree at the specific node. Each child is built from the same basic data structure. Tip: Make this an empty array, if you want to asynchronously load a potential parent.
 
 #### loading
 Loading flag. It will populate the treeview with the loading component. Useful when asynchronously pulling the data into the treeview.
-
-#### terminal
-Terminates the node. There is no more data to load into the subtree. A Toggle will not be rendered. This is the end of the path.
 
 #### decorators / animations
 Attach specific decorators / animations to a node. Provides the low level functionality to create visuals on a node-by-node basis. These structures are the same as the top level props, described above.

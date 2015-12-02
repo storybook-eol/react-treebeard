@@ -10,7 +10,7 @@ const factory = require('../utils/factory');
 
 const defaults = {
     style: {},
-    node: {},
+    node: { children: [] },
     animations: { toggle: {} },
     decorators: factory.createDecorators()
 };
@@ -31,7 +31,7 @@ describe('header component', () => {
     it('should render the toggle decorator if the node is not terminal', () => {
         const toggleType = React.createClass({ render: () => <div/> });
         const decorators = factory.createDecorators({ toggle: toggleType });
-        const node = { terminal: false };
+        const node = { children: [] };
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
                 node={node}
@@ -45,7 +45,7 @@ describe('header component', () => {
     it('should not render the toggle decorator if the node is terminal', () => {
         const toggleType = React.createClass({ render: () => <div/> });
         const decorators = factory.createDecorators({ toggle: toggleType });
-        const node = { terminal: true };
+        const node = { name: 'terminal-node' };
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
                 decorators={decorators}
@@ -105,7 +105,7 @@ describe('header component', () => {
 
     it('should pass the node and style to the header decorator', () => {
         const style = { header: { color: 'red' } };
-        const node = { terminal: true };
+        const node = { name: 'terminal-node' };
         const headType = React.createClass({ render: () => <div/> });
         const decorators = factory.createDecorators({ header: headType });
         const header = TestUtils.renderIntoDocument(
