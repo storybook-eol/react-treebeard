@@ -54,6 +54,7 @@ class TreeNode extends React.Component {
     renderHeader(decorators, animations){
         return (
             <NodeHeader
+                childrenField={this.props.childrenField}
                 decorators={decorators}
                 animations={animations}
                 style={this.props.style}
@@ -63,13 +64,14 @@ class TreeNode extends React.Component {
         );
     }
     renderChildren(decorators){
+        const {keyField, childrenField} = this.props;
         if(this.props.node.loading){ return this.renderLoading(decorators); }
         return (
             <ul style={this.props.style.subtree} ref="subtree">
-                {rutils.children.map(this.props.node.children, (child, index) =>
+                {rutils.children.map(this.props.node[childrenField], (child, index) =>
                     <TreeNode
                         {...this._eventBubbles()}
-                        key={index}
+                        key={keyField?child[keyField]:index}
                         node={child}
                         decorators={this.props.decorators}
                         animations={this.props.animations}
@@ -98,7 +100,9 @@ TreeNode.propTypes = {
     node: React.PropTypes.object.isRequired,
     decorators: React.PropTypes.object.isRequired,
     animations: React.PropTypes.object.isRequired,
-    onToggle: React.PropTypes.func
+    onToggle: React.PropTypes.func,
+    keyField: React.PropTypes.string,
+    childrenField: React.PropTypes.string
 };
 
 export default TreeNode;
