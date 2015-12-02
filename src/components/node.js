@@ -65,7 +65,7 @@ class TreeNode extends React.Component {
         );
     }
     renderChildren(decorators){
-        const {keyGetter, childrenGetter} = this.props;
+        const {keyGetter, childrenGetter, toggledGetter} = this.props;
         if(this.props.node.loading){ return this.renderLoading(decorators); }
         return (
             <ul style={this.props.style.subtree} ref="subtree">
@@ -75,6 +75,7 @@ class TreeNode extends React.Component {
                         key={keyGetter(child, index)}
                         keyGetter={keyGetter}
                         childrenGetter={childrenGetter}
+                        toggledGetter={toggledGetter}
                         node={child}
                         decorators={this.props.decorators}
                         animations={this.props.animations}
