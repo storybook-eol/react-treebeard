@@ -11,22 +11,39 @@ class TreeBeard extends React.Component {
     constructor(props){
         super(props);
     }
+    keyGetter(node, index){
+        let {keyField} = this.props;
+        if(!keyField){
+            return index;
+        }
+        else if(typeof keyField === 'function'){
+            return keyField(node);
+        }
+        return node[keyField];
+    }
+    childrenGetter(node){
+        let {childrenField} = this.props;
+        if(typeof childrenField === 'function'){
+            return childrenField(node);
+        }
+        return node[childrenField];
+    }
     render(){
-        let {data, keyField} = this.props;
+        let {data} = this.props;
         // Support Multiple Root Nodes. Its not formally a tree, but its a use-case.
         if(!Array.isArray(data)){ data = [data]; }
         return (
             <ul style={this.props.style.tree.base} ref="treeBase">
                 {data.map((node, index) =>
                     <TreeNode
-                        key={keyField?node[keyField]:index}
+                        key={this.keyGetter(node, index)}
                         node={node}
                         onToggle={this.props.onToggle}
                         animations={this.props.animations}
                         decorators={this.props.decorators}
                         style={this.props.style.tree.node}
-                        childrenField={this.props.childrenField}
-                        keyField={keyField}
+                        childrenGetter={this.childrenGetter.bind(this)}
+                        keyGetter={this.keyGetter.bind(this)}
                     />
                 )}
             </ul>
@@ -42,9 +59,7 @@ TreeBeard.propTypes = {
     ]).isRequired,
     animations: React.PropTypes.object,
     onToggle: React.PropTypes.func,
-    decorators: React.PropTypes.object,
-    keyField: React.PropTypes.string,
-    childrenField: React.PropTypes.string
+    decorators: React.PropTypes.object
 };
 
 TreeBeard.defaultProps = {

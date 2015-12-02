@@ -52,9 +52,10 @@ class TreeNode extends React.Component {
         );
     }
     renderHeader(decorators, animations){
+        const {childrenGetter} = this.props;
         return (
             <NodeHeader
-                childrenField={this.props.childrenField}
+                childrenGetter={childrenGetter}
                 decorators={decorators}
                 animations={animations}
                 style={this.props.style}
@@ -64,14 +65,16 @@ class TreeNode extends React.Component {
         );
     }
     renderChildren(decorators){
-        const {keyField, childrenField} = this.props;
+        const {keyGetter, childrenGetter} = this.props;
         if(this.props.node.loading){ return this.renderLoading(decorators); }
         return (
             <ul style={this.props.style.subtree} ref="subtree">
-                {rutils.children.map(this.props.node[childrenField], (child, index) =>
+                {rutils.children.map(childrenGetter(this.props.node), (child, index) =>
                     <TreeNode
                         {...this._eventBubbles()}
-                        key={keyField?child[keyField]:index}
+                        key={keyGetter(child, index)}
+                        keyGetter={keyGetter}
+                        childrenGetter={childrenGetter}
                         node={child}
                         decorators={this.props.decorators}
                         animations={this.props.animations}
@@ -101,8 +104,8 @@ TreeNode.propTypes = {
     decorators: React.PropTypes.object.isRequired,
     animations: React.PropTypes.object.isRequired,
     onToggle: React.PropTypes.func,
-    keyField: React.PropTypes.string,
-    childrenField: React.PropTypes.string
+    childrenGetter: React.PropTypes.func.isRequired,
+    keyGetter: React.PropTypes.func.isRequired
 };
 
 export default TreeNode;

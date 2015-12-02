@@ -10,8 +10,8 @@ class NodeHeader extends React.Component {
         super(props);
     }
     render(){
-        const {style, animations, decorators, childrenField} = this.props;
-        const terminal = !this.props.node[childrenField];
+        const {style, animations, decorators, childrenGetter} = this.props;
+        const terminal = !childrenGetter(this.props.node);
         const active = this.props.node.active;
         const linkStyle = [style.link, active ? style.activeLink : null];
         return (
@@ -46,7 +46,7 @@ NodeHeader.propTypes = {
     animations: React.PropTypes.object.isRequired,
     node: React.PropTypes.object.isRequired,
     onClick: React.PropTypes.func,
-    childrenField: React.PropTypes.string
+    childrenGetter: React.PropTypes.func.isRequired
 };
 
 export default NodeHeader;
