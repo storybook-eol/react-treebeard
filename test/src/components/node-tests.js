@@ -12,7 +12,8 @@ const defaults = {
     style: {},
     node: { chilren: [] },
     keyGetter: (node, index)=>index,
-    childrenGetter: (node)=>node.children,
+    childrenGetter: node=>node.children,
+    toggledGetter: node=>node.toggled,
     animations: factory.createAnimations(),
     decorators: factory.createDecorators()
 };
@@ -35,7 +36,7 @@ describe('node component', () => {
                 node={node}
             />
         );
-        const changedProps = { node: { toggled: true } };
+        const changedProps = { ...defaults, node: { toggled: true } };
         treeNode.componentWillReceiveProps(changedProps);
         treeNode.state.toggled.should.equal(changedProps.node.toggled);
     });
@@ -47,7 +48,7 @@ describe('node component', () => {
                 node={original}
             />
         );
-        const changedProps = { node: { toggled: undefined } };
+        const changedProps = { ...defaults, node: { toggled: undefined } };
         treeNode.componentWillReceiveProps(changedProps);
         treeNode.state.toggled.should.equal(original.toggled);
     });

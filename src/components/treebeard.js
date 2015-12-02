@@ -28,6 +28,13 @@ class TreeBeard extends React.Component {
         }
         return node[childrenField];
     }
+    toggledGetter(node){
+        let {toggledField} = this.props;
+        if(typeof toggledField === 'function'){
+            return toggledField(node);
+        }
+        return node[toggledField];
+    }
     render(){
         let {data} = this.props;
         // Support Multiple Root Nodes. Its not formally a tree, but its a use-case.
@@ -44,6 +51,7 @@ class TreeBeard extends React.Component {
                         style={this.props.style.tree.node}
                         childrenGetter={this.childrenGetter.bind(this)}
                         keyGetter={this.keyGetter.bind(this)}
+                        toggledGetter={this.toggledGetter.bind(this)}
                     />
                 )}
             </ul>
@@ -66,7 +74,8 @@ TreeBeard.defaultProps = {
     style: defaultTheme,
     animations: defaultAnimations,
     decorators: defaultDecorators,
-    childrenField: 'children'
+    childrenField: 'children',
+    toggledField: 'toggled'
 };
 
 export default TreeBeard;

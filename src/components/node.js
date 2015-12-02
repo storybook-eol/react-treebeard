@@ -13,7 +13,7 @@ class TreeNode extends React.Component {
         this.onClick = this.onClick.bind(this);
     }
     componentWillReceiveProps(props){
-        let toggled = props.node.toggled;
+        let toggled = props.toggledGetter(props.node);
         if(toggled !== undefined){
             this.setState({ toggled });
         }
@@ -105,7 +105,8 @@ TreeNode.propTypes = {
     animations: React.PropTypes.object.isRequired,
     onToggle: React.PropTypes.func,
     childrenGetter: React.PropTypes.func.isRequired,
-    keyGetter: React.PropTypes.func.isRequired
+    keyGetter: React.PropTypes.func.isRequired,
+    toggledGetter: React.PropTypes.func.isRequired
 };
 
 export default TreeNode;
