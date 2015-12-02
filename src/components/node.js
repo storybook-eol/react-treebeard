@@ -13,7 +13,7 @@ class TreeNode extends React.Component {
         this.onClick = this.onClick.bind(this);
     }
     componentWillReceiveProps(props){
-        let toggled = props.node.toggled;
+        let toggled = props.toggledGetter(props.node);
         if(toggled !== undefined){
             this.setState({ toggled });
         }
@@ -52,8 +52,10 @@ class TreeNode extends React.Component {
         );
     }
     renderHeader(decorators, animations){
+        const {childrenGetter} = this.props;
         return (
             <NodeHeader
+                childrenGetter={childrenGetter}
                 decorators={decorators}
                 animations={animations}
                 style={this.props.style}
@@ -63,13 +65,17 @@ class TreeNode extends React.Component {
         );
     }
     renderChildren(decorators){
+        const {keyGetter, childrenGetter, toggledGetter} = this.props;
         if(this.props.node.loading){ return this.renderLoading(decorators); }
         return (
             <ul style={this.props.style.subtree} ref="subtree">
-                {rutils.children.map(this.props.node.children, (child, index) =>
+                {rutils.children.map(childrenGetter(this.props.node), (child, index) =>
                     <TreeNode
                         {...this._eventBubbles()}
-                        key={index}
+                        key={keyGetter(child, index)}
+                        keyGetter={keyGetter}
+                        childrenGetter={childrenGetter}
+                        toggledGetter={toggledGetter}
                         node={child}
                         decorators={this.props.decorators}
                         animations={this.props.animations}
@@ -98,7 +104,10 @@ TreeNode.propTypes = {
     node: React.PropTypes.object.isRequired,
     decorators: React.PropTypes.object.isRequired,
     animations: React.PropTypes.object.isRequired,
-    onToggle: React.PropTypes.func
+    onToggle: React.PropTypes.func,
+    childrenGetter: React.PropTypes.func.isRequired,
+    keyGetter: React.PropTypes.func.isRequired,
+    toggledGetter: React.PropTypes.func.isRequired
 };
 
 export default TreeNode;

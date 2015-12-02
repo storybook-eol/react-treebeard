@@ -11,6 +11,7 @@ const factory = require('../utils/factory');
 const defaults = {
     style: {},
     node: { children: [] },
+    childrenGetter: (node)=>node.children,
     animations: { toggle: {} },
     decorators: factory.createDecorators()
 };
