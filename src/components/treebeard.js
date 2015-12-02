@@ -11,52 +11,45 @@ class TreeBeard extends React.Component {
     constructor(props){
         super(props);
     }
-    keyGetter(node, index){
-        let {keyField} = this.props;
-        if(!keyField){
-            return index;
-        }
-        else if(typeof keyField === 'function'){
-            return keyField(node);
-        }
-        return node[keyField];
-    }
-    childrenGetter(node){
-        let {childrenField} = this.props;
-        if(typeof childrenField === 'function'){
-            return childrenField(node);
-        }
-        return node[childrenField];
-    }
-    toggledGetter(node){
-        let {toggledField} = this.props;
-        if(typeof toggledField === 'function'){
-            return toggledField(node);
-        }
-        return node[toggledField];
-    }
     render(){
         let {data} = this.props;
         // Support Multiple Root Nodes. Its not formally a tree, but its a use-case.
         if(!Array.isArray(data)){ data = [data]; }
+
+        // Compose children, key and toggled getters
+        const getters = {
+            childrenGetter: node=>Getter(node, this.props.childrenField),
+            keyGetter: (node, index)=>Getter(node, this.props.keyField, index),
+            toggledGetter: node=>Getter(node, this.props.childrenField)
+        }
+
         return (
             <ul style={this.props.style.tree.base} ref="treeBase">
                 {data.map((node, index) =>
                     <TreeNode
-                        key={this.keyGetter(node, index)}
+                        key={getters.keyGetter(node, index)}
                         node={node}
                         onToggle={this.props.onToggle}
                         animations={this.props.animations}
                         decorators={this.props.decorators}
                         style={this.props.style.tree.node}
-                        childrenGetter={this.childrenGetter.bind(this)}
-                        keyGetter={this.keyGetter.bind(this)}
-                        toggledGetter={this.toggledGetter.bind(this)}
+                        {...getters}
                     />
                 )}
             </ul>
         );
     }
+}
+
+// Helper: Get value by function or property name
+function Getter(node, field, defaultValue){
+    if(!field){
+        return defaultValue;
+    }
+    else if(typeof field === 'function'){
+        return field(node);
+    }
+    return node[field];
 }
 
 TreeBeard.propTypes = {
