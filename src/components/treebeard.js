@@ -3,6 +3,7 @@
 import React from 'react';
 
 import TreeNode from './node';
+import Getter from './helpers/getter';
 import defaultDecorators from './decorators';
 import defaultTheme from '../themes/default';
 import defaultAnimations from '../themes/animations';
@@ -12,19 +13,29 @@ class TreeBeard extends React.Component {
         super(props);
     }
     render(){
-        let data = this.props.data;
+        let {data} = this.props;
         // Support Multiple Root Nodes. Its not formally a tree, but its a use-case.
         if(!Array.isArray(data)){ data = [data]; }
+
+        // Compose children, key and toggled getters
+        const getters = {
+            childrenGetter: node=>Getter(node, this.props.childrenField),
+            keyGetter: (node, index)=>Getter(node, this.props.keyField, index),
+            toggledGetter: node=>Getter(node, this.props.toggledField)
+        }
+
         return (
             <ul style={this.props.style.tree.base} ref="treeBase">
                 {data.map((node, index) =>
                     <TreeNode
-                        key={index}
+                        key={getters.keyGetter(node, index)}
                         node={node}
                         onToggle={this.props.onToggle}
                         animations={this.props.animations}
                         decorators={this.props.decorators}
                         style={this.props.style.tree.node}
+                        renderNode={this.props.renderNode}
+                        {...getters}
                     />
                 )}
             </ul>
@@ -40,13 +51,28 @@ TreeBeard.propTypes = {
     ]).isRequired,
     animations: React.PropTypes.object,
     onToggle: React.PropTypes.func,
-    decorators: React.PropTypes.object
+    decorators: React.PropTypes.object,
+    childrenField: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.func
+    ]),
+    toggledField: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.func
+    ]),
+    keyField: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.func
+    ]),
+    renderNode: React.PropTypes.func
 };
 
 TreeBeard.defaultProps = {
     style: defaultTheme,
     animations: defaultAnimations,
-    decorators: defaultDecorators
+    decorators: defaultDecorators,
+    childrenField: 'children',
+    toggledField: 'toggled'
 };
 
 export default TreeBeard;

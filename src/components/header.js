@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Radium from 'radium';
-import {VelocityComponent} from 'velocity-react';
 
 @Radium
 class NodeHeader extends React.Component {
@@ -10,13 +9,12 @@ class NodeHeader extends React.Component {
         super(props);
     }
     render(){
-        const {style, animations, decorators} = this.props;
-        const terminal = !this.props.node.children;
+        const {style, animations, decorators, hasChildren} = this.props;
+        const terminal = !hasChildren;
         const active = this.props.node.active;
         const linkStyle = [style.link, active ? style.activeLink : null];
         return (
             <div
-                ref="hyperlink"
                 onClick={this.props.onClick}
                 style={linkStyle}>
                 { !terminal ? this.renderToggle(decorators, animations) : '' }
@@ -28,15 +26,10 @@ class NodeHeader extends React.Component {
         );
     }
     renderToggle(decorators, animations){
-        const Toggle = decorators.Toggle;
         const style = this.props.style;
         return (
-            <VelocityComponent ref="velocity"
-                duration={animations.toggle.duration}
-                animation={animations.toggle.animation}>
-                <Toggle style={style.toggle}/>
-            </VelocityComponent>
-        );
+            <decorators.Toggle style={style.toggle} animations={animations.toggle}/>
+        )
     }
 }
 
@@ -45,7 +38,8 @@ NodeHeader.propTypes = {
     decorators: React.PropTypes.object.isRequired,
     animations: React.PropTypes.object.isRequired,
     node: React.PropTypes.object.isRequired,
-    onClick: React.PropTypes.func
+    onClick: React.PropTypes.func,
+    children: React.PropTypes.array
 };
 
 export default NodeHeader;
