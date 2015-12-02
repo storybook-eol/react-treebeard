@@ -3,6 +3,7 @@
 import React from 'react';
 
 import TreeNode from './node';
+import Getter from './helpers/getter';
 import defaultDecorators from './decorators';
 import defaultTheme from '../themes/default';
 import defaultAnimations from '../themes/animations';
@@ -39,17 +40,6 @@ class TreeBeard extends React.Component {
             </ul>
         );
     }
-}
-
-// Helper: Get value by function or property name
-function Getter(node, field, defaultValue){
-    if(!field){
-        return defaultValue;
-    }
-    else if(typeof field === 'function'){
-        return field(node);
-    }
-    return node[field];
 }
 
 TreeBeard.propTypes = {
