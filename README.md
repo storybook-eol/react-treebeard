@@ -133,13 +133,17 @@ let decorators = {
 
 ```javascript
 {
+    id: '[optional] string',
     name: 'string',
-    children: 'array',
-    loading: 'boolean',
-    decorators: 'object',
-    animations: 'object'
+    children: '[optional] array',
+    loading: '[optional] boolean',
+    decorators: '[optional] object',
+    animations: '[optional] object'
 },
 ```
+#### id
+The component key. If not defined, an auto-generated index is used.
+
 #### name
 The name prop passed into the Header component.
 

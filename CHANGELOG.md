@@ -1,3 +1,8 @@
+1.0.14
+-------------------
+- [Derived Terminal Attribute](https://github.com/alexcurtis/react-treebeard/issues/11)
+- Optional `id` can be defined in data and used as a component key.
+
 1.0.13
 -------------------
 - Remove Hyperlink. Reverted ES-Lint Script Reporting.

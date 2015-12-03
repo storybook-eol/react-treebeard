@@ -69,7 +69,7 @@ class TreeNode extends React.Component {
                 {rutils.children.map(this.props.node.children, (child, index) =>
                     <TreeNode
                         {...this._eventBubbles()}
-                        key={index}
+                        key={child.id || index}
                         node={child}
                         decorators={this.props.decorators}
                         animations={this.props.animations}

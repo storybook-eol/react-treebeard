@@ -1,6 +1,7 @@
 'use strict';
 
 export default {
+    id: 'test-node',
     name: 'react-treebeard',
     toggled: true,
     children: [

@@ -4,6 +4,7 @@
 
 const sinon = require('sinon');
 const React = require('react');
+const ReactDOM = require('react-dom');
 const TestUtils = require('react-addons-test-utils');
 const TreeNode = require('../../../src/components/node');
 const factory = require('../utils/factory');
@@ -280,6 +281,39 @@ describe('node component', () => {
             />
         );
         global.should.not.exist(treeNode.refs.subtree);
+    });
+
+    it('should render a child with an id key if available', () => {
+        const id = 'SpecialNode';
+        const node = {
+            toggled: true,
+            children: [{ id }]
+        };
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode {...defaults}
+                node={node}
+            />
+        );
+        const nodes = TestUtils.scryRenderedComponentsWithType(treeNode, TreeNode);
+        const element = ReactDOM.findDOMNode(nodes[1]);
+        const expectedId = '$' + id;
+        element.dataset.reactid.should.contain(expectedId);
+    });
+
+    it('should render a child with an index key if id is not available', () => {
+        const node = {
+            toggled: true,
+            children: [{ name: 'node' }]
+        };
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode {...defaults}
+                node={node}
+            />
+        );
+        const nodes = TestUtils.scryRenderedComponentsWithType(treeNode, TreeNode);
+        const element = ReactDOM.findDOMNode(nodes[1]);
+        const expectedId = '$0';
+        element.dataset.reactid.should.contain(expectedId);
     });
 
 });
