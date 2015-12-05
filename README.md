@@ -29,7 +29,8 @@ const data = {
         {
             name: 'parent',
             children: [
-                { name: 'child' }
+                { name: 'child1' },
+                { name: 'child2' }
             ]
         },
         {
@@ -43,7 +44,8 @@ const data = {
                 {
                     name: 'nested parent',
                     children: [
-                        { name: 'nested child' }
+                        { name: 'nested child 1' },
+                        { name: 'nested child 2' }
                     ]
                 }
             ]
@@ -54,9 +56,14 @@ const data = {
 class TreeExample extends React.Component {
     constructor(props){
         super(props);
+        this.state = {};
+        this.onToggle = this.onToggle.bind(this);
     }
-    onToggle(/* node, toggled */){
-        // ...
+    onToggle(node, toggled){
+        if(this.state.cursor){this.state.cursor.active = false;}
+        node.active = true;
+        if(node.children){ node.toggled = toggled; }
+        this.setState({ cursor: node });
     }
     render(){
         return (
@@ -136,6 +143,8 @@ let decorators = {
     id: '[optional] string',
     name: 'string',
     children: '[optional] array',
+    toggled: '[optional] boolean',
+    active: '[optional] boolean',
     loading: '[optional] boolean',
     decorators: '[optional] object',
     animations: '[optional] object'
@@ -149,6 +158,12 @@ The name prop passed into the Header component.
 
 #### children
 The children attached to the node. This value populates the subtree at the specific node. Each child is built from the same basic data structure. Tip: Make this an empty array, if you want to asynchronously load a potential parent.
+
+#### toggled
+Toggled flag. Sets the visibility of a node's children. It also sets the state for the toggle decorator.
+
+#### active
+Active flag. If active, the node will be highlighted. The highlight is derived from the `node.activeLink` style object in the theme.
 
 #### loading
 Loading flag. It will populate the treeview with the loading component. Useful when asynchronously pulling the data into the treeview.
