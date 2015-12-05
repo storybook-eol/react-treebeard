@@ -1,13 +1,13 @@
 'use strict';
 
 export default {
-    toggle: (state) => {
+    toggle: (props) => {
         return {
-            animation: { rotateZ: state.toggled ? 90 : 0 },
+            animation: { rotateZ: props.node.toggled ? 90 : 0 },
             duration: 300
         };
     },
-    drawer: (/* state */) => {
+    drawer: (/* props */) => {
         return {
             enter: {
                 animation: 'slideDown',

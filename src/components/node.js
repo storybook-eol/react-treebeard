@@ -9,27 +9,19 @@ import NodeHeader from './header';
 class TreeNode extends React.Component {
     constructor(props){
         super(props);
-        this.state = { toggled: props.node.toggled };
         this.onClick = this.onClick.bind(this);
     }
-    componentWillReceiveProps(props){
-        let toggled = props.node.toggled;
-        if(toggled !== undefined){
-            this.setState({ toggled });
-        }
-    }
     onClick(){
-        let toggled = !this.state.toggled;
+        let toggled = !this.props.node.toggled;
         let onToggle = this.props.onToggle;
         if(onToggle){ onToggle(this.props.node, toggled); }
-        this.setState({ toggled: toggled });
     }
     animations(){
         const props = this.props;
         let anim = Object.assign({}, props.animations, props.node.animations);
         return {
-            toggle: anim.toggle(this.state),
-            drawer: anim.drawer(this.state)
+            toggle: anim.toggle(this.props),
+            drawer: anim.drawer(this.props)
         };
     }
     decorators(){
@@ -41,7 +33,7 @@ class TreeNode extends React.Component {
     render(){
         const decorators = this.decorators();
         const animations = this.animations();
-        const toggled = this.state.toggled;
+        const toggled = this.props.node.toggled;
         return (
             <li style={this.props.style.base} ref="topLevel">
                 {this.renderHeader(decorators, animations)}

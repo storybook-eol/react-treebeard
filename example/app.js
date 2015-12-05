@@ -53,14 +53,10 @@ class DemoTree extends React.Component {
         this.state = {};
         this.onToggle = this.onToggle.bind(this);
     }
-    onSubTreeToggled(node, toggled){
-        // Store Toggle State
-        node.toggled = toggled;
-    }
     onToggle(node, toggled){
         if(this.state.cursor){this.state.cursor.active = false;}
         node.active = true;
-        if(node.children){ this.onSubTreeToggled(node, toggled); }
+        if(node.children){ node.toggled = toggled; }
         this.setState({ cursor: node });
     }
     render(){
