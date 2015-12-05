@@ -17,50 +17,27 @@ const defaults = {
 };
 
 describe('node component', () => {
-    it('should initialise the toggled state from the node prop', () => {
+    it('should not have any internal state', () => {
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode {...defaults}/>
+        );
+        global.should.not.exist(treeNode.state);
+    });
+
+    it('should invert the toggle state on click', (done) => {
         const node = { toggled: true };
-        const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode {...defaults}
-                node={node}
-            />
-        );
-        treeNode.state.toggled.should.equal(node.toggled);
-    });
-
-    it('should set the toggled state if the props change and it is defined', () => {
-        const node = { toggled: false };
-        const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode {...defaults}
-                node={node}
-            />
-        );
-        const changedProps = { node: { toggled: true } };
-        treeNode.componentWillReceiveProps(changedProps);
-        treeNode.state.toggled.should.equal(changedProps.node.toggled);
-    });
-
-    it('should not set the toggled state if the props change and it is not defined', () => {
-        const original = { toggled: true };
-        const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode {...defaults}
-                node={original}
-            />
-        );
-        const changedProps = { node: { toggled: undefined } };
-        treeNode.componentWillReceiveProps(changedProps);
-        treeNode.state.toggled.should.equal(original.toggled);
-    });
-
-    it('should invert the toggle state on click', () => {
-        const node = { toggled: true };
+        const onToggle = function(node, toggled){
+            toggled.should.equal(!node.toggled);
+            done();
+        };
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode
                 {...defaults}
                 node={node}
+                onToggle={onToggle}
             />
         );
         treeNode.onClick();
-        treeNode.state.toggled.should.equal(!node.toggled);
     });
 
     it('should call the onToggle callback once if it is registered on click', () => {
@@ -95,8 +72,8 @@ describe('node component', () => {
             />
         );
         treeNode.animations();
-        nodeAnimations.toggle.should.be.calledWith(treeNode.state);
-        nodeAnimations.drawer.should.be.calledWith(treeNode.state);
+        nodeAnimations.toggle.should.be.calledWith(treeNode.props);
+        nodeAnimations.drawer.should.be.calledWith(treeNode.props);
     });
 
     it('should fallback to the prop animations if the node animations are not defined', () => {
@@ -111,8 +88,8 @@ describe('node component', () => {
             />
         );
         treeNode.animations();
-        animations.toggle.should.be.calledWith(treeNode.state);
-        animations.drawer.should.be.calledWith(treeNode.state);
+        animations.toggle.should.be.calledWith(treeNode.props);
+        animations.drawer.should.be.calledWith(treeNode.props);
     });
 
     it('should use the node decorators if defined', () => {
