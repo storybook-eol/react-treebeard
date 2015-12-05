@@ -11,8 +11,8 @@
     "test-travis": "./node_modules/karma/bin/karma start --browsers Firefox --single-run"
   },
   "peerDependencies": {
-      "react": "^0.14",
-      "react-dom": "^0.14"
+    "react": "^0.14",
+    "react-dom": "^0.14"
   },
   "repository": {
     "type": "git",
@@ -71,6 +71,7 @@
   },
   "dependencies": {
     "babel-runtime": "^5.8.29",
+    "deep-equal": "^1.0.1",
     "radium": "^0.14.3",
     "react-utils": "alexcurtis/react-utils",
     "velocity-react": "^1.1.1"

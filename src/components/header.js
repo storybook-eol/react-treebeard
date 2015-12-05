@@ -2,12 +2,16 @@
 
 import React from 'react';
 import Radium from 'radium';
+import deepEqual from 'deep-equal';
 import {VelocityComponent} from 'velocity-react';
 
 @Radium
 class NodeHeader extends React.Component {
     constructor(props){
         super(props);
+    }
+    shouldComponentUpdate(nextProps){
+        return !deepEqual(this.props, nextProps, { strict: true });
     }
     render(){
         const {style, animations, decorators} = this.props;
