@@ -1,3 +1,14 @@
+1.1.0
+-------------------
+#### Breaking Changes:
+- [Toggle is now completely data-driven.](https://github.com/alexcurtis/react-treebeard/issues/14) There is no self-aware state.
+
+#### Non-Breaking Changes:
+
+- Node Headers are now optimised via `shouldComponentUpdate`. This cuts down render time with large trees.
+- [Container Decorator Available](https://github.com/alexcurtis/react-treebeard/issues/9). Increased flexibility by allowing you to create your own node containers. Found in `decorators.Container`.
+- [Turn Off All Animations](https://github.com/alexcurtis/react-treebeard/issues/15). This will remove all Velocity components from the tree. Simply set `animations` to `false` in the props.
+
 1.0.14
 -------------------
 - [Derived Terminal Attribute](https://github.com/alexcurtis/react-treebeard/issues/11)

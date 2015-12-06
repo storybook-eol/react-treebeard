@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/alexcurtis/react-treebeard.svg?branch=master)](https://travis-ci.org/alexcurtis/react-treebeard) [![Coverage Status](https://coveralls.io/repos/alexcurtis/react-treebeard/badge.svg?branch=master&service=github)](https://coveralls.io/github/alexcurtis/react-treebeard?branch=master)
 
-React Tree View Component. Fast, Efficient and Customisable.
+React Tree View Component. Data-Driven, Fast, Efficient and Customisable.
 
 ### Install
 
