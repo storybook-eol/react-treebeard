@@ -18,6 +18,7 @@ class TreeNode extends React.Component {
     }
     animations(){
         const props = this.props;
+        if(props.animations === false){ return false; }
         let anim = Object.assign({}, props.animations, props.node.animations);
         return {
             toggle: anim.toggle(this.props),
@@ -33,14 +34,23 @@ class TreeNode extends React.Component {
     render(){
         const decorators = this.decorators();
         const animations = this.animations();
-        const toggled = this.props.node.toggled;
         return (
             <li style={this.props.style.base} ref="topLevel">
                 {this.renderHeader(decorators, animations)}
-                <VelocityTransitionGroup {...animations.drawer} ref="velocity">
-                    {toggled ? this.renderChildren(decorators, animations) : null}
-                </VelocityTransitionGroup>
+                {this.renderDrawer(decorators, animations)}
             </li>
+        );
+    }
+    renderDrawer(decorators, animations){
+        const toggled = this.props.node.toggled;
+        if(!animations && !toggled){ return null; }
+        if(!animations && toggled){
+            return this.renderChildren(decorators, animations);
+        }
+        return (
+            <VelocityTransitionGroup {...animations.drawer} ref="velocity">
+                {toggled ? this.renderChildren(decorators, animations) : null}
+            </VelocityTransitionGroup>
         );
     }
     renderHeader(decorators, animations){
@@ -89,7 +99,10 @@ TreeNode.propTypes = {
     style: React.PropTypes.object.isRequired,
     node: React.PropTypes.object.isRequired,
     decorators: React.PropTypes.object.isRequired,
-    animations: React.PropTypes.object.isRequired,
+    animations: React.PropTypes.oneOfType([
+        React.PropTypes.object,
+        React.PropTypes.bool
+    ]).isRequired,
     onToggle: React.PropTypes.func
 };
 

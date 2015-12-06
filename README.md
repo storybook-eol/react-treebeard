@@ -97,9 +97,9 @@ Callback function when a node is toggled / clicked. Passes 2 attributes: the dat
 Sets the treeview styling. Defaults to `src/themes/default`.
 
 #### animations
-`React.PropTypes.object`
+`React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.bool])`
 
-Sets the treeview animations. See [velocity-react](https://github.com/twitter-fabric/velocity-react) for more details. Defaults to `src/themes/animations`.
+Sets the treeview animations. Set to `false` if you want to turn off animations. See [velocity-react](https://github.com/twitter-fabric/velocity-react) for more details. Defaults to `src/themes/animations`.
 
 #### decorators
 `React.PropTypes.object`

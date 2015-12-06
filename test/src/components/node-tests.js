@@ -190,6 +190,41 @@ describe('node component', () => {
         velocity.props.leave.duration.should.equal(drawer.leave.duration);
     });
 
+    it('should not render a velocity component if animations is false and not toggled', () => {
+        const node = { toggled: false };
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode {...defaults}
+                animations={false}
+                node={node}
+            />
+        );
+        const velocity = treeNode.refs.velocity;
+        global.should.not.exist(velocity);
+    });
+
+    it('should not render a velocity component if animations is false and toggled', () => {
+        const node = { toggled: true };
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode {...defaults}
+                animations={false}
+                node={node}
+            />
+        );
+        const velocity = treeNode.refs.velocity;
+        global.should.not.exist(velocity);
+    });
+
+    it('should render a velocity component if animations is an object', () => {
+        const animations = factory.createAnimations();
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode {...defaults}
+                animations={animations}
+            />
+        );
+        const velocity = treeNode.refs.velocity;
+        velocity.should.exist;
+    });
+
     it('should wrap the children in a list', () => {
         const node = { toggled: true };
         const treeNode = TestUtils.renderIntoDocument(

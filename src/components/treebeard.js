@@ -38,7 +38,10 @@ TreeBeard.propTypes = {
         React.PropTypes.object,
         React.PropTypes.array
     ]).isRequired,
-    animations: React.PropTypes.object,
+    animations: React.PropTypes.oneOfType([
+        React.PropTypes.object,
+        React.PropTypes.bool
+    ]),
     onToggle: React.PropTypes.func,
     decorators: React.PropTypes.object
 };

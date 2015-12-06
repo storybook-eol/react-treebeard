@@ -76,15 +76,30 @@ class Container extends React.Component {
             </div>
         );
     }
+    // renderToggle(){
+    //     const {style, decorators, animations} = this.props;
+    //     return (
+    //         <VelocityComponent ref="velocity"
+    //             duration={animations.toggle.duration}
+    //             animation={animations.toggle.animation}>
+    //             <decorators.Toggle style={style.toggle}/>
+    //         </VelocityComponent>
+    //     );
+    // }
     renderToggle(){
-        const {style, decorators, animations} = this.props;
+        const animations = this.props.animations;
+        if(!animations){ return this.renderToggleDecorator(); }
         return (
             <VelocityComponent ref="velocity"
                 duration={animations.toggle.duration}
                 animation={animations.toggle.animation}>
-                <decorators.Toggle style={style.toggle}/>
+                {this.renderToggleDecorator()}
             </VelocityComponent>
         );
+    }
+    renderToggleDecorator(){
+        const {style, decorators} = this.props;
+        return (<decorators.Toggle style={style.toggle}/>);
     }
 }
 
@@ -93,7 +108,10 @@ Container.propTypes = {
     decorators: React.PropTypes.object.isRequired,
     terminal: React.PropTypes.bool.isRequired,
     onClick: React.PropTypes.func.isRequired,
-    animations: React.PropTypes.object.isRequired,
+    animations: React.PropTypes.oneOfType([
+        React.PropTypes.object,
+        React.PropTypes.bool
+    ]).isRequired,
     node: React.PropTypes.object.isRequired
 };
 

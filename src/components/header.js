@@ -41,7 +41,10 @@ class NodeHeader extends React.Component {
 NodeHeader.propTypes = {
     style: React.PropTypes.object.isRequired,
     decorators: React.PropTypes.object.isRequired,
-    animations: React.PropTypes.object.isRequired,
+    animations: React.PropTypes.oneOfType([
+        React.PropTypes.object,
+        React.PropTypes.bool
+    ]).isRequired,
     node: React.PropTypes.object.isRequired,
     onClick: React.PropTypes.func
 };
