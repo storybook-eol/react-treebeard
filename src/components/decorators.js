@@ -1,6 +1,8 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'radium';
+import {VelocityComponent} from 'velocity-react';
 
 const Loading = (props) => {
     return (
@@ -54,8 +56,50 @@ Header.propTypes = {
     node: React.PropTypes.object.isRequired
 };
 
+@Radium
+class HeaderContainer extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    render(){
+        const {style, decorators, terminal, onClick, node} = this.props;
+        return (
+            <div
+                ref="clickable"
+                onClick={onClick}
+                style={style.container}>
+                { !terminal ? this.renderToggle() : null }
+                <decorators.Header
+                    node={node}
+                    style={style.header}
+                />
+            </div>
+        );
+    }
+    renderToggle(){
+        const {style, decorators, animations} = this.props;
+        return (
+            <VelocityComponent ref="velocity"
+                duration={animations.toggle.duration}
+                animation={animations.toggle.animation}>
+                <decorators.Toggle style={style.toggle}/>
+            </VelocityComponent>
+        );
+    }
+}
+
+HeaderContainer.propTypes = {
+    style: React.PropTypes.object.isRequired,
+    decorators: React.PropTypes.object.isRequired,
+    terminal: React.PropTypes.bool.isRequired,
+    onClick: React.PropTypes.func.isRequired,
+    animations: React.PropTypes.object.isRequired,
+    node: React.PropTypes.object.isRequired
+};
+
 export default {
     Loading,
     Toggle,
-    Header
+    Header,
+    HeaderContainer
 };

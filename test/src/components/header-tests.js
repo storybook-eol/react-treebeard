@@ -16,15 +16,15 @@ const defaults = {
 };
 
 describe('header component', () => {
-    it('should render a hyperlink with a click event handler', () => {
+    it('should render a clickable element with a click event handler', () => {
         const onClick = sinon.spy();
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
                 onClick={onClick}
             />
         );
-        const hyperlink = header.refs.hyperlink;
-        TestUtils.Simulate.click(hyperlink);
+        const clickable element = header.refs.clickable element;
+        TestUtils.Simulate.click(clickable element);
         onClick.should.be.called.once;
     });
 

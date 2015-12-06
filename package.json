@@ -74,6 +74,7 @@
     "deep-equal": "^1.0.1",
     "radium": "^0.14.3",
     "react-utils": "alexcurtis/react-utils",
+    "shallowequal": "^0.2.2",
     "velocity-react": "^1.1.1"
   }
 }
