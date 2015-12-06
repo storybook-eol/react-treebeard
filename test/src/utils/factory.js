@@ -1,6 +1,7 @@
 'use strict';
 
 const React = require('react');
+const decorators = require('../../../src/components/decorators');
 
 module.exports = {
     createDecorators: function(spec){
@@ -14,7 +15,11 @@ module.exports = {
             },
             Header: (props) => {
                 return spec.header ? <spec.header {...props}/> : <div/>;
+            },
+            HeaderContainer: (props) => {
+                return spec.header ? <spec.container {...props}/> : <div/>;
             }
+
         };
     },
     createAnimations: function(){

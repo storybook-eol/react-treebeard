@@ -93,11 +93,9 @@ describe('node component', () => {
     });
 
     it('should use the node decorators if defined', () => {
-        const ToggleDecorator = React.createClass({ render: () => <div/> });
-        const HeaderDecorator = React.createClass({ render: () => <div/> });
+        const HeaderContainerDecorator = React.createClass({ render: () => <div/> });
         const nodeDecorators = {
-            Toggle: ToggleDecorator,
-            Header: HeaderDecorator
+            HeaderContainer: HeaderContainerDecorator
         };
         const node = { decorators: nodeDecorators, children: [] };
         const treeNode = TestUtils.renderIntoDocument(
@@ -106,16 +104,13 @@ describe('node component', () => {
                 node={node}
             />
         );
-        TestUtils.findRenderedComponentWithType(treeNode, ToggleDecorator).should.exist;
-        TestUtils.findRenderedComponentWithType(treeNode, HeaderDecorator).should.exist;
+        TestUtils.findRenderedComponentWithType(treeNode, HeaderContainerDecorator).should.exist;
     });
 
     it('should fallback to the prop decorators if the node decorators are not defined', () => {
-        const ToggleDecorator = React.createClass({ render: () => <div/> });
-        const HeaderDecorator = React.createClass({ render: () => <div/> });
+        const HeaderContainerDecorator = React.createClass({ render: () => <div/> });
         const decorators = {
-            Toggle: ToggleDecorator,
-            Header: HeaderDecorator
+            HeaderContainer: HeaderContainerDecorator
         };
         const node = { children: [] };
         const treeNode = TestUtils.renderIntoDocument(
@@ -125,8 +120,7 @@ describe('node component', () => {
                 node={node}
             />
         );
-        TestUtils.findRenderedComponentWithType(treeNode, ToggleDecorator).should.exist;
-        TestUtils.findRenderedComponentWithType(treeNode, HeaderDecorator).should.exist;
+        TestUtils.findRenderedComponentWithType(treeNode, HeaderContainerDecorator).should.exist;
     });
 
     it('should render a list item at the top level', () => {
@@ -292,5 +286,4 @@ describe('node component', () => {
         const expectedId = '$0';
         element.dataset.reactid.should.contain(expectedId);
     });
-
 });
