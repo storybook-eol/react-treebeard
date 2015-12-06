@@ -17,13 +17,13 @@ const defaults = {
     onClick: function(){}
 };
 
-const HeaderContainer = decorators.HeaderContainer;
+const Container = decorators.Container;
 
-describe('header container decorator component', () => {
+describe('container decorator component', () => {
     it('should render a clickable element with a click event handler', () => {
         const onClick = sinon.spy();
         const container = TestUtils.renderIntoDocument(
-            <HeaderContainer {...defaults}
+            <Container {...defaults}
                 onClick={onClick}
             />
         );
@@ -36,7 +36,7 @@ describe('header container decorator component', () => {
         const toggleType = React.createClass({ render: () => <div/> });
         const decorators = factory.createDecorators({ toggle: toggleType });
         const container = TestUtils.renderIntoDocument(
-            <HeaderContainer {...defaults}
+            <Container {...defaults}
                 decorators={decorators}
                 terminal={false}
             />
@@ -49,7 +49,7 @@ describe('header container decorator component', () => {
         const toggleType = React.createClass({ render: () => <div/> });
         const decorators = factory.createDecorators({ toggle: toggleType });
         const container = TestUtils.renderIntoDocument(
-            <HeaderContainer {...defaults}
+            <Container {...defaults}
                 decorators={decorators}
                 terminal={true}
             />
@@ -63,7 +63,7 @@ describe('header container decorator component', () => {
         const toggleType = React.createClass({ render: () => <div/> });
         const decorators = factory.createDecorators({ toggle: toggleType });
         const container = TestUtils.renderIntoDocument(
-            <HeaderContainer {...defaults}
+            <Container {...defaults}
                 decorators={decorators}
                 style={style}
             />
@@ -75,7 +75,7 @@ describe('header container decorator component', () => {
     it('should render the toggle decorator in a velocity component', () => {
         const VelocityComponent = require('velocity-react').VelocityComponent;
         const container = TestUtils.renderIntoDocument(
-            <HeaderContainer {...defaults}/>
+            <Container {...defaults}/>
         );
         const component = TestUtils.findRenderedComponentWithType(container, VelocityComponent);
         component.should.exist;
@@ -84,7 +84,7 @@ describe('header container decorator component', () => {
     it('should pass velocity the toggle animation and duration props', () => {
         const animations = { toggle: { duration: 1, animation: 'slideUp' } };
         const container = TestUtils.renderIntoDocument(
-            <HeaderContainer {...defaults}
+            <Container {...defaults}
                 animations={animations}
             />
         );
@@ -97,7 +97,7 @@ describe('header container decorator component', () => {
         const headType = React.createClass({ render: () => <div/> });
         const decorators = factory.createDecorators({ header: headType });
         const container = TestUtils.renderIntoDocument(
-            <HeaderContainer {...defaults}
+            <Container {...defaults}
                 decorators={decorators}
             />
         );
@@ -111,7 +111,7 @@ describe('header container decorator component', () => {
         const headType = React.createClass({ render: () => <div/> });
         const decorators = factory.createDecorators({ header: headType });
         const container = TestUtils.renderIntoDocument(
-            <HeaderContainer {...defaults}
+            <Container {...defaults}
                 decorators={decorators}
                 node={node}
                 style={style}

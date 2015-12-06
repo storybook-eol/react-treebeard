@@ -57,7 +57,7 @@ Header.propTypes = {
 };
 
 @Radium
-class HeaderContainer extends React.Component {
+class Container extends React.Component {
     constructor(props){
         super(props);
     }
@@ -88,7 +88,7 @@ class HeaderContainer extends React.Component {
     }
 }
 
-HeaderContainer.propTypes = {
+Container.propTypes = {
     style: React.PropTypes.object.isRequired,
     decorators: React.PropTypes.object.isRequired,
     terminal: React.PropTypes.bool.isRequired,
@@ -101,5 +101,5 @@ export default {
     Loading,
     Toggle,
     Header,
-    HeaderContainer
+    Container
 };

@@ -93,9 +93,9 @@ describe('node component', () => {
     });
 
     it('should use the node decorators if defined', () => {
-        const HeaderContainerDecorator = React.createClass({ render: () => <div/> });
+        const ContainerDecorator = React.createClass({ render: () => <div/> });
         const nodeDecorators = {
-            HeaderContainer: HeaderContainerDecorator
+            Container: ContainerDecorator
         };
         const node = { decorators: nodeDecorators, children: [] };
         const treeNode = TestUtils.renderIntoDocument(
@@ -104,13 +104,13 @@ describe('node component', () => {
                 node={node}
             />
         );
-        TestUtils.findRenderedComponentWithType(treeNode, HeaderContainerDecorator).should.exist;
+        TestUtils.findRenderedComponentWithType(treeNode, ContainerDecorator).should.exist;
     });
 
     it('should fallback to the prop decorators if the node decorators are not defined', () => {
-        const HeaderContainerDecorator = React.createClass({ render: () => <div/> });
+        const ContainerDecorator = React.createClass({ render: () => <div/> });
         const decorators = {
-            HeaderContainer: HeaderContainerDecorator
+            Container: ContainerDecorator
         };
         const node = { children: [] };
         const treeNode = TestUtils.renderIntoDocument(
@@ -120,7 +120,7 @@ describe('node component', () => {
                 node={node}
             />
         );
-        TestUtils.findRenderedComponentWithType(treeNode, HeaderContainerDecorator).should.exist;
+        TestUtils.findRenderedComponentWithType(treeNode, ContainerDecorator).should.exist;
     });
 
     it('should render a list item at the top level', () => {

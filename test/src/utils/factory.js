@@ -16,7 +16,7 @@ module.exports = {
             Header: (props) => {
                 return spec.header ? <spec.header {...props}/> : <div/>;
             },
-            HeaderContainer: (props) => {
+            Container: (props) => {
                 return spec.header ? <spec.container {...props}/> : <div/>;
             }
 
