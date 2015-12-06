@@ -107,7 +107,7 @@ Sets the treeview animations. See [velocity-react](https://github.com/twitter-fa
 Decorates the treeview. Here you can use your own Container, Header, Toggle and Loading components. Defaults to `src/decorators`. See example below:
 
 ```javascript
-let decorators = {
+const decorators = {
     Loading: (props) => {
         return (
             <div style={props.style}>
@@ -128,6 +128,15 @@ let decorators = {
         return (
             <div style={props.style}>
                 {props.node.name}
+            </div>
+        );
+    },
+    Container: (props) => {
+        return (
+            <div onClick={this.props.onClick}>
+                // Hide Toggle When Terminal Here
+                <this.props.decorators.Toggle/>
+                <this.props.decorators.Header/>
             </div>
         );
     }
