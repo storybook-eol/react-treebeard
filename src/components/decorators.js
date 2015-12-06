@@ -76,16 +76,6 @@ class Container extends React.Component {
             </div>
         );
     }
-    // renderToggle(){
-    //     const {style, decorators, animations} = this.props;
-    //     return (
-    //         <VelocityComponent ref="velocity"
-    //             duration={animations.toggle.duration}
-    //             animation={animations.toggle.animation}>
-    //             <decorators.Toggle style={style.toggle}/>
-    //         </VelocityComponent>
-    //     );
-    // }
     renderToggle(){
         const animations = this.props.animations;
         if(!animations){ return this.renderToggleDecorator(); }
