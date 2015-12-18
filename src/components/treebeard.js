@@ -25,6 +25,8 @@ class TreeBeard extends React.Component {
                         animations={this.props.animations}
                         decorators={this.props.decorators}
                         style={this.props.style.tree.node}
+                        //shareProps will be pass on to every node.
+                        {...this.props.shareProps}
                     />
                 )}
             </ul>

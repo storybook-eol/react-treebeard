@@ -61,6 +61,7 @@ class TreeNode extends React.Component {
                 style={this.props.style}
                 node={Object.assign({}, this.props.node)}
                 onClick={this.onClick}
+                {...this.props.shareProps}
             />
         );
     }
@@ -76,6 +77,7 @@ class TreeNode extends React.Component {
                         decorators={this.props.decorators}
                         animations={this.props.animations}
                         style={this.props.style}
+                        {...this.props.shareProps}
                     />
                 )}
             </ul>
