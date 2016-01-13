@@ -10,6 +10,56 @@ import styles from './styles';
 
 const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
 
+// Helper functions for filtering
+var defaultMatcher = (filterText, node) => {
+    return node.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1;
+};
+
+var nodeMatchesOrHasMatchingDescendants = (node, filter, matcher) => {
+    return matcher(filter, node) || // i match
+        (node.children && // or i have decendents and one of them match
+        node.children.length &&
+        !!node.children.find(childNode => nodeMatchesOrHasMatchingDescendants(childNode, filter, matcher)));
+};
+
+var filterTree = (node, filter, matcher = defaultMatcher) => {
+    if(matcher(filter, node)){ // if im an exact match then all my children get to stay
+        return node;
+    }
+    // if not then only keep the ones that match or have matching descendants
+    var filteredChildren;
+
+    if(node.children) {
+        filteredChildren = node.children.filter(child => nodeMatchesOrHasMatchingDescendants(child, filter, matcher));
+    }
+
+    if(filteredChildren && filteredChildren.length){
+        filteredChildren = filteredChildren.map(child => filterTree(child, filter, matcher));
+    }
+
+    return Object.assign({}, node, {
+        children: filteredChildren
+    });
+};
+
+var expandNodesWithMatchingDescendants = (node, filter, matcher = defaultMatcher) => {
+    var children = node.children;
+    var shouldExpand = false;
+
+    if(children && children.length){
+        var childrenWithMatches = node.children.filter(child => nodeMatchesOrHasMatchingDescendants(child, filter, matcher));
+        shouldExpand = !!childrenWithMatches.length; // I expand if any of my kids match
+
+        if(shouldExpand) {// if im going to expand
+            // go through all the matches and see if thier children need to expand
+            children = childrenWithMatches.map(child => expandNodesWithMatchingDescendants(child, filter, matcher));
+        }
+    }
+
+    return Object.assign({}, node, {children: children, toggled: shouldExpand});
+};
+// end of helper functions
+
 // Example: Customising The Header Decorator To Include Icons
 decorators.Header = (props) => {
     const style = props.style;
@@ -50,7 +100,7 @@ NodeViewer.propTypes = {
 class DemoTree extends React.Component {
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {data};
         this.onToggle = this.onToggle.bind(this);
     }
     onToggle(node, toggled){
@@ -59,12 +109,27 @@ class DemoTree extends React.Component {
         if(node.children){ node.toggled = toggled; }
         this.setState({ cursor: node });
     }
+    onFilterMouseUp(e){
+        const filter = e.target.value.trim();
+
+        if(filter){
+            var filtered = filterTree(data, filter);
+            filtered = expandNodesWithMatchingDescendants(filtered, filter);
+
+            this.setState({data: filtered});
+        }
+        else {
+            this.setState({data});
+        }
+    }
+
     render(){
         return (
             <div>
+                <input onKeyUp={this.onFilterMouseUp.bind(this)} />
                 <div style={styles.component}>
                     <Treebeard
-                        data={data}
+                        data={this.state.data}
                         onToggle={this.onToggle}
                         decorators={decorators}
                     />

@@ -8,7 +8,8 @@
     "lib": "npm run babel",
     "babel": "rimraf lib && babel src/ -d lib/",
     "test": "./node_modules/.bin/karma start karma.conf.js",
-    "test-travis": "./node_modules/karma/bin/karma start --browsers Firefox --single-run"
+    "test-travis": "./node_modules/karma/bin/karma start --browsers Firefox --single-run",
+    "example": "webpack-dev-server --content-base ./example/ --config ./example/webpack.config.js"
   },
   "peerDependencies": {
     "react": "^0.14",
