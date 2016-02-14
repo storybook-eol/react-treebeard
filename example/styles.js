@@ -11,9 +11,11 @@ export default {
             display: 'block'
         }
     },
+    searchBox: {
+        padding: '20px 20px 0 20px'
+    },
     viewer: {
         base: {
-            fontFamily: 'lucida grande ,tahoma,verdana,arial,sans-serif',
             fontSize: '12px',
             whiteSpace: 'pre-wrap',
             backgroundColor: '#282C34',

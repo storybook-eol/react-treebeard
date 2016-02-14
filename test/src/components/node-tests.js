@@ -26,8 +26,8 @@ describe('node component', () => {
 
     it('should invert the toggle state on click', (done) => {
         const node = { toggled: true };
-        const onToggle = function(node, toggled){
-            toggled.should.equal(!node.toggled);
+        const onToggle = function(toggledNode, toggled){
+            toggled.should.equal(!toggledNode.toggled);
             done();
         };
         const treeNode = TestUtils.renderIntoDocument(

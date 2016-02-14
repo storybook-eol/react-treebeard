@@ -1,7 +1,6 @@
 'use strict';
 
 const React = require('react');
-const decorators = require('../../../src/components/decorators');
 
 module.exports = {
     createDecorators: function(spec){

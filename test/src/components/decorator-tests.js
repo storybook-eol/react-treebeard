@@ -6,7 +6,7 @@ const sinon = require('sinon');
 const React = require('react');
 const TestUtils = require('react-addons-test-utils');
 const VelocityComponent = require('velocity-react').VelocityComponent;
-const decorators = require('../../../src/components/decorators');
+const defaultDecorators = require('../../../src/components/decorators');
 const factory = require('../utils/factory');
 
 const defaults = {
@@ -18,7 +18,7 @@ const defaults = {
     onClick: function(){}
 };
 
-const Container = decorators.Container;
+const Container = defaultDecorators.Container;
 
 describe('container decorator component', () => {
     it('should render a clickable element with a click event handler', () => {

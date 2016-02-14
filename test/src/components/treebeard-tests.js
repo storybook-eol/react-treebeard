@@ -94,7 +94,6 @@ describe('treebeard component', () => {
     });
 
     it('should render a root node with an index key if id is not available', () => {
-        const id = 'RootNode';
         const rootNode = { name: 'root-1', children: [] };
         const treebeard = TestUtils.renderIntoDocument(
             <Treebeard data={rootNode}/>
