@@ -4,8 +4,6 @@
 
 React Tree View Component. Data-Driven, Fast, Efficient and Customisable.
 
-[![Click here to lend your support to: React-Treebeard and make a donation at pledgie.com !](https://pledgie.com/campaigns/30722.png?skin_name=chrome)](https://pledgie.com/campaigns/30722)
-
 ### Install
 
 ```
