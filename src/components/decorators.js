@@ -4,19 +4,19 @@ import React from 'react';
 import Radium from 'radium';
 import {VelocityComponent} from 'velocity-react';
 
-const Loading = (props) => {
+const Loading = Radium((props) => {
     return (
         <div style={props.style}>
             loading...
         </div>
     );
-};
+});
 
 Loading.propTypes = {
     style: React.PropTypes.object
 };
 
-const Toggle = (props) => {
+const Toggle = Radium((props) => {
     const style = props.style;
     const height = style.height;
     const width = style.width;
@@ -34,13 +34,13 @@ const Toggle = (props) => {
             </div>
         </div>
     );
-};
+});
 
 Toggle.propTypes = {
     style: React.PropTypes.object
 };
 
-const Header = (props) => {
+const Header = Radium((props) => {
     const style = props.style;
     return (
         <div style={style.base}>
@@ -49,7 +49,7 @@ const Header = (props) => {
             </div>
         </div>
     );
-};
+});
 
 Header.propTypes = {
     style: React.PropTypes.object,
