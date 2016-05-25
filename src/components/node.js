@@ -9,9 +9,8 @@ import NodeHeader from './header';
 class TreeNode extends React.Component {
     constructor(props){
         super(props);
-        this.onClick = this.onClick.bind(this);
     }
-    onClick(){
+    onClick = () =>{
         let toggled = !this.props.node.toggled;
         let onToggle = this.props.onToggle;
         if(onToggle){ onToggle(this.props.node, toggled); }
@@ -29,13 +28,14 @@ class TreeNode extends React.Component {
         // Merge Any Node Based Decorators Into The Pack
         const props = this.props;
         let nodeDecorators = props.node.decorators || {};
-        return Object.assign({}, props.decorators, nodeDecorators);
+        return {...props.decorators, ...nodeDecorators};
     }
     render(){
         const decorators = this.decorators();
         const animations = this.animations();
+        const { style, ...other } = this.props;
         return (
-            <li style={this.props.style.base} ref="topLevel">
+            <li style={style.base} { ...other } ref="topLevel">
                 {this.renderHeader(decorators, animations)}
                 {this.renderDrawer(decorators, animations)}
             </li>
@@ -54,18 +54,22 @@ class TreeNode extends React.Component {
         );
     }
     renderHeader(decorators, animations){
+        const { style, ...other } = this.props
         return (
             <NodeHeader
                 decorators={decorators}
                 animations={animations}
-                style={this.props.style}
+                style={style}
                 node={Object.assign({}, this.props.node)}
                 onClick={this.onClick}
+                {...other}
             />
         );
     }
     renderChildren(decorators){
-        if(this.props.node.loading){ return this.renderLoading(decorators); }
+        const { node, ...other } = this.props
+        if(node.loading){ return this.renderLoading(decorators); }
+
         return (
             <ul style={this.props.style.subtree} ref="subtree">
                 {rutils.children.map(this.props.node.children, (child, index) =>
@@ -76,6 +80,7 @@ class TreeNode extends React.Component {
                         decorators={this.props.decorators}
                         animations={this.props.animations}
                         style={this.props.style}
+                        {...other}
                     />
                 )}
             </ul>
