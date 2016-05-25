@@ -2,9 +2,9 @@
 
 'use strict';
 
-const React = require('react');
-const TestUtils = require('react-addons-test-utils');
-const Header = require('../../../src/components/header');
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import Header from '../../../src/components/header';
 const factory = require('../utils/factory');
 
 const ContainerType = React.createClass({ render: () => <div/> });

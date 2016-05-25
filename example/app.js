@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { StyleRoot } from 'radium';
-import {Treebeard, decorators} from '../src/index';
+import Treebeard, { decorators } from '../src/index';
 
 import data from './data';
 import styles from './styles';

@@ -12,19 +12,19 @@ class TreeBeard extends React.Component {
         super(props);
     }
     render(){
-        const { data, ...other } = this.props;
+        let { animations, decorators, data, key, onToggle, style, ...other } = this.props;
         // Support Multiple Root Nodes. Its not formally a tree, but its a use-case.
         if(!Array.isArray(data)){ data = [data]; }
         return (
-            <ul style={this.props.style.tree.base} ref="treeBase">
+            <ul style={style.tree.base} ref="treeBase">
                 {data.map((node, index) =>
                     <TreeNode
                         key={node.id || index}
                         node={node}
-                        onToggle={this.props.onToggle}
-                        animations={this.props.animations}
-                        decorators={this.props.decorators}
-                        style={this.props.style.tree.node}
+                        onToggle={onToggle}
+                        animations={animations}
+                        decorators={decorators}
+                        style={style.tree.node}
                         {...other}
                     />
                 )}

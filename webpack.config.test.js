@@ -6,7 +6,7 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             exclude: [/node_modules/],
-            loaders: ['babel-loader?stage=0']
+            loader: 'babel'
         }],
         postLoaders: [{
             test: /\.js$/,

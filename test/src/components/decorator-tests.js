@@ -2,11 +2,11 @@
 
 'use strict';
 
-const sinon = require('sinon');
-const React = require('react');
-const TestUtils = require('react-addons-test-utils');
-const VelocityComponent = require('velocity-react').VelocityComponent;
-const defaultDecorators = require('../../../src/components/decorators');
+import sinon from 'sinon';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import { VelocityComponent } from 'velocity-react';
+import defaultDecorators from '../../../src/components/decorators';
 const factory = require('../utils/factory');
 
 const defaults = {

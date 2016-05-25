@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var babel = require('gulp-babel');
-var eslint= require('gulp-eslint');
+var eslint = require('gulp-eslint');
 var open = require('gulp-open');
 var del = require('del');
 var url = require('url');
