@@ -1,17 +1,16 @@
 'use strict';
 
-import React from 'react';
+import React, { Component } from 'react';
 import rutils from 'react-utils';
 import {VelocityTransitionGroup} from 'velocity-react';
 
 import NodeHeader from './header';
 
-class TreeNode extends React.Component {
+class TreeNode extends Component {
     constructor(props){
         super(props);
-        this.onClick = this.onClick.bind(this);
     }
-    onClick(){
+    onClick = () =>{
         let toggled = !this.props.node.toggled;
         let onToggle = this.props.onToggle;
         if(onToggle){ onToggle(this.props.node, toggled); }
@@ -27,17 +26,20 @@ class TreeNode extends React.Component {
     }
     decorators(){
         // Merge Any Node Based Decorators Into The Pack
-        const props = this.props;
-        let nodeDecorators = props.node.decorators || {};
-        return Object.assign({}, props.decorators, nodeDecorators);
+        const { decorators, node } = this.props;
+        const nodeDecorators = node.decorators || {};
+
+        return {...decorators, ...nodeDecorators};
     }
     render(){
-        const decorators = this.decorators();
-        const animations = this.animations();
+        const decs = this.decorators();
+        const anims = this.animations();
+
+        const { animations, decorators, key, onToggle, node, style, ...other } = this.props;
         return (
-            <li style={this.props.style.base} ref="topLevel">
-                {this.renderHeader(decorators, animations)}
-                {this.renderDrawer(decorators, animations)}
+            <li style={style.base} { ...other } ref="topLevel">
+                {this.renderHeader(decs, anims)}
+                {this.renderDrawer(decs, anims)}
             </li>
         );
     }
@@ -53,29 +55,34 @@ class TreeNode extends React.Component {
             </VelocityTransitionGroup>
         );
     }
-    renderHeader(decorators, animations){
+    renderHeader(decs, anims){
+        const { animations, decorators, key, node, onToggle, style, ...other} = this.props;
         return (
             <NodeHeader
-                decorators={decorators}
-                animations={animations}
-                style={this.props.style}
-                node={Object.assign({}, this.props.node)}
+                decorators={decs}
+                animations={anims}
+                style={style}
+                node={{...node}}
                 onClick={this.onClick}
+                {...other}
             />
         );
     }
-    renderChildren(decorators){
-        if(this.props.node.loading){ return this.renderLoading(decorators); }
+    renderChildren(decs){
+        const { animations, decorators, key, onToggle, node, style, ...other} = this.props;
+        if(this.props.node.loading){ return this.renderLoading(decs); }
+
         return (
             <ul style={this.props.style.subtree} ref="subtree">
-                {rutils.children.map(this.props.node.children, (child, index) =>
+                {rutils.children.map(node.children, (child, index) =>
                     <TreeNode
                         {...this._eventBubbles()}
                         key={child.id || index}
                         node={child}
-                        decorators={this.props.decorators}
-                        animations={this.props.animations}
-                        style={this.props.style}
+                        decorators={decorators}
+                        animations={animations}
+                        style={style}
+                        {...other}
                     />
                 )}
             </ul>
