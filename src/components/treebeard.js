@@ -6,6 +6,7 @@ import TreeNode from './node';
 import defaultDecorators from './decorators';
 import defaultTheme from '../themes/default';
 import defaultAnimations from '../themes/animations';
+import passThrough from 'react-passthrough';
 
 class TreeBeard extends React.Component {
     constructor(props){
@@ -15,10 +16,12 @@ class TreeBeard extends React.Component {
         let data = this.props.data;
         // Support Multiple Root Nodes. Its not formally a tree, but its a use-case.
         if(!Array.isArray(data)){ data = [data]; }
+        const self = this;
         return (
             <ul style={this.props.style.tree.base} ref="treeBase">
                 {data.map((node, index) =>
                     <TreeNode
+                        {...self.passthrough()}
                         key={node.id || index}
                         node={node}
                         onToggle={this.props.onToggle}
@@ -51,5 +54,7 @@ TreeBeard.defaultProps = {
     animations: defaultAnimations,
     decorators: defaultDecorators
 };
+
+passThrough({omit: ['children', 'form', 'data']})(TreeBeard);
 
 export default TreeBeard;

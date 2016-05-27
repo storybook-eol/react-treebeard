@@ -3,6 +3,7 @@
 import React from 'react';
 import Radium from 'radium';
 import {VelocityComponent} from 'velocity-react';
+import passThrough from 'react-passthrough';
 
 const Loading = (props) => {
     return (
@@ -70,6 +71,7 @@ class Container extends React.Component {
                 style={style.container}>
                 { !terminal ? this.renderToggle() : null }
                 <decorators.Header
+                    {...this.passthrough()}
                     node={node}
                     style={style.header}
                 />
@@ -89,7 +91,7 @@ class Container extends React.Component {
     }
     renderToggleDecorator(){
         const {style, decorators} = this.props;
-        return (<decorators.Toggle style={style.toggle}/>);
+        return (<decorators.Toggle {...this.passthrough()} style={style.toggle}/>);
     }
 }
 
@@ -104,6 +106,8 @@ Container.propTypes = {
     ]).isRequired,
     node: React.PropTypes.object.isRequired
 };
+
+passThrough({omit: ['children', 'form']})(Container);
 
 export default {
     Loading,
