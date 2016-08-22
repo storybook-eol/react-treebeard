@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import rutils from 'react-utils';
+import rutils from '../utils';
 import {VelocityTransitionGroup} from 'velocity-react';
 
 import NodeHeader from './header';
@@ -68,7 +68,7 @@ class TreeNode extends React.Component {
         if(this.props.node.loading){ return this.renderLoading(decorators); }
         return (
             <ul style={this.props.style.subtree} ref="subtree">
-                {rutils.children.map(this.props.node.children, (child, index) =>
+                {rutils.map(this.props.node.children, (child, index) =>
                     <TreeNode
                         {...this._eventBubbles()}
                         key={child.id || index}
