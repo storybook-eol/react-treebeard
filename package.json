@@ -73,7 +73,7 @@
   "dependencies": {
     "babel-runtime": "^5.8.29",
     "deep-equal": "^1.0.1",
-    "radium": "^0.16.6",
+    "radium": "^0.18.0",
     "react-utils": "alexcurtis/react-utils",
     "shallowequal": "^0.2.2",
     "velocity-react": "^1.1.2"
