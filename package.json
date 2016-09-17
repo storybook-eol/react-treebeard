@@ -73,7 +73,7 @@
     "rimraf": "^2.4.4",
     "sinon": "uberVU/Sinon.JS.git",
     "sinon-chai": "^2.8.0",
-    "velocity-react": "^1.1.5"
+    "velocity-react": "^1.1.5",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.1"
   },
