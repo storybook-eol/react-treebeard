@@ -35,9 +35,9 @@ class TreeNode extends Component {
         const decs = this.decorators();
         const anims = this.animations();
 
-        const { animations, decorators, key, onToggle, node, style, ...other } = this.props;
+        const { style } = this.props;
         return (
-            <li style={style.base} { ...other } ref="topLevel">
+            <li style={style.base} ref="topLevel">
                 {this.renderHeader(decs, anims)}
                 {this.renderDrawer(decs, anims)}
             </li>
@@ -49,6 +49,8 @@ class TreeNode extends Component {
         if(!animations && toggled){
             return this.renderChildren(decorators, animations);
         }
+
+        console.log('hererere', animations)
         return (
             <VelocityTransitionGroup {...animations.drawer} ref="velocity">
                 {toggled ? this.renderChildren(decorators, animations) : null}
@@ -56,21 +58,21 @@ class TreeNode extends Component {
         );
     }
     renderHeader(decs, anims){
-        const { animations, decorators, key, node, onToggle, style, ...other} = this.props;
+        const { decoratorProps, node, style } = this.props;
         return (
             <NodeHeader
+                decoratorProps={decoratorProps}
                 decorators={decs}
                 animations={anims}
                 style={style}
                 node={{...node}}
                 onClick={this.onClick}
-                {...other}
             />
         );
     }
-    renderChildren(decs){
-        const { animations, decorators, key, onToggle, node, style, ...other} = this.props;
-        if(this.props.node.loading){ return this.renderLoading(decs); }
+    renderChildren(decs, animations){
+        const { decoratorProps, node, style } = this.props;
+        if(this.props.node.loading){ return this.renderLoading(decs, decoratorProps); }
 
         return (
             <ul style={this.props.style.subtree} ref="subtree">
@@ -79,20 +81,20 @@ class TreeNode extends Component {
                         {...this._eventBubbles()}
                         key={child.id || index}
                         node={child}
-                        decorators={decorators}
+                        decorators={decs}
+                        decoratorProps={decoratorProps}
                         animations={animations}
                         style={style}
-                        {...other}
                     />
                 )}
             </ul>
         );
     }
-    renderLoading(decorators){
+    renderLoading(decorators, decoratorProps){
         return (
             <ul style={this.props.style.subtree}>
                 <li>
-                    <decorators.Loading style={this.props.style.loading}/>
+                    <decorators.Loading style={this.props.style.loading} { ...decoratorProps }/>
                 </li>
             </ul>
         );

@@ -20,7 +20,7 @@ class NodeHeader extends React.Component {
         return !deepEqual(props.animations, nextProps.animations, { strict: true });
     }
     render(){
-        const {style, decorators} = this.props;
+        const {style, decorators, decoratorProps} = this.props;
         const terminal = !this.props.node.children;
         const active = this.props.node.active;
         const container = [style.link, active ? style.activeLink : null];
@@ -33,6 +33,7 @@ class NodeHeader extends React.Component {
                 onClick={this.props.onClick}
                 animations={this.props.animations}
                 node={this.props.node}
+                { ...decoratorProps }
             />
         );
     }
