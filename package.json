@@ -81,6 +81,6 @@
     "babel-runtime": "^6.9.0",
     "deep-equal": "^1.0.1",
     "react-utils": "alexcurtis/react-utils",
-    "shallowequal": "^0.2.2",
+    "shallowequal": "^0.2.2"
   }
 }
