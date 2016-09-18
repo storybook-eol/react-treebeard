@@ -104,6 +104,7 @@ class TreeNode extends Component {
 TreeNode.propTypes = {
     style: React.PropTypes.object.isRequired,
     node: React.PropTypes.object.isRequired,
+    decoratorProps: React.PropTypes.object,
     decorators: React.PropTypes.object.isRequired,
     animations: React.PropTypes.oneOfType([
         React.PropTypes.object,

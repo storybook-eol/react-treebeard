@@ -29,11 +29,11 @@ class NodeHeader extends React.Component {
             <decorators.Container
                 style={headerStyles}
                 decorators={decorators}
+                decoratorProps={decoratorProps}
                 terminal={terminal}
                 onClick={this.props.onClick}
                 animations={this.props.animations}
                 node={this.props.node}
-                { ...decoratorProps }
             />
         );
     }
@@ -41,6 +41,7 @@ class NodeHeader extends React.Component {
 
 NodeHeader.propTypes = {
     style: React.PropTypes.object.isRequired,
+    decoratorProps: React.PropTypes.object,
     decorators: React.PropTypes.object.isRequired,
     animations: React.PropTypes.oneOfType([
         React.PropTypes.object,

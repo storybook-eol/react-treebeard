@@ -62,7 +62,7 @@ class Container extends React.Component {
         super(props);
     }
     render(){
-        const {style, decorators, terminal, onClick, node} = this.props;
+        const {style, decoratorProps, decorators, terminal, onClick, node} = this.props;
         return (
             <div
                 ref="clickable"
@@ -72,6 +72,7 @@ class Container extends React.Component {
                 <decorators.Header
                     node={node}
                     style={style.header}
+                    { ...decoratorProps }
                 />
             </div>
         );
@@ -89,14 +90,15 @@ class Container extends React.Component {
         );
     }
     renderToggleDecorator(){
-        const {style, decorators} = this.props;
-        return (<decorators.Toggle style={style.toggle}/>);
+        const {style, decoratorProps, decorators} = this.props;
+        return (<decorators.Toggle style={style.toggle} { ...decoratorProps }/>);
     }
 }
 
 Container.propTypes = {
     style: React.PropTypes.object.isRequired,
     decorators: React.PropTypes.object.isRequired,
+    decoratorProps: React.PropTypes.object,
     terminal: React.PropTypes.bool.isRequired,
     onClick: React.PropTypes.func.isRequired,
     animations: React.PropTypes.oneOfType([
