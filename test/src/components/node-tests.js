@@ -24,6 +24,41 @@ describe('node component', () => {
         global.should.not.exist(treeNode.state);
     });
 
+    it('should invert the toggle state on icon click', (done) => {
+        const node = { toggled: true };
+        const onClickIcon = function(toggledNode, toggled){
+            toggled.should.equal(!toggledNode.toggled);
+            done();
+        };
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode
+                {...defaults}
+                node={node}
+                onClickIcon={onClickIcon}
+            />
+        );
+        treeNode.onClickIcon();
+    });
+
+    it('should call the onClickIcon callback once if it is registered on icon click', () => {
+        const onClickIcon = sinon.spy();
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode
+                {...defaults}
+                onClickIcon={onClickIcon}
+            />
+        );
+        treeNode.onClickIcon();
+        onClickIcon.should.be.called.once;
+    });
+
+    it('should not throw an exception if a callback is not registered on icon click', () => {
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode {...defaults}/>
+        );
+        (() => { treeNode.onClickIcon(); }).should.not.throw(Error);
+    });
+
     it('should invert the toggle state on click', (done) => {
         const node = { toggled: true };
         const onToggle = function(toggledNode, toggled){

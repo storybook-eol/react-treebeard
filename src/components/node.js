@@ -9,11 +9,17 @@ class TreeNode extends React.Component {
     constructor(props){
         super(props);
         this.onClick = this.onClick.bind(this);
+        this.onClickIcon = this.onClickIcon.bind(this);
     }
     onClick(){
         let toggled = !this.props.node.toggled;
         let onToggle = this.props.onToggle;
         if(onToggle){ onToggle(this.props.node, toggled); }
+    }
+    onClickIcon(){
+        let toggled = !this.props.node.toggled;
+        let onClickIcon = this.props.onClickIcon;
+        if(onClickIcon){ onClickIcon(this.props.node, toggled); }
     }
     animations(){
         const props = this.props;
@@ -60,6 +66,7 @@ class TreeNode extends React.Component {
                 style={this.props.style}
                 node={Object.assign({}, this.props.node)}
                 onClick={this.onClick}
+                onClickIcon={this.onClickIcon}
             />
         );
     }
@@ -92,7 +99,10 @@ class TreeNode extends React.Component {
         );
     }
     _eventBubbles(){
-        return { onToggle: this.props.onToggle };
+        return {
+            onToggle: this.props.onToggle,
+            onClickIcon: this.props.onClickIcon
+        };
     }
 }
 
@@ -104,7 +114,8 @@ TreeNode.propTypes = {
         React.PropTypes.object,
         React.PropTypes.bool
     ]).isRequired,
-    onToggle: React.PropTypes.func
+    onToggle: React.PropTypes.func,
+    onClickIcon: React.PropTypes.func
 };
 
 export default TreeNode;

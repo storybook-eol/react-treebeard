@@ -22,6 +22,7 @@ class TreeBeard extends React.Component {
                         key={node.id || index}
                         node={node}
                         onToggle={this.props.onToggle}
+                        onClickIcon={this.props.onClickIcon}
                         animations={this.props.animations}
                         decorators={this.props.decorators}
                         style={this.props.style.tree.node}
@@ -43,6 +44,7 @@ TreeBeard.propTypes = {
         React.PropTypes.bool
     ]),
     onToggle: React.PropTypes.func,
+    onClickIcon: React.PropTypes.func,
     decorators: React.PropTypes.object
 };
 
