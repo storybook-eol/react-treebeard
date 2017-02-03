@@ -42,7 +42,7 @@ describe('container decorator component', () => {
             />
         );
         const clickable = container.refs.clickable;
-        TestUtils.Simulate.click(clickable);
+        TestUtils.Simulate.doubleClick(clickable);
         onDoubleClick.should.be.called.once;
     });
 
