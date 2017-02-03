@@ -15,7 +15,8 @@ const defaults = {
     animations: { toggle: {} },
     terminal: false,
     decorators: factory.createDecorators(),
-    onClick: function(){}
+    onClick: function(){},
+    onDoubleClick: function(){}
 };
 
 const Container = defaultDecorators.Container;
@@ -31,6 +32,18 @@ describe('container decorator component', () => {
         const clickable = container.refs.clickable;
         TestUtils.Simulate.click(clickable);
         onClick.should.be.called.once;
+    });
+
+    it('should render a clickable element with a doubleClick event handler', () => {
+        const onDoubleClick = sinon.spy();
+        const container = TestUtils.renderIntoDocument(
+            <Container {...defaults}
+                onDoubleClick={onDoubleClick}
+            />
+        );
+        const clickable = container.refs.clickable;
+        TestUtils.Simulate.click(clickable);
+        onDoubleClick.should.be.called.once;
     });
 
     it('should render the toggle decorator not terminal', () => {
