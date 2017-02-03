@@ -48,7 +48,7 @@ NodeHeader.propTypes = {
     ]).isRequired,
     node: React.PropTypes.object.isRequired,
     onClick: React.PropTypes.func,
-    onDoubleClick : React.PropTypes.fun
+    onDoubleClick : React.PropTypes.func
 };
 
 export default NodeHeader;
