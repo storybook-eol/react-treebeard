@@ -62,11 +62,12 @@ class Container extends React.Component {
         super(props);
     }
     render(){
-        const {style, decorators, terminal, onClick, node} = this.props;
+        const {style, decorators, terminal, onClick,onDoubleClick, node} = this.props;
         return (
             <div
                 ref="clickable"
                 onClick={onClick}
+                onDoubleClick={onDoubleClick}
                 style={style.container}>
                 { !terminal ? this.renderToggle() : null }
                 <decorators.Header
@@ -98,6 +99,7 @@ Container.propTypes = {
     decorators: React.PropTypes.object.isRequired,
     terminal: React.PropTypes.bool.isRequired,
     onClick: React.PropTypes.func.isRequired,
+    onDoubleClick: React.PropTypes.func,
     animations: React.PropTypes.oneOfType([
         React.PropTypes.object,
         React.PropTypes.bool
