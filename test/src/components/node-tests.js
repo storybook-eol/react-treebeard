@@ -52,6 +52,18 @@ describe('node component', () => {
         onToggle.should.be.called.once;
     });
 
+    it('should call the onDblClick callback once if it is registered on doubleClick', () => {
+        const onDblClick = sinon.spy();
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode
+                {...defaults}
+                onDblClick={onDblClick}
+            />
+        );
+        treeNode.onDoubleClick();
+        onDblClick.should.be.called.once;
+    });
+
     it('should not throw an exception if a callback is not registered on click', () => {
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}/>

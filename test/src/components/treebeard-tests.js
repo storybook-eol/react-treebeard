@@ -104,4 +104,16 @@ describe('treebeard component', () => {
         element.dataset.reactid.should.contain(expectedId);
     });
 
+    it('should pass the top level tree node the onDblClick props', () => {
+        const treebeard = TestUtils.renderIntoDocument(
+            <Treebeard
+                data={defaults}
+                onDblClick={()=>{}}
+            />
+        );
+        const node = TestUtils.findRenderedComponentWithType(treebeard, TreeNode);
+        node.props.node.should.equal(treebeard.props.data);
+        node.props.onDblClick.should.equal(treebeard.props.onDblClick);
+    });
+
 });
