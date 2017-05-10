@@ -94,7 +94,11 @@ describe('node component', () => {
     });
 
     it('should use the node decorators if defined', () => {
-        const ContainerDecorator = React.createClass({render: () => <div/>});
+        class ContainerDecorator extends React.Component {
+            render() {
+                return <div/>;
+            }
+        }
         const nodeDecorators = {
             Container: ContainerDecorator
         };
@@ -109,7 +113,11 @@ describe('node component', () => {
     });
 
     it('should fallback to the prop decorators if the node decorators are not defined', () => {
-        const ContainerDecorator = React.createClass({render: () => <div/>});
+        class ContainerDecorator extends React.Component {
+            render() {
+                return <div/>;
+            }
+        }
         const decorators = {
             Container: ContainerDecorator
         };
@@ -254,7 +262,11 @@ describe('node component', () => {
 
     it('should render the loading decorator if the node is loading and toggled', () => {
         const node = {toggled: true, loading: true};
-        const LoadingDecorator = React.createClass({render: () => <div/>});
+        class LoadingDecorator extends React.Component {
+            render() {
+                return <div/>;
+            }
+        }
         const decorators = factory.createDecorators({loading: LoadingDecorator});
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
@@ -268,7 +280,11 @@ describe('node component', () => {
 
     it('should not render the loading decorator if the node is not loading but toggled', () => {
         const node = {toggled: true, loading: false};
-        const LoadingDecorator = React.createClass({render: () => <div/>});
+        class LoadingDecorator extends React.Component {
+            render() {
+                return <div/>;
+            }
+        }
         const decorators = factory.createDecorators({loading: LoadingDecorator});
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}

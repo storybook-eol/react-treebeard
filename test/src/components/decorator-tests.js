@@ -34,7 +34,11 @@ describe('container decorator component', () => {
     });
 
     it('should render the toggle decorator not terminal', () => {
-        const toggleType = React.createClass({render: () => <div/>});
+        class toggleType extends React.Component {
+            render() {
+                return <div/>;
+            }
+        }
         const decorators = factory.createDecorators({toggle: toggleType});
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
@@ -47,7 +51,11 @@ describe('container decorator component', () => {
     });
 
     it('should not render the toggle decorator if the node is terminal', () => {
-        const toggleType = React.createClass({render: () => <div/>});
+        class toggleType extends React.Component {
+            render() {
+                return <div/>;
+            }
+        }
         const decorators = factory.createDecorators({toggle: toggleType});
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
@@ -61,7 +69,11 @@ describe('container decorator component', () => {
 
     it('should pass the style to the toggle decorator', () => {
         const style = {toggle: {color: 'red'}};
-        const toggleType = React.createClass({render: () => <div/>});
+        class toggleType extends React.Component {
+            render() {
+                return <div/>;
+            }
+        }
         const decorators = factory.createDecorators({toggle: toggleType});
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
@@ -115,7 +127,11 @@ describe('container decorator component', () => {
     });
 
     it('should render the header decorator', () => {
-        const headType = React.createClass({render: () => <div/>});
+        class headType extends React.Component {
+            render() {
+                return <div/>;
+            }
+        }
         const decorators = factory.createDecorators({header: headType});
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
@@ -129,7 +145,11 @@ describe('container decorator component', () => {
     it('should pass the node and style to the header decorator', () => {
         const style = {header: {color: 'red'}};
         const node = {name: 'terminal-node'};
-        const headType = React.createClass({render: () => <div/>});
+        class headType extends React.Component {
+            render() {
+                return <div/>;
+            }
+        }
         const decorators = factory.createDecorators({header: headType});
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}

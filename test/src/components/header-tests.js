@@ -7,7 +7,11 @@ const TestUtils = require('react-dom/test-utils');
 const Header = require('../../../src/components/header');
 const factory = require('../utils/factory');
 
-const ContainerType = React.createClass({render: () => <div/>});
+class ContainerType extends React.Component {
+    render() {
+        return <div/>;
+    }
+}
 
 const defaults = {
     style: {},
