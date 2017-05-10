@@ -3,7 +3,7 @@
 'use strict';
 
 const React = require('react');
-const TestUtils = require('react-addons-test-utils');
+const TestUtils = require('react-dom/test-utils');
 const Header = require('../../../src/components/header');
 const factory = require('../utils/factory');
 

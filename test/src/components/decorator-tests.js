@@ -4,7 +4,7 @@
 
 const sinon = require('sinon');
 const React = require('react');
-const TestUtils = require('react-addons-test-utils');
+const TestUtils = require('react-dom/test-utils');
 const VelocityComponent = require('velocity-react').VelocityComponent;
 const defaultDecorators = require('../../../src/components/decorators');
 const factory = require('../utils/factory');
