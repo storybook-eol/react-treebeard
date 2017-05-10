@@ -18,7 +18,7 @@ describe('treebeard component', () => {
         const treebeard = TestUtils.renderIntoDocument(
             <Treebeard data={defaults}/>
         );
-        const treeBase = treebeard.refs.treeBase;
+        const treeBase = treebeard.treeBaseRef;
         treeBase.tagName.toLowerCase().should.equal('ul');
     });
 
@@ -32,10 +32,8 @@ describe('treebeard component', () => {
 
     it('should pass the top level tree node the associated props', () => {
         const treebeard = TestUtils.renderIntoDocument(
-            <Treebeard
-                data={defaults}
-                onToggle={()=>{}}
-            />
+            <Treebeard data={defaults}
+                       onToggle={() => null}/>
         );
         const node = TestUtils.findRenderedComponentWithType(treebeard, TreeNode);
         node.props.node.should.equal(treebeard.props.data);
@@ -71,8 +69,8 @@ describe('treebeard component', () => {
 
     it('should support rendering multiple nodes at the root level', () => {
         const multipleRootNodes = [
-            { name: 'root-1', children: [] },
-            { name: 'root-2', children: [] }
+            {name: 'root-1', children: []},
+            {name: 'root-2', children: []}
         ];
         const treebeard = TestUtils.renderIntoDocument(
             <Treebeard data={multipleRootNodes}/>
@@ -83,7 +81,7 @@ describe('treebeard component', () => {
 
     it('should render a root node with an id key if available', () => {
         const id = 'RootNode';
-        const rootNode = { id: id, name: 'root-1', children: [] };
+        const rootNode = {id: id, name: 'root-1', children: []};
         const treebeard = TestUtils.renderIntoDocument(
             <Treebeard data={rootNode}/>
         );
@@ -94,7 +92,7 @@ describe('treebeard component', () => {
     });
 
     it('should render a root node with an index key if id is not available', () => {
-        const rootNode = { name: 'root-1', children: [] };
+        const rootNode = {name: 'root-1', children: []};
         const treebeard = TestUtils.renderIntoDocument(
             <Treebeard data={rootNode}/>
         );

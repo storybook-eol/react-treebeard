@@ -11,7 +11,7 @@ const factory = require('../utils/factory');
 
 const defaults = {
     style: {},
-    node: { chilren: [] },
+    node: {chilren: []},
     animations: factory.createAnimations(),
     decorators: factory.createDecorators()
 };
@@ -25,8 +25,8 @@ describe('node component', () => {
     });
 
     it('should invert the toggle state on click', (done) => {
-        const node = { toggled: true };
-        const onToggle = function(toggledNode, toggled){
+        const node = {toggled: true};
+        const onToggle = (toggledNode, toggled) => {
             toggled.should.equal(!toggledNode.toggled);
             done();
         };
@@ -56,15 +56,16 @@ describe('node component', () => {
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}/>
         );
-        (() => { treeNode.onClick(); }).should.not.throw(Error);
+
+        (() => treeNode.onClick()).should.not.throw(Error);
     });
 
     it('should use the node animations if defined', () => {
         const nodeAnimations = {
-            toggle: sinon.stub().returns({ duration: 0, animation: 'fadeIn' }),
-            drawer: sinon.stub().returns({ duration: 0, animation: 'fadeIn' })
+            toggle: sinon.stub().returns({duration: 0, animation: 'fadeIn'}),
+            drawer: sinon.stub().returns({duration: 0, animation: 'fadeIn'})
         };
-        const node = { animations: nodeAnimations };
+        const node = {animations: nodeAnimations};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode
                 {...defaults}
@@ -78,8 +79,8 @@ describe('node component', () => {
 
     it('should fallback to the prop animations if the node animations are not defined', () => {
         const animations = {
-            toggle: sinon.stub().returns({ duration: 0, animation: 'fadeIn' }),
-            drawer: sinon.stub().returns({ duration: 0, animation: 'fadeIn' })
+            toggle: sinon.stub().returns({duration: 0, animation: 'fadeIn'}),
+            drawer: sinon.stub().returns({duration: 0, animation: 'fadeIn'})
         };
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode
@@ -93,11 +94,11 @@ describe('node component', () => {
     });
 
     it('should use the node decorators if defined', () => {
-        const ContainerDecorator = React.createClass({ render: () => <div/> });
+        const ContainerDecorator = React.createClass({render: () => <div/>});
         const nodeDecorators = {
             Container: ContainerDecorator
         };
-        const node = { decorators: nodeDecorators, children: [] };
+        const node = {decorators: nodeDecorators, children: []};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode
                 {...defaults}
@@ -108,11 +109,11 @@ describe('node component', () => {
     });
 
     it('should fallback to the prop decorators if the node decorators are not defined', () => {
-        const ContainerDecorator = React.createClass({ render: () => <div/> });
+        const ContainerDecorator = React.createClass({render: () => <div/>});
         const decorators = {
             Container: ContainerDecorator
         };
-        const node = { children: [] };
+        const node = {children: []};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode
                 {...defaults}
@@ -127,7 +128,7 @@ describe('node component', () => {
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}/>
         );
-        const topLevel = treeNode.refs.topLevel;
+        const topLevel = treeNode.topLevelRef;
         topLevel.tagName.toLowerCase().should.equal('li');
     });
 
@@ -140,19 +141,19 @@ describe('node component', () => {
     });
 
     it('should render the subtree if toggled', () => {
-        const node = { toggled: true };
+        const node = {toggled: true};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults} node={node}/>
         );
-        treeNode.refs.subtree.should.exist;
+        treeNode.subtreeRef.should.exist;
     });
 
     it('should not render the children if not toggled', () => {
-        const node = { toggled: false };
+        const node = {toggled: false};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults} node={node}/>
         );
-        global.should.not.exist(treeNode.refs.subtree);
+        global.should.not.exist(treeNode.subtreeRef);
     });
 
     it('should wrap the children in a velocity transition group', () => {
@@ -168,10 +169,10 @@ describe('node component', () => {
         const animations = factory.createAnimations();
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                animations={animations}
+                      animations={animations}
             />
         );
-        const velocity = treeNode.refs.velocity;
+        const velocity = treeNode.velocityRef;
         const drawer = animations.drawer();
         velocity.props.enter.animation.should.equal(drawer.enter.animation);
         velocity.props.enter.duration.should.equal(drawer.enter.duration);
@@ -181,36 +182,36 @@ describe('node component', () => {
         const animations = factory.createAnimations();
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                animations={animations}
+                      animations={animations}
             />
         );
-        const velocity = treeNode.refs.velocity;
+        const velocity = treeNode.velocityRef;
         const drawer = animations.drawer();
         velocity.props.leave.animation.should.equal(drawer.leave.animation);
         velocity.props.leave.duration.should.equal(drawer.leave.duration);
     });
 
     it('should not render a velocity component if animations is false and not toggled', () => {
-        const node = { toggled: false };
+        const node = {toggled: false};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                animations={false}
-                node={node}
+                      animations={false}
+                      node={node}
             />
         );
-        const velocity = treeNode.refs.velocity;
+        const velocity = treeNode.velocityRef;
         global.should.not.exist(velocity);
     });
 
     it('should not render a velocity component if animations is false and toggled', () => {
-        const node = { toggled: true };
+        const node = {toggled: true};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                animations={false}
-                node={node}
+                      animations={false}
+                      node={node}
             />
         );
-        const velocity = treeNode.refs.velocity;
+        const velocity = treeNode.velocityRef;
         global.should.not.exist(velocity);
     });
 
@@ -218,32 +219,32 @@ describe('node component', () => {
         const animations = factory.createAnimations();
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                animations={animations}
+                      animations={animations}
             />
         );
-        const velocity = treeNode.refs.velocity;
+        const velocity = treeNode.velocityRef;
         velocity.should.exist;
     });
 
     it('should wrap the children in a list', () => {
-        const node = { toggled: true };
+        const node = {toggled: true};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                node={node}
+                      node={node}
             />
         );
-        const subtree = treeNode.refs.subtree;
+        const subtree = treeNode.subtreeRef;
         subtree.tagName.toLowerCase().should.equal('ul');
     });
 
     it('should render a TreeNode component for each child', () => {
         const node = {
             toggled: true,
-            children: [ {node: {}}, {node: {}}, {node: {}} ]
+            children: [{node: {}}, {node: {}}, {node: {}}]
         };
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                node={node}
+                      node={node}
             />
         );
         // Find All TreeNodes (+ Top Level TreeNode)
@@ -252,13 +253,13 @@ describe('node component', () => {
     });
 
     it('should render the loading decorator if the node is loading and toggled', () => {
-        const node = { toggled: true, loading: true };
-        const LoadingDecorator = React.createClass({ render: () => <div/> });
-        const decorators = factory.createDecorators({ loading: LoadingDecorator });
+        const node = {toggled: true, loading: true};
+        const LoadingDecorator = React.createClass({render: () => <div/>});
+        const decorators = factory.createDecorators({loading: LoadingDecorator});
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                node={node}
-                decorators={decorators}
+                      node={node}
+                      decorators={decorators}
             />
         );
         const loading = TestUtils.findRenderedComponentWithType(treeNode, LoadingDecorator);
@@ -266,13 +267,13 @@ describe('node component', () => {
     });
 
     it('should not render the loading decorator if the node is not loading but toggled', () => {
-        const node = { toggled: true, loading: false };
-        const LoadingDecorator = React.createClass({ render: () => <div/> });
-        const decorators = factory.createDecorators({ loading: LoadingDecorator });
+        const node = {toggled: true, loading: false};
+        const LoadingDecorator = React.createClass({render: () => <div/>});
+        const decorators = factory.createDecorators({loading: LoadingDecorator});
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                node={node}
-                decorators={decorators}
+                      node={node}
+                      decorators={decorators}
             />
         );
         const loading = TestUtils.scryRenderedComponentsWithType(treeNode, LoadingDecorator);
@@ -280,24 +281,24 @@ describe('node component', () => {
     });
 
     it('should not render the children if the node is Loading', () => {
-        const node = { toggled: true, loading: true };
+        const node = {toggled: true, loading: true};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                node={node}
+                      node={node}
             />
         );
-        global.should.not.exist(treeNode.refs.subtree);
+        global.should.not.exist(treeNode.subtreeRef);
     });
 
     it('should render a child with an id key if available', () => {
         const id = 'SpecialNode';
         const node = {
             toggled: true,
-            children: [{ id }]
+            children: [{id}]
         };
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                node={node}
+                      node={node}
             />
         );
         const nodes = TestUtils.scryRenderedComponentsWithType(treeNode, TreeNode);
@@ -309,11 +310,11 @@ describe('node component', () => {
     it('should render a child with an index key if id is not available', () => {
         const node = {
             toggled: true,
-            children: [{ name: 'node' }]
+            children: [{name: 'node'}]
         };
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                node={node}
+                      node={node}
             />
         );
         const nodes = TestUtils.scryRenderedComponentsWithType(treeNode, TreeNode);

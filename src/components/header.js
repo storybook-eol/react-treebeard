@@ -6,35 +6,39 @@ import shallowEqual from 'shallowequal';
 import deepEqual from 'deep-equal';
 
 class NodeHeader extends React.Component {
-    constructor(props){
-        super(props);
-    }
-    shouldComponentUpdate(nextProps){
+    shouldComponentUpdate(nextProps) {
         const props = this.props;
         const nextPropKeys = Object.keys(nextProps);
-        for(let i = 0; i < nextPropKeys.length; i++){
+
+        for (let i = 0; i < nextPropKeys.length; i++) {
             const key = nextPropKeys[i];
-            if(key === 'animations'){ continue; }
+            if (key === 'animations') {
+                continue;
+            }
+
             const isEqual = shallowEqual(props[key], nextProps[key]);
-            if(!isEqual){ return true; }
+            if (!isEqual) {
+                return true;
+            }
         }
-        return !deepEqual(props.animations, nextProps.animations, { strict: true });
+
+        return !deepEqual(props.animations, nextProps.animations, {strict: true});
     }
-    render(){
-        const {style, decorators} = this.props;
-        const terminal = !this.props.node.children;
-        const active = this.props.node.active;
+
+    render() {
+        const {animations, decorators, node, onClick, style} = this.props;
+        const {active, children} = node;
+        const terminal = !children;
         const container = [style.link, active ? style.activeLink : null];
-        const headerStyles = Object.assign({ container }, this.props.style);
+        const headerStyles = Object.assign({container}, style);
+
         return (
-            <decorators.Container
-                style={headerStyles}
-                decorators={decorators}
-                terminal={terminal}
-                onClick={this.props.onClick}
-                animations={this.props.animations}
-                node={this.props.node}
-            />
+            <decorators.Container animations={animations}
+                                  decorators={decorators}
+                                  node={node}
+                                  onClick={onClick}
+                                  style={headerStyles}
+                                  terminal={terminal}/>
         );
     }
 }
