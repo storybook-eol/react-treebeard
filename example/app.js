@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { StyleRoot } from 'radium';
 import {Treebeard, decorators} from '../src/index';
@@ -44,7 +45,7 @@ class NodeViewer extends React.Component {
 }
 
 NodeViewer.propTypes = {
-    node: React.PropTypes.object
+    node: PropTypes.object
 };
 
 class DemoTree extends React.Component {

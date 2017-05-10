@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {VelocityTransitionGroup} from 'velocity-react';
 
 import NodeHeader from './header';
@@ -97,14 +98,14 @@ class TreeNode extends React.Component {
 }
 
 TreeNode.propTypes = {
-    style: React.PropTypes.object.isRequired,
-    node: React.PropTypes.object.isRequired,
-    decorators: React.PropTypes.object.isRequired,
-    animations: React.PropTypes.oneOfType([
-        React.PropTypes.object,
-        React.PropTypes.bool
+    style: PropTypes.object.isRequired,
+    node: PropTypes.object.isRequired,
+    decorators: PropTypes.object.isRequired,
+    animations: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.bool
     ]).isRequired,
-    onToggle: React.PropTypes.func
+    onToggle: PropTypes.func
 };
 
 export default TreeNode;

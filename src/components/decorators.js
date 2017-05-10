@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import {VelocityComponent} from 'velocity-react';
 
@@ -13,7 +14,7 @@ const Loading = (props) => {
 };
 
 Loading.propTypes = {
-    style: React.PropTypes.object
+    style: PropTypes.object
 };
 
 const Toggle = (props) => {
@@ -37,7 +38,7 @@ const Toggle = (props) => {
 };
 
 Toggle.propTypes = {
-    style: React.PropTypes.object
+    style: PropTypes.object
 };
 
 const Header = (props) => {
@@ -52,8 +53,8 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-    style: React.PropTypes.object,
-    node: React.PropTypes.object.isRequired
+    style: PropTypes.object,
+    node: PropTypes.object.isRequired
 };
 
 @Radium
@@ -94,15 +95,15 @@ class Container extends React.Component {
 }
 
 Container.propTypes = {
-    style: React.PropTypes.object.isRequired,
-    decorators: React.PropTypes.object.isRequired,
-    terminal: React.PropTypes.bool.isRequired,
-    onClick: React.PropTypes.func.isRequired,
-    animations: React.PropTypes.oneOfType([
-        React.PropTypes.object,
-        React.PropTypes.bool
+    style: PropTypes.object.isRequired,
+    decorators: PropTypes.object.isRequired,
+    terminal: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+    animations: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.bool
     ]).isRequired,
-    node: React.PropTypes.object.isRequired
+    node: PropTypes.object.isRequired
 };
 
 export default {

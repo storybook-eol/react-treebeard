@@ -73,6 +73,7 @@
   "dependencies": {
     "babel-runtime": "^5.8.29",
     "deep-equal": "^1.0.1",
+    "prop-types": "^15.5.8",
     "radium": "^0.18.2",
     "shallowequal": "^0.2.2",
     "velocity-react": "^1.3.1"
