@@ -78,28 +78,4 @@ describe('treebeard component', () => {
         const nodes = TestUtils.scryRenderedComponentsWithType(treebeard, TreeNode);
         nodes.length.should.equal(multipleRootNodes.length);
     });
-
-    it('should render a root node with an id key if available', () => {
-        const id = 'RootNode';
-        const rootNode = {id: id, name: 'root-1', children: []};
-        const treebeard = TestUtils.renderIntoDocument(
-            <Treebeard data={rootNode}/>
-        );
-        const node = TestUtils.findRenderedComponentWithType(treebeard, TreeNode);
-        const element = ReactDOM.findDOMNode(node);
-        const expectedId = '$' + id;
-        element.dataset.reactid.should.contain(expectedId);
-    });
-
-    it('should render a root node with an index key if id is not available', () => {
-        const rootNode = {name: 'root-1', children: []};
-        const treebeard = TestUtils.renderIntoDocument(
-            <Treebeard data={rootNode}/>
-        );
-        const node = TestUtils.findRenderedComponentWithType(treebeard, TreeNode);
-        const element = ReactDOM.findDOMNode(node);
-        const expectedId = '$0';
-        element.dataset.reactid.should.contain(expectedId);
-    });
-
 });
