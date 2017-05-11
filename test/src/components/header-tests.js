@@ -2,10 +2,10 @@
 
 'use strict';
 
-const React = require('react');
-const TestUtils = require('react-dom/test-utils');
-const Header = require('../../../src/components/header');
-const factory = require('../utils/factory');
+import React from 'react';
+import TestUtils from 'react-dom/test-utils';
+import Header from '../../../src/components/header';
+import {createDecorators} from '../utils/factory';
 
 class ContainerType extends React.Component {
     render() {
@@ -17,7 +17,7 @@ const defaults = {
     style: {},
     node: {children: []},
     animations: {toggle: {}},
-    decorators: factory.createDecorators({container: ContainerType})
+    decorators: createDecorators({container: ContainerType})
 };
 
 describe('header component', () => {

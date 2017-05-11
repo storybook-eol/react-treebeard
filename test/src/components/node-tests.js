@@ -2,18 +2,18 @@
 
 'use strict';
 
-const sinon = require('sinon');
-const React = require('react');
-const ReactDOM = require('react-dom');
-const TestUtils = require('react-dom/test-utils');
-const TreeNode = require('../../../src/components/node');
-const factory = require('../utils/factory');
+import sinon from 'sinon';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-dom/test-utils';
+import TreeNode from '../../../src/components/node';
+import {createAnimations, createDecorators} from '../utils/factory';
 
 const defaults = {
     style: {},
     node: {chilren: []},
-    animations: factory.createAnimations(),
-    decorators: factory.createDecorators()
+    animations: createAnimations(),
+    decorators: createDecorators()
 };
 
 describe('node component', () => {
@@ -174,7 +174,7 @@ describe('node component', () => {
     });
 
     it('should pass velocity the drawer enter animation and duration props', () => {
-        const animations = factory.createAnimations();
+        const animations = createAnimations();
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                       animations={animations}
@@ -187,7 +187,7 @@ describe('node component', () => {
     });
 
     it('should pass velocity the drawer leave animation and duration props', () => {
-        const animations = factory.createAnimations();
+        const animations = createAnimations();
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                       animations={animations}
@@ -224,7 +224,7 @@ describe('node component', () => {
     });
 
     it('should render a velocity component if animations is an object', () => {
-        const animations = factory.createAnimations();
+        const animations = createAnimations();
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                       animations={animations}
@@ -267,7 +267,7 @@ describe('node component', () => {
                 return <div/>;
             }
         }
-        const decorators = factory.createDecorators({loading: LoadingDecorator});
+        const decorators = createDecorators({loading: LoadingDecorator});
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                       node={node}
@@ -285,7 +285,7 @@ describe('node component', () => {
                 return <div/>;
             }
         }
-        const decorators = factory.createDecorators({loading: LoadingDecorator});
+        const decorators = createDecorators({loading: LoadingDecorator});
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                       node={node}

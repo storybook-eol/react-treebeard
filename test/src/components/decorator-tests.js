@@ -2,19 +2,19 @@
 
 'use strict';
 
-const sinon = require('sinon');
-const React = require('react');
-const TestUtils = require('react-dom/test-utils');
-const VelocityComponent = require('velocity-react').VelocityComponent;
-const defaultDecorators = require('../../../src/components/decorators');
-const factory = require('../utils/factory');
+import sinon from 'sinon';
+import React from 'react';
+import TestUtils from 'react-dom/test-utils';
+import {VelocityComponent} from 'velocity-react';
+import defaultDecorators from '../../../src/components/decorators';
+import {createAnimations, createDecorators} from '../utils/factory';
 
 const defaults = {
     style: {},
     node: {children: []},
     animations: {toggle: {}},
     terminal: false,
-    decorators: factory.createDecorators(),
+    decorators: createDecorators(),
     onClick: () => null
 };
 
@@ -39,7 +39,7 @@ describe('container decorator component', () => {
                 return <div/>;
             }
         }
-        const decorators = factory.createDecorators({toggle: toggleType});
+        const decorators = createDecorators({toggle: toggleType});
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
                        decorators={decorators}
@@ -56,7 +56,7 @@ describe('container decorator component', () => {
                 return <div/>;
             }
         }
-        const decorators = factory.createDecorators({toggle: toggleType});
+        const decorators = createDecorators({toggle: toggleType});
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
                        decorators={decorators}
@@ -74,7 +74,7 @@ describe('container decorator component', () => {
                 return <div/>;
             }
         }
-        const decorators = factory.createDecorators({toggle: toggleType});
+        const decorators = createDecorators({toggle: toggleType});
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
                        decorators={decorators}
@@ -104,7 +104,7 @@ describe('container decorator component', () => {
     });
 
     it('should render a velocity component if animations is an object', () => {
-        const animations = factory.createAnimations();
+        const animations = createAnimations();
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
                        animations={animations}
@@ -132,7 +132,7 @@ describe('container decorator component', () => {
                 return <div/>;
             }
         }
-        const decorators = factory.createDecorators({header: headType});
+        const decorators = createDecorators({header: headType});
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
                        decorators={decorators}
@@ -150,13 +150,12 @@ describe('container decorator component', () => {
                 return <div/>;
             }
         }
-        const decorators = factory.createDecorators({header: headType});
+        const decorators = createDecorators({header: headType});
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
                        decorators={decorators}
                        node={node}
-                       style={style}
-            />
+                       style={style}/>
         );
         const head = TestUtils.findRenderedComponentWithType(container, headType);
         head.props.style.should.equal(style.header);

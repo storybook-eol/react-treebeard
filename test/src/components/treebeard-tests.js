@@ -2,11 +2,11 @@
 
 'use strict';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const TestUtils = require('react-dom/test-utils');
-const TreeNode = require('../../../src/components/node');
-const Treebeard = require('../../../src/components/treebeard');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-dom/test-utils';
+import TreeNode from '../../../src/components/node';
+import Treebeard from '../../../src/components/treebeard';
 
 const defaults = {
     name: '',
