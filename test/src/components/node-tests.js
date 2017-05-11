@@ -2,11 +2,15 @@
 
 'use strict';
 
-import sinon from 'sinon';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import TestUtils from 'react-dom/test-utils';
+
+import sinon from 'sinon';
+import {VelocityTransitionGroup as TransitionGroup} from 'velocity-react';
+
+import NodeHeader from '../../../src/components/header';
 import TreeNode from '../../../src/components/node';
+
 import {createAnimations, createDecorators} from '../utils/factory';
 
 const defaults = {
@@ -18,9 +22,8 @@ const defaults = {
 
 describe('node component', () => {
     it('should not have any internal state', () => {
-        const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode {...defaults}/>
-        );
+        const treeNode = TestUtils.renderIntoDocument(<TreeNode {...defaults}/>);
+
         global.should.not.exist(treeNode.state);
     });
 
@@ -31,11 +34,9 @@ describe('node component', () => {
             done();
         };
         const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode
-                {...defaults}
-                node={node}
-                onToggle={onToggle}
-            />
+            <TreeNode {...defaults}
+                      node={node}
+                      onToggle={onToggle}/>
         );
         treeNode.onClick();
     });
@@ -49,13 +50,12 @@ describe('node component', () => {
             />
         );
         treeNode.onClick();
+
         onToggle.should.be.called.once;
     });
 
     it('should not throw an exception if a callback is not registered on click', () => {
-        const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode {...defaults}/>
-        );
+        const treeNode = TestUtils.renderIntoDocument(<TreeNode {...defaults}/>);
 
         (() => treeNode.onClick()).should.not.throw(Error);
     });
@@ -67,12 +67,11 @@ describe('node component', () => {
         };
         const node = {animations: nodeAnimations};
         const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode
-                {...defaults}
-                node={node}
-            />
+            <TreeNode{...defaults}
+                     node={node}/>
         );
         treeNode.animations();
+
         nodeAnimations.toggle.should.be.calledWith(treeNode.props);
         nodeAnimations.drawer.should.be.calledWith(treeNode.props);
     });
@@ -83,12 +82,11 @@ describe('node component', () => {
             drawer: sinon.stub().returns({duration: 0, animation: 'fadeIn'})
         };
         const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode
-                {...defaults}
-                animations={animations}
-            />
+            <TreeNode{...defaults}
+                     animations={animations}/>
         );
         treeNode.animations();
+
         animations.toggle.should.be.calledWith(treeNode.props);
         animations.drawer.should.be.calledWith(treeNode.props);
     });
@@ -104,12 +102,12 @@ describe('node component', () => {
         };
         const node = {decorators: nodeDecorators, children: []};
         const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode
-                {...defaults}
-                node={node}
-            />
+            <TreeNode {...defaults}
+                      node={node}/>
         );
-        TestUtils.findRenderedComponentWithType(treeNode, ContainerDecorator).should.exist;
+        const component = TestUtils.findRenderedComponentWithType(treeNode, ContainerDecorator);
+
+        component.should.exist;
     });
 
     it('should fallback to the prop decorators if the node decorators are not defined', () => {
@@ -123,13 +121,13 @@ describe('node component', () => {
         };
         const node = {children: []};
         const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode
-                {...defaults}
-                decorators={decorators}
-                node={node}
-            />
+            <TreeNode {...defaults}
+                      decorators={decorators}
+                      node={node}/>
         );
-        TestUtils.findRenderedComponentWithType(treeNode, ContainerDecorator).should.exist;
+        const component = TestUtils.findRenderedComponentWithType(treeNode, ContainerDecorator);
+
+        component.should.exist;
     });
 
     it('should render a list item at the top level', () => {
@@ -141,35 +139,30 @@ describe('node component', () => {
     });
 
     it('should render the NodeHeader component', () => {
-        const NodeHeader = require('../../../src/components/header');
-        const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode {...defaults}/>
-        );
-        TestUtils.findRenderedComponentWithType(treeNode, NodeHeader).should.exist;
+        const treeNode = TestUtils.renderIntoDocument(<TreeNode {...defaults}/>);
+        const component = TestUtils.findRenderedComponentWithType(treeNode, NodeHeader);
+
+        component.should.exist;
     });
 
     it('should render the subtree if toggled', () => {
         const node = {toggled: true};
-        const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode {...defaults} node={node}/>
-        );
+        const treeNode = TestUtils.renderIntoDocument(<TreeNode {...defaults} node={node}/>);
+
         treeNode.subtreeRef.should.exist;
     });
 
     it('should not render the children if not toggled', () => {
         const node = {toggled: false};
-        const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode {...defaults} node={node}/>
-        );
+        const treeNode = TestUtils.renderIntoDocument(<TreeNode {...defaults} node={node}/>);
+
         global.should.not.exist(treeNode.subtreeRef);
     });
 
     it('should wrap the children in a velocity transition group', () => {
-        const TransitionGroup = require('velocity-react').VelocityTransitionGroup;
-        const treeNode = TestUtils.renderIntoDocument(
-            <TreeNode {...defaults}/>
-        );
+        const treeNode = TestUtils.renderIntoDocument(<TreeNode {...defaults}/>);
         const component = TestUtils.findRenderedComponentWithType(treeNode, TransitionGroup);
+
         component.should.exist;
     });
 
@@ -177,11 +170,11 @@ describe('node component', () => {
         const animations = createAnimations();
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                      animations={animations}
-            />
+                      animations={animations}/>
         );
         const velocity = treeNode.velocityRef;
         const drawer = animations.drawer();
+
         velocity.props.enter.animation.should.equal(drawer.enter.animation);
         velocity.props.enter.duration.should.equal(drawer.enter.duration);
     });
@@ -190,11 +183,11 @@ describe('node component', () => {
         const animations = createAnimations();
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                      animations={animations}
-            />
+                      animations={animations}/>
         );
         const velocity = treeNode.velocityRef;
         const drawer = animations.drawer();
+
         velocity.props.leave.animation.should.equal(drawer.leave.animation);
         velocity.props.leave.duration.should.equal(drawer.leave.duration);
     });
@@ -204,10 +197,10 @@ describe('node component', () => {
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                       animations={false}
-                      node={node}
-            />
+                      node={node}/>
         );
         const velocity = treeNode.velocityRef;
+
         global.should.not.exist(velocity);
     });
 
@@ -216,10 +209,10 @@ describe('node component', () => {
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                       animations={false}
-                      node={node}
-            />
+                      node={node}/>
         );
         const velocity = treeNode.velocityRef;
+
         global.should.not.exist(velocity);
     });
 
@@ -227,10 +220,10 @@ describe('node component', () => {
         const animations = createAnimations();
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                      animations={animations}
-            />
+                      animations={animations}/>
         );
         const velocity = treeNode.velocityRef;
+
         velocity.should.exist;
     });
 
@@ -238,10 +231,10 @@ describe('node component', () => {
         const node = {toggled: true};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                      node={node}
-            />
+                      node={node}/>
         );
         const subtree = treeNode.subtreeRef;
+
         subtree.tagName.toLowerCase().should.equal('ul');
     });
 
@@ -252,11 +245,11 @@ describe('node component', () => {
         };
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                      node={node}
-            />
+                      node={node}/>
         );
         // Find All TreeNodes (+ Top Level TreeNode)
         const nodes = TestUtils.scryRenderedComponentsWithType(treeNode, TreeNode);
+
         nodes.length.should.equal(node.children.length + 1);
     });
 
@@ -271,10 +264,10 @@ describe('node component', () => {
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                       node={node}
-                      decorators={decorators}
-            />
+                      decorators={decorators}/>
         );
         const loading = TestUtils.findRenderedComponentWithType(treeNode, LoadingDecorator);
+
         loading.should.exist;
     });
 
@@ -289,10 +282,10 @@ describe('node component', () => {
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                       node={node}
-                      decorators={decorators}
-            />
+                      decorators={decorators}/>
         );
         const loading = TestUtils.scryRenderedComponentsWithType(treeNode, LoadingDecorator);
+
         loading.should.be.empty;
     });
 
@@ -300,9 +293,9 @@ describe('node component', () => {
         const node = {toggled: true, loading: true};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
-                      node={node}
-            />
+                      node={node}/>
         );
+
         global.should.not.exist(treeNode.subtreeRef);
     });
 });

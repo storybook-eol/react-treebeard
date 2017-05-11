@@ -4,7 +4,9 @@
 
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
+
 import Header from '../../../src/components/header';
+
 import {createDecorators} from '../utils/factory';
 
 class ContainerType extends React.Component {
@@ -22,10 +24,9 @@ const defaults = {
 
 describe('header component', () => {
     it('should render the container decorator', () => {
-        const header = TestUtils.renderIntoDocument(
-            <Header {...defaults}/>
-        );
+        const header = TestUtils.renderIntoDocument(<Header {...defaults}/>);
         const container = TestUtils.findRenderedComponentWithType(header, ContainerType);
+
         container.should.exist;
     });
 
@@ -33,10 +34,10 @@ describe('header component', () => {
         const node = {toggled: false};
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
-                    node={node}
-            />
+                    node={node}/>
         );
         const nextProps = {node: {toggled: !node.toggled}};
+
         header.shouldComponentUpdate(nextProps).should.be.true;
     });
 
@@ -44,10 +45,10 @@ describe('header component', () => {
         const node = {toggled: false};
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
-                    node={node}
-            />
+                    node={node}/>
         );
         const nextProps = Object.assign({}, defaults, {node: {toggled: node.toggled}});
+
         header.shouldComponentUpdate(nextProps).should.be.false;
     });
 
@@ -55,11 +56,11 @@ describe('header component', () => {
         const animations = {nested: {prop: 'value'}};
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
-                    animations={animations}
-            />
+                    animations={animations}/>
         );
         const sameAnimationProp = {animations: {nested: {prop: animations.nested.prop}}};
         const nextProps = Object.assign({}, defaults, sameAnimationProp);
+
         header.shouldComponentUpdate(nextProps).should.be.false;
     });
 
@@ -67,11 +68,11 @@ describe('header component', () => {
         const animations = {nested: {prop: 'value'}};
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
-                    animations={animations}
-            />
+                    animations={animations}/>
         );
         const diffAnimationProp = {animations: {nested: {prop: 'new-value'}}};
         const nextProps = Object.assign({}, defaults, diffAnimationProp);
+
         header.shouldComponentUpdate(nextProps).should.be.true;
     });
 
@@ -79,10 +80,10 @@ describe('header component', () => {
         const node = {name: 'terminal-node'};
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
-                    node={node}
-            />
+                    node={node}/>
         );
         const container = TestUtils.findRenderedComponentWithType(header, ContainerType);
+
         container.props.terminal.should.be.true;
     });
 
@@ -90,10 +91,10 @@ describe('header component', () => {
         const node = {children: [{name: 'child-node'}]};
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
-                    node={node}
-            />
+                    node={node}/>
         );
         const container = TestUtils.findRenderedComponentWithType(header, ContainerType);
+
         container.props.terminal.should.be.false;
     });
 
@@ -101,10 +102,10 @@ describe('header component', () => {
         const style = {link: {backgroundColor: 'black'}};
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
-                    style={style}
-            />
+                    style={style}/>
         );
         const container = TestUtils.findRenderedComponentWithType(header, ContainerType);
+
         container.props.style.container[0].should.equal(style.link);
     });
 
@@ -114,10 +115,10 @@ describe('header component', () => {
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
                     node={node}
-                    style={style}
-            />
+                    style={style}/>
         );
         const container = TestUtils.findRenderedComponentWithType(header, ContainerType);
+
         container.props.style.container[1].should.equal(style.activeLink);
     });
 
@@ -127,10 +128,10 @@ describe('header component', () => {
         const header = TestUtils.renderIntoDocument(
             <Header {...defaults}
                     node={node}
-                    style={style}
-            />
+                    style={style}/>
         );
         const container = TestUtils.findRenderedComponentWithType(header, ContainerType);
+
         global.should.not.exist(container.props.style.container[1]);
     });
 
