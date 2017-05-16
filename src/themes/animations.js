@@ -1,7 +1,7 @@
 'use strict';
 
 export default {
-    toggle: ({node: toggled}) => ({
+    toggle: ({node: {toggled}}) => ({
         animation: {rotateZ: toggled ? 90 : 0},
         duration: 300
     }),
