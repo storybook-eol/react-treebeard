@@ -1,110 +1,150 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {VelocityTransitionGroup} from 'velocity-react';
 
 import NodeHeader from './header';
 
 class TreeNode extends React.Component {
-    constructor(props){
-        super(props);
+    constructor() {
+        super();
+
         this.onClick = this.onClick.bind(this);
     }
-    onClick(){
-        let toggled = !this.props.node.toggled;
-        let onToggle = this.props.onToggle;
-        if(onToggle){ onToggle(this.props.node, toggled); }
+
+    onClick() {
+        const {node, onToggle} = this.props;
+        const {toggled} = node;
+
+        if (onToggle) {
+            onToggle(node, !toggled);
+        }
     }
-    animations(){
-        const props = this.props;
-        if(props.animations === false){ return false; }
-        let anim = Object.assign({}, props.animations, props.node.animations);
+
+    animations() {
+        const {animations, node} = this.props;
+
+        if (animations === false) {
+            return false;
+        }
+
+        const anim = Object.assign({}, animations, node.animations);
         return {
             toggle: anim.toggle(this.props),
             drawer: anim.drawer(this.props)
         };
     }
-    decorators(){
+
+    decorators() {
         // Merge Any Node Based Decorators Into The Pack
-        const props = this.props;
-        let nodeDecorators = props.node.decorators || {};
-        return Object.assign({}, props.decorators, nodeDecorators);
+        const {decorators, node} = this.props;
+        let nodeDecorators = node.decorators || {};
+
+        return Object.assign({}, decorators, nodeDecorators);
     }
-    render(){
+
+    render() {
+        const {style} = this.props;
         const decorators = this.decorators();
         const animations = this.animations();
+
         return (
-            <li style={this.props.style.base} ref="topLevel">
+            <li ref={ref => this.topLevelRef = ref}
+                style={style.base}>
                 {this.renderHeader(decorators, animations)}
+
                 {this.renderDrawer(decorators, animations)}
             </li>
         );
     }
-    renderDrawer(decorators, animations){
-        const toggled = this.props.node.toggled;
-        if(!animations && !toggled){ return null; }
-        if(!animations && toggled){
+
+    renderDrawer(decorators, animations) {
+        const {node: {toggled}} = this.props;
+
+        if (!animations && !toggled) {
+            return null;
+        } else if (!animations && toggled) {
             return this.renderChildren(decorators, animations);
         }
+
+        const {animation, duration, ...restAnimationInfo} = animations.drawer;
         return (
-            <VelocityTransitionGroup {...animations.drawer} ref="velocity">
+            <VelocityTransitionGroup {...restAnimationInfo}
+                                     ref={ref => this.velocityRef = ref}>
                 {toggled ? this.renderChildren(decorators, animations) : null}
             </VelocityTransitionGroup>
         );
     }
-    renderHeader(decorators, animations){
+
+    renderHeader(decorators, animations) {
+        const {node, style} = this.props;
+
         return (
-            <NodeHeader
-                decorators={decorators}
-                animations={animations}
-                style={this.props.style}
-                node={Object.assign({}, this.props.node)}
-                onClick={this.onClick}
-            />
+            <NodeHeader animations={animations}
+                        decorators={decorators}
+                        node={Object.assign({}, node)}
+                        onClick={this.onClick}
+                        style={style}/>
         );
     }
-    renderChildren(decorators){
-        if(this.props.node.loading){ return this.renderLoading(decorators); }
-        let children = this.props.node.children;
-        if (!Array.isArray(children)) { children = children ? [children] : []; }
+
+    renderChildren(decorators) {
+        const {animations, decorators: propDecorators, node, style} = this.props;
+
+        if (node.loading) {
+            return this.renderLoading(decorators);
+        }
+
+        let children = node.children;
+        if (!Array.isArray(children)) {
+            children = children ? [children] : [];
+        }
+
         return (
-            <ul style={this.props.style.subtree} ref="subtree">
-                {children.map((child, index) =>
-                    <TreeNode
-                        {...this._eventBubbles()}
-                        key={child.id || index}
-                        node={child}
-                        decorators={this.props.decorators}
-                        animations={this.props.animations}
-                        style={this.props.style}
-                    />
+            <ul style={style.subtree}
+                ref={ref => this.subtreeRef = ref}>
+                {children.map((child, index) => <TreeNode {...this._eventBubbles()}
+                                                          animations={animations}
+                                                          decorators={propDecorators}
+                                                          key={child.id || index}
+                                                          node={child}
+                                                          style={style}/>
                 )}
             </ul>
         );
     }
-    renderLoading(decorators){
+
+    renderLoading(decorators) {
+        const {style} = this.props;
+
         return (
-            <ul style={this.props.style.subtree}>
+            <ul style={style.subtree}>
                 <li>
-                    <decorators.Loading style={this.props.style.loading}/>
+                    <decorators.Loading style={style.loading}/>
                 </li>
             </ul>
         );
     }
-    _eventBubbles(){
-        return { onToggle: this.props.onToggle };
+
+    _eventBubbles() {
+        const {onToggle} = this.props;
+
+        return {
+            onToggle
+        };
     }
 }
 
 TreeNode.propTypes = {
-    style: React.PropTypes.object.isRequired,
-    node: React.PropTypes.object.isRequired,
-    decorators: React.PropTypes.object.isRequired,
-    animations: React.PropTypes.oneOfType([
-        React.PropTypes.object,
-        React.PropTypes.bool
+    style: PropTypes.object.isRequired,
+    node: PropTypes.object.isRequired,
+    decorators: PropTypes.object.isRequired,
+    animations: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.bool
     ]).isRequired,
-    onToggle: React.PropTypes.func
+    onToggle: PropTypes.func
 };
 
 export default TreeNode;
