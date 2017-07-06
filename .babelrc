@@ -1,4 +1,20 @@
 {
-  "stage": 0,
-  "optional": ["runtime"]
+  "presets": [
+    "stage-0",
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "last 4 versions"
+          ]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-react-jsx",
+    "transform-decorators-legacy"
+  ]
 }
