@@ -5,7 +5,7 @@ import decorators from './components/decorators';
 import animations from './themes/animations';
 import theme from './themes/default';
 
-export default {
+export {
     Treebeard,
     decorators,
     animations,

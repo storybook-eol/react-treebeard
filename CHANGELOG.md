@@ -2,6 +2,9 @@
 
 ### vNEXT
 
+### v2.0.1
+- Fix bug where package wasn't exported properly [PR #67 (comment)](https://github.com/alexcurtis/react-treebeard/pull/67#issuecomment-312475622)
+
 ### v2.0.0
 - **BREAKING:** The `peerDependencies` range (for both `react` & `react-dom`)has been changed from `^0.14 || ^15.0` to `^15.5.4`.
 - Uses `prop-types` package instead of `React.PropTypes`
