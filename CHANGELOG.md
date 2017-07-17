@@ -2,8 +2,17 @@
 
 ### vNEXT
 
+### v2.0.0
+- **BREAKING:** The `peerDependencies` range (for both `react` & `react-dom`)has been changed from `^0.14 || ^15.0` to `^15.5.4`.
+- Uses `prop-types` package instead of `React.PropTypes`
+    - Fixes dependencies for `velocity-react` & `radium`
+- Uses ES6 classes instead of `React.createClass` in tests
+- Uses `react-dom/test-utils` package instead of `react-addons-test-utils` in tests
+- Some code clean-up`
+- Deletes deprecated tests (`reactid` isn't used anymore since `React v15.0`)
+
 ### v1.1.0
-- BREAKING: [Toggle is now completely data-driven.](https://github.com/alexcurtis/react-treebeard/issues/14) There is no self-aware state.
+- **BREAKING:** [Toggle is now completely data-driven.](https://github.com/alexcurtis/react-treebeard/issues/14) There is no self-aware state.
 - Node Headers are now optimised via `shouldComponentUpdate`. This cuts down render time with large trees.
 - [Container Decorator Available](https://github.com/alexcurtis/react-treebeard/issues/9). Increased flexibility by allowing you to create your own node containers. Found in `decorators.Container`.
 - [Turn Off All Animations](https://github.com/alexcurtis/react-treebeard/issues/15). This will remove all Velocity components from the tree. Simply set `animations` to `false` in the props.
