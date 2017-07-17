@@ -94,7 +94,7 @@ rules:
     no-underscore-dangle: 0
     no-unreachable: 2
     no-unused-expressions: 2
-    no-unused-vars: [2, {vars: 'all', args: 'after-used'}]
+    no-unused-vars: [1, {vars: 'all', args: 'after-used'}]
     no-use-before-define: 2
     no-void: 2
     no-var: 0

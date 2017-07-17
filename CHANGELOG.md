@@ -1,6 +1,7 @@
 # Change log
 
 ### vNEXT
+- Fix ESLint issue
 
 ### v2.0.1
 - Fix bug where package wasn't exported properly [PR #67 (comment)](https://github.com/alexcurtis/react-treebeard/pull/67#issuecomment-312475622)
