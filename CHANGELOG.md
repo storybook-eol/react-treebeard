@@ -1,6 +1,7 @@
 # Change log
 
 ### vNEXT
+- Update Babel, Webpack, Mocha & Karma dependencies
 - Fix ESLint issue
 
 ### v2.0.1

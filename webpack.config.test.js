@@ -1,20 +1,19 @@
 'use strict';
+
 module.exports = {
     cache: true,
     devtool: 'inline-source-map',
     module: {
-        loaders: [{
+        rules: [{
             test: /\.js$/,
             exclude: [/node_modules/],
-            loaders: ['babel-loader?stage=0']
-        }],
-        postLoaders: [{
-            test: /\.js$/,
-            exclude: [/test\/*/, /node_modules/],
-            loader: 'istanbul-instrumenter'
+            use: [
+                'istanbul-instrumenter-loader',
+                'babel-loader'
+            ]
         }]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     }
 };
