@@ -1,6 +1,7 @@
 # Change log
 
 ### vNEXT
+- Update `.babelrc` to fix some issues with Travis CI [PR #83](https://github.com/alexcurtis/react-treebeard/pull/83)
 
 ### v2.0.2
 - Update Babel, Webpack, Mocha & Karma dependencies
