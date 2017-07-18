@@ -1,6 +1,8 @@
 # Change log
 
 ### vNEXT
+
+### v2.0.3
 - Update `.babelrc` to fix some issues with Travis CI [PR #83](https://github.com/alexcurtis/react-treebeard/pull/83)
 
 ### v2.0.2
