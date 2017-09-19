@@ -180,7 +180,7 @@ describe('node component', () => {
         component.should.exist;
     });
   
-    xit('should render the subtree if toggled', () => {
+    it('should render the subtree if toggled', () => {
         const node = {toggled: true};
         const treeNode = TestUtils.renderIntoDocument(<TreeNode {...defaults} node={node}/>);
 
@@ -262,7 +262,7 @@ describe('node component', () => {
         velocity.should.exist;
     });
 
-    xit('should wrap the children in a list', () => {
+    it('should wrap the children in a list', () => {
         const node = {toggled: true};
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
