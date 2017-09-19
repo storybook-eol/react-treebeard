@@ -1,4 +1,17 @@
 {
-  "stage": 0,
-  "optional": ["runtime"]
+  "presets": [
+    "env",
+    "stage-0",
+    "react"
+  ],
+  "plugins": [
+    [
+      "transform-runtime",
+      {
+        "polyfill": true,
+        "regenerator": true
+      }
+    ],
+    "transform-decorators-legacy"
+  ]
 }

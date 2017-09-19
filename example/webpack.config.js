@@ -1,6 +1,6 @@
 'use strict';
 
-var webpack = require('webpack');
+const webpack = require('webpack');
 
 module.exports = {
     entry: [
@@ -14,29 +14,23 @@ module.exports = {
         publicPath: '/assets/'
     },
     cache: true,
-    debug: false,
     devtool: false,
     stats: {
         colors: true,
         reasons: true
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     module: {
-        preLoaders: [{
+        rules: [{
             test: /\.js$/,
             exclude: [/node_modules/],
-            loader: 'eslint-loader'
-        }],
-        loaders: [{
-            test: /\.js$/,
-            exclude: [/node_modules/],
-            loaders: ['react-hot', 'babel-loader']
+            use: ['react-hot-loader', 'babel-loader', 'eslint-loader']
         }]
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin()
     ]
 };

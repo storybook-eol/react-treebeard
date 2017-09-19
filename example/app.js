@@ -1,8 +1,9 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { StyleRoot } from 'radium';
+import {StyleRoot} from 'radium';
 import {Treebeard, decorators} from '../src/index';
 
 import data from './data';
@@ -12,87 +13,96 @@ import * as filters from './filter';
 const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
 
 // Example: Customising The Header Decorator To Include Icons
-decorators.Header = (props) => {
-    const style = props.style;
-    const iconType = props.node.children ? 'folder' : 'file-text';
+decorators.Header = ({style, node}) => {
+    const iconType = node.children ? 'folder' : 'file-text';
     const iconClass = `fa fa-${iconType}`;
-    const iconStyle = { marginRight: '5px' };
+    const iconStyle = {marginRight: '5px'};
+
     return (
         <div style={style.base}>
             <div style={style.title}>
                 <i className={iconClass} style={iconStyle}/>
-                {props.node.name}
+
+                {node.name}
             </div>
         </div>
     );
 };
 
 class NodeViewer extends React.Component {
-    constructor(props){
-        super(props);
-    }
-    render(){
+    render() {
         const style = styles.viewer;
         let json = JSON.stringify(this.props.node, null, 4);
-        if(!json){ json = HELP_MSG; }
-        return (
-            <div style={style.base}>
-                {json}
-            </div>
-        );
+
+        if (!json) {
+            json = HELP_MSG;
+        }
+
+        return <div style={style.base}>{json}</div>;
     }
 }
-
 NodeViewer.propTypes = {
-    node: React.PropTypes.object
+    node: PropTypes.object
 };
 
 class DemoTree extends React.Component {
-    constructor(props){
-        super(props);
+    constructor() {
+        super();
+
         this.state = {data};
         this.onToggle = this.onToggle.bind(this);
     }
-    onToggle(node, toggled){
-        if(this.state.cursor){this.state.cursor.active = false;}
+
+    onToggle(node, toggled) {
+        const {cursor} = this.state;
+
+        if (cursor) {
+            cursor.active = false;
+        }
+
         node.active = true;
-        if(node.children){ node.toggled = toggled; }
-        this.setState({ cursor: node });
+        if (node.children) {
+            node.toggled = toggled;
+        }
+
+        this.setState({cursor: node});
     }
-    onFilterMouseUp(e){
+
+    onFilterMouseUp(e) {
         const filter = e.target.value.trim();
-        if(!filter){ return this.setState({data}); }
+        if (!filter) {
+            return this.setState({data});
+        }
         var filtered = filters.filterTree(data, filter);
         filtered = filters.expandFilteredNodes(filtered, filter);
         this.setState({data: filtered});
     }
-    render(){
+
+    render() {
+        const {data: stateData, cursor} = this.state;
+
         return (
             <StyleRoot>
                 <div style={styles.searchBox}>
                     <div className="input-group">
                         <span className="input-group-addon">
-                          <i className="fa fa-search"></i>
+                          <i className="fa fa-search"/>
                         </span>
-                        <input type="text"
-                            className="form-control"
-                            placeholder="Search the tree..."
-                            onKeyUp={this.onFilterMouseUp.bind(this)}
-                        />
+                        <input className="form-control"
+                               onKeyUp={this.onFilterMouseUp.bind(this)}
+                               placeholder="Search the tree..."
+                               type="text"/>
                     </div>
                 </div>
                 <div style={styles.component}>
-                    <Treebeard
-                        data={this.state.data}
-                        onToggle={this.onToggle}
-                        decorators={decorators}
-                    />
+                    <Treebeard data={stateData}
+                               decorators={decorators}
+                               onToggle={this.onToggle}/>
                 </div>
                 <div style={styles.component}>
-                    <NodeViewer node={this.state.cursor}/>
+                    <NodeViewer node={cursor}/>
                 </div>
             </StyleRoot>
-
         );
     }
 }
