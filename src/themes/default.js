@@ -5,6 +5,8 @@ export default {
         base: {
             listStyle: 'none',
             backgroundColor: '#21252B',
+            minWidth: '100%',
+            float: 'left',
             margin: 0,
             padding: 0,
             color: '#9DA5AB',
@@ -13,7 +15,8 @@ export default {
         },
         node: {
             base: {
-                position: 'relative'
+                position: 'relative',
+                whiteSpace: 'nowrap'
             },
             link: {
                 cursor: 'pointer',
