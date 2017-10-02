@@ -1,6 +1,7 @@
 # Change log
 
 ### vNEXT
+- Add `React 16.0` to peerDependencies [PR #102](https://github.com/alexcurtis/react-treebeard/pull/102)
 
 ### v2.0.3
 - Update `.babelrc` to fix some issues with Travis CI [PR #83](https://github.com/alexcurtis/react-treebeard/pull/83)
