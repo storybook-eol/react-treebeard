@@ -2,3 +2,14 @@ _site
 coverage
 node_modules
 npm-debug.log
+.eslintrc
+.babelrc
+.npmignore
+.idea
+example/
+
+.travis.yml
+Gulpfile.js
+karma.conf.js
+webpack.config.test.js
+test/
