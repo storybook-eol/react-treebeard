@@ -1,6 +1,8 @@
 # Change log
 
 ### vNEXT
+
+### v2.1.0
 - Add `React 16.0` to peerDependencies [PR #102](https://github.com/alexcurtis/react-treebeard/pull/102)
 
 ### v2.0.3
