@@ -22,6 +22,12 @@ class TreeNode extends React.Component {
         }
     }
 
+    handleCheckbox(flagChecked) {
+        if (this.props.handleCheckbox) {
+            this.props.handleCheckbox(this.props.node, !flagChecked);
+        }
+    }
+
     animations() {
         const {animations, node} = this.props;
 
@@ -44,6 +50,20 @@ class TreeNode extends React.Component {
         return Object.assign({}, decorators, nodeDecorators);
     }
 
+    renderCheckbox(value, style, isChecked) {
+        if (this.props.enableCheckbox) {
+            return (
+                <input
+                    type="checkbox"
+                    checked={isChecked}
+                    value={value}
+                    style={style}
+                    onChange={this.handleCheckbox.bind(this, isChecked)}
+                />
+            );
+        }
+    }
+
     render() {
         const {style} = this.props;
         const decorators = this.decorators();
@@ -52,6 +72,7 @@ class TreeNode extends React.Component {
         return (
             <li ref={ref => this.topLevelRef = ref}
                 style={style.base}>
+                {this.renderCheckbox(this.props.node[this.props.checkboxField], style.checkbox, this.props.node.checked)}
                 {this.renderHeader(decorators, animations)}
 
                 {this.renderDrawer(decorators, animations)}
@@ -109,7 +130,10 @@ class TreeNode extends React.Component {
                                                           decorators={propDecorators}
                                                           key={child.id || index}
                                                           node={child}
-                                                          style={style}/>
+                                                          style={style}
+                                                          enableCheckbox={this.props.enableCheckbox}
+                                                          checkboxField={this.props.checkboxField}
+                                                          handleCheckbox={this.props.handleCheckbox}/>
                 )}
             </ul>
         );
@@ -144,7 +168,10 @@ TreeNode.propTypes = {
         PropTypes.object,
         PropTypes.bool
     ]).isRequired,
-    onToggle: PropTypes.func
+    onToggle: PropTypes.func,
+    enableCheckbox: PropTypes.bool,
+    checkboxField: PropTypes.string,
+    handleCheckbox: PropTypes.func
 };
 
 export default TreeNode;

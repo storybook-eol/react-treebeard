@@ -298,4 +298,15 @@ describe('node component', () => {
 
         global.should.not.exist(treeNode.subtreeRef);
     });
+
+    it('should call handleCheckbox function', () => {
+        const node = {name: 'test'};
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode{...defaults}
+                     node={node}
+                     enableCheckbox={true}
+                     handleCheckbox={() => null}/>
+        );
+        treeNode.handleCheckbox();
+    });
 });

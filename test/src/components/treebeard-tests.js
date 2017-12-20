@@ -73,4 +73,11 @@ describe('treebeard component', () => {
 
         nodes.length.should.equal(multipleRootNodes.length);
     });
+
+    it('should render the treebase with checkbox', () => {
+        const treebeard = TestUtils.renderIntoDocument(<Treebeard data={defaults} enableCheckbox={true}/>);
+        const treeBase = treebeard.treeBaseRef;
+        const elementType = treeBase.children[0].children[0].type;
+        elementType.toLowerCase().should.equal('checkbox');
+    });
 });
