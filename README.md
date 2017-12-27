@@ -59,10 +59,10 @@ class TreeExample extends React.Component {
         this.state = {};
         this.onToggle = this.onToggle.bind(this);
     }
-    onToggle(node, toggled){
+    onToggle(node){
         if(this.state.cursor){this.state.cursor.active = false;}
         node.active = true;
-        if(node.children){ node.toggled = toggled; }
+        if(node.children){ node.toggled = !node.toggled; }
         this.setState({ cursor: node });
     }
     render(){
