@@ -14,11 +14,11 @@ class TreeNode extends React.Component {
     }
 
     onClick() {
-        const {node, onToggle} = this.props;
+        const {node, nodePath, onToggle} = this.props;
         const {toggled} = node;
 
         if (onToggle) {
-            onToggle(node, !toggled);
+            onToggle(node, !toggled, nodePath);
         }
     }
 
@@ -53,7 +53,6 @@ class TreeNode extends React.Component {
             <li ref={ref => this.topLevelRef = ref}
                 style={style.base}>
                 {this.renderHeader(decorators, animations)}
-
                 {this.renderDrawer(decorators, animations)}
             </li>
         );
@@ -90,14 +89,13 @@ class TreeNode extends React.Component {
     }
 
     renderChildren(decorators) {
-        const {animations, decorators: propDecorators, node, style} = this.props;
-
+        const {animations, decorators: propDecorators, node, nodePath, style} = this.props;
         if (node.loading) {
             return this.renderLoading(decorators);
         }
-
         let children = node.children;
-        if (!Array.isArray(children)) {
+        const isChildrenArray = Array.isArray(node.children);
+        if (!isChildrenArray) {
             children = children ? [children] : [];
         }
 
@@ -109,6 +107,7 @@ class TreeNode extends React.Component {
                                                           decorators={propDecorators}
                                                           key={child.id || index}
                                                           node={child}
+                                                          nodePath={isChildrenArray ? nodePath.concat('children', String(index)) : nodePath.concat('children')}
                                                           style={style}/>
                 )}
             </ul>
@@ -139,6 +138,7 @@ class TreeNode extends React.Component {
 TreeNode.propTypes = {
     style: PropTypes.object.isRequired,
     node: PropTypes.object.isRequired,
+    nodePath: PropTypes.arrayOf(PropTypes.string).isRequired,
     decorators: PropTypes.object.isRequired,
     animations: PropTypes.oneOfType([
         PropTypes.object,

@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {StyleRoot} from 'radium';
-import {Treebeard, decorators} from '../src/index';
+import {Treebeard, decorators, getFromData, makeNewData} from '../src/index';
 
 import data from './data';
 import styles from './styles';
@@ -22,7 +22,6 @@ decorators.Header = ({style, node}) => {
         <div style={style.base}>
             <div style={style.title}>
                 <i className={iconClass} style={iconStyle}/>
-
                 {node.name}
             </div>
         </div>
@@ -48,38 +47,37 @@ NodeViewer.propTypes = {
 class DemoTree extends React.Component {
     constructor() {
         super();
-
         this.state = {data};
         this.onToggle = this.onToggle.bind(this);
     }
 
-    onToggle(node, toggled) {
-        const {cursor} = this.state;
-
-        if (cursor) {
-            cursor.active = false;
-        }
-
-        node.active = true;
+    onToggle(node, toggled, nodePath) {
+        const {data: oldData, cursorPath} = this.state;
+        const nodeDiff = {active: true};
         if (node.children) {
-            node.toggled = toggled;
+            nodeDiff.toggled = toggled;
         }
-
-        this.setState({cursor: node});
+        let newData = oldData;
+        if (cursorPath) {
+            newData = makeNewData(newData, cursorPath, {active: false});
+        }
+        newData = makeNewData(newData, nodePath, nodeDiff);
+        this.setState({data: newData, cursorPath: nodePath});
     }
 
     onFilterMouseUp(e) {
+        const {data: stateData} = this.state;
         const filter = e.target.value.trim();
         if (!filter) {
-            return this.setState({data});
+            return;
         }
-        var filtered = filters.filterTree(data, filter);
+        let filtered = filters.filterTree(stateData, filter);
         filtered = filters.expandFilteredNodes(filtered, filter);
         this.setState({data: filtered});
     }
 
     render() {
-        const {data: stateData, cursor} = this.state;
+        const {data: stateData, cursorPath} = this.state;
 
         return (
             <StyleRoot>
@@ -100,7 +98,7 @@ class DemoTree extends React.Component {
                                onToggle={this.onToggle}/>
                 </div>
                 <div style={styles.component}>
-                    <NodeViewer node={cursor}/>
+                    <NodeViewer node={getFromData(stateData, cursorPath)}/>
                 </div>
             </StyleRoot>
         );
