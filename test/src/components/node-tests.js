@@ -15,7 +15,8 @@ import {createAnimations, createDecorators} from '../utils/factory';
 
 const defaults = {
     style: {},
-    node: {chilren: []},
+    node: {children: []},
+    nodePath: [],
     animations: createAnimations(),
     decorators: createDecorators()
 };
