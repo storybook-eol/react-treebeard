@@ -22,23 +22,26 @@ class NodeHeader extends React.Component {
             }
         }
 
-        return !deepEqual(props.animations, nextProps.animations, {strict: true});
+        return !deepEqual(props.animations, nextProps.animations, { strict: true });
     }
 
     render() {
-        const {animations, decorators, node, onClick, style} = this.props;
-        const {active, children} = node;
+        const { animations, decorators, node, onClick, onArrowClick, style } = this.props;
+        const { active, children } = node;
         const terminal = !children;
         const container = [style.link, active ? style.activeLink : null];
-        const headerStyles = Object.assign({container}, style);
+        const headerStyles = Object.assign({ container }, style);
 
         return (
-            <decorators.Container animations={animations}
-                                  decorators={decorators}
-                                  node={node}
-                                  onClick={onClick}
-                                  style={headerStyles}
-                                  terminal={terminal}/>
+            <decorators.Container
+                animations={animations}
+                decorators={decorators}
+                node={node}
+                onClick={onClick}
+                onArrowClick={onArrowClick}
+                style={headerStyles}
+                terminal={terminal}
+            />
         );
     }
 }
@@ -46,12 +49,9 @@ class NodeHeader extends React.Component {
 NodeHeader.propTypes = {
     style: PropTypes.object.isRequired,
     decorators: PropTypes.object.isRequired,
-    animations: PropTypes.oneOfType([
-        PropTypes.object,
-        PropTypes.bool
-    ]).isRequired,
+    animations: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]).isRequired,
     node: PropTypes.object.isRequired,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
 };
 
 export default NodeHeader;
