@@ -3,12 +3,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import {StyleRoot} from 'radium';
 import {Treebeard, decorators} from '../src/index';
+import styled from 'react-emotion';
+
 
 import data from './data';
 import styles from './styles';
 import * as filters from './filter';
+
+const Div = styled('Div', {
+    shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
+})(({ style }) => style);
 
 const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
 
@@ -19,13 +24,13 @@ decorators.Header = ({style, node}) => {
     const iconStyle = {marginRight: '5px'};
 
     return (
-        <div style={style.base}>
-            <div style={style.title}>
+        <Div style={style.base}>
+            <Div style={style.title}>
                 <i className={iconClass} style={iconStyle}/>
 
                 {node.name}
-            </div>
-        </div>
+            </Div>
+        </Div>
     );
 };
 
@@ -38,7 +43,7 @@ class NodeViewer extends React.Component {
             json = HELP_MSG;
         }
 
-        return <div style={style.base}>{json}</div>;
+        return <Div style={style.base}>{json}</Div>;
     }
 }
 NodeViewer.propTypes = {
@@ -82,9 +87,9 @@ class DemoTree extends React.Component {
         const {data: stateData, cursor} = this.state;
 
         return (
-            <StyleRoot>
-                <div style={styles.searchBox}>
-                    <div className="input-group">
+            <Div>
+                <Div style={styles.searchBox}>
+                    <Div className="input-group">
                         <span className="input-group-addon">
                           <i className="fa fa-search"/>
                         </span>
@@ -92,17 +97,17 @@ class DemoTree extends React.Component {
                                onKeyUp={this.onFilterMouseUp.bind(this)}
                                placeholder="Search the tree..."
                                type="text"/>
-                    </div>
-                </div>
-                <div style={styles.component}>
+                    </Div>
+                </Div>
+                <Div style={styles.component}>
                     <Treebeard data={stateData}
                                decorators={decorators}
                                onToggle={this.onToggle}/>
-                </div>
-                <div style={styles.component}>
+                </Div>
+                <Div style={styles.component}>
                     <NodeViewer node={cursor}/>
-                </div>
-            </StyleRoot>
+                </Div>
+            </Div>
         );
     }
 }

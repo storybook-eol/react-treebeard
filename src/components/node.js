@@ -3,8 +3,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {VelocityTransitionGroup} from 'velocity-react';
+import styled from 'react-emotion';
 
 import NodeHeader from './header';
+
+const Li = styled('li', {
+    shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
+})(({style}) => style);
+const Ul = styled('ul', {
+    shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
+})(({style}) => style);
 
 class TreeNode extends React.Component {
     constructor() {
@@ -50,12 +58,12 @@ class TreeNode extends React.Component {
         const animations = this.animations();
 
         return (
-            <li ref={ref => this.topLevelRef = ref}
+            <Li innerRef={ref => this.topLevelRef = ref}
                 style={style.base}>
                 {this.renderHeader(decorators, animations)}
 
                 {this.renderDrawer(decorators, animations)}
-            </li>
+            </Li>
         );
     }
 
@@ -102,7 +110,7 @@ class TreeNode extends React.Component {
         }
 
         return (
-            <ul style={style.subtree}
+            <Ul style={style.subtree}
                 ref={ref => this.subtreeRef = ref}>
                 {children.map((child, index) => <TreeNode {...this._eventBubbles()}
                                                           animations={animations}
@@ -111,7 +119,7 @@ class TreeNode extends React.Component {
                                                           node={child}
                                                           style={style}/>
                 )}
-            </ul>
+            </Ul>
         );
     }
 
@@ -119,11 +127,11 @@ class TreeNode extends React.Component {
         const {style} = this.props;
 
         return (
-            <ul style={style.subtree}>
+            <Ul style={style.subtree}>
                 <li>
                     <decorators.Loading style={style.loading}/>
                 </li>
-            </ul>
+            </Ul>
         );
     }
 

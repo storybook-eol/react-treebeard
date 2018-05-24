@@ -2,12 +2,20 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Radium from 'radium';
 import {VelocityComponent} from 'velocity-react';
+import styled from 'react-emotion';
 
-const Loading = ({style}) => {
-    return <div style={style}>loading...</div>;
-};
+const Div = styled('div', {
+    shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
+})((({style}) => style));
+const Polygon = styled('polygon', {
+    shouldForwardProp: prop => ['className', 'children', 'points'].indexOf(prop) !== -1
+})((({style}) => style));
+
+const Loading = styled(({ className }) => {
+    return <div className={className}>loading...</div>;
+})(({ style }) => style);
+
 Loading.propTypes = {
     style: PropTypes.object
 };
@@ -18,14 +26,14 @@ const Toggle = ({style}) => {
     const points = `0,0 0,${height} ${width},${midHeight}`;
 
     return (
-        <div style={style.base}>
-            <div style={style.wrapper}>
+        <Div style={style.base}>
+            <Div style={style.wrapper}>
                 <svg height={height} width={width}>
-                    <polygon points={points}
+                    <Polygon points={points}
                              style={style.arrow}/>
                 </svg>
-            </div>
-        </div>
+            </Div>
+        </Div>
     );
 };
 Toggle.propTypes = {
@@ -34,11 +42,11 @@ Toggle.propTypes = {
 
 const Header = ({node, style}) => {
     return (
-        <div style={style.base}>
-            <div style={style.title}>
+        <Div style={style.base}>
+            <Div style={style.title}>
                 {node.name}
-            </div>
-        </div>
+            </Div>
+        </Div>
     );
 };
 Header.propTypes = {
@@ -46,7 +54,6 @@ Header.propTypes = {
     node: PropTypes.object.isRequired
 };
 
-@Radium
 class Container extends React.Component {
     render() {
         const {style, decorators, terminal, onClick, node} = this.props;

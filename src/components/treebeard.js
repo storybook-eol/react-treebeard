@@ -3,10 +3,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styled from 'react-emotion';
+
 import TreeNode from './node';
 import defaultDecorators from './decorators';
 import defaultTheme from '../themes/default';
 import defaultAnimations from '../themes/animations';
+
+const Ul = styled('ul', {
+    shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
+})((({style}) => style));
 
 class TreeBeard extends React.Component {
     render() {
@@ -18,7 +24,7 @@ class TreeBeard extends React.Component {
             data = [data];
         }
         return (
-            <ul style={style.tree.base}
+            <Ul style={style.tree.base}
                 ref={ref => this.treeBaseRef = ref}>
                 {data.map((node, index) =>
                     <TreeNode animations={animations}
@@ -28,7 +34,7 @@ class TreeBeard extends React.Component {
                               onToggle={onToggle}
                               style={style.tree.node}/>
                 )}
-            </ul>
+            </Ul>
         );
     }
 }
