@@ -19,7 +19,7 @@ const defaults = {
 describe('treebeard component', () => {
     it('should render the treebase as a list', () => {
         const treebeard = TestUtils.renderIntoDocument(<Treebeard data={defaults}/>);
-        const treeBase = treebeard.treeBaseRef;
+        const treeBase = TestUtils.findRenderedDOMComponentWithTag(treebeard, 'ul');
 
         treeBase.tagName.toLowerCase().should.equal('ul');
     });

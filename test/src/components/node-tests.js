@@ -134,7 +134,7 @@ describe('node component', () => {
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}/>
         );
-        const topLevel = treeNode.topLevelRef;
+        const topLevel = TestUtils.findRenderedDOMComponentWithTag(treeNode, 'li');
         topLevel.tagName.toLowerCase().should.equal('li');
     });
 
@@ -233,7 +233,7 @@ describe('node component', () => {
             <TreeNode {...defaults}
                       node={node}/>
         );
-        const subtree = treeNode.subtreeRef;
+        const subtree = TestUtils.findRenderedDOMComponentWithTag(treeNode, 'ul');
 
         subtree.tagName.toLowerCase().should.equal('ul');
     });
