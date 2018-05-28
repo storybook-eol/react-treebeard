@@ -14,11 +14,11 @@ class TreeNode extends React.Component {
     }
 
     onClick() {
-        const {node, onToggle} = this.props;
+        const {node, onToggle, indexPath} = this.props;
         const {toggled} = node;
 
         if (onToggle) {
-            onToggle(node, !toggled);
+            onToggle(node, !toggled, indexPath);
         }
     }
 
@@ -90,7 +90,7 @@ class TreeNode extends React.Component {
     }
 
     renderChildren(decorators) {
-        const {animations, decorators: propDecorators, node, style} = this.props;
+        const {animations, decorators: propDecorators, node, style, indexPath} = this.props;
 
         if (node.loading) {
             return this.renderLoading(decorators);
@@ -109,7 +109,8 @@ class TreeNode extends React.Component {
                                                           decorators={propDecorators}
                                                           key={child.id || index}
                                                           node={child}
-                                                          style={style}/>
+                                                          style={style}
+                                                          indexPath={indexPath.concat(['children', index])}/>
                 )}
             </ul>
         );
@@ -144,7 +145,11 @@ TreeNode.propTypes = {
         PropTypes.object,
         PropTypes.bool
     ]).isRequired,
-    onToggle: PropTypes.func
+    onToggle: PropTypes.func,
+    indexPath: PropTypes.arrayOf(PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ])).isRequired
 };
 
 export default TreeNode;

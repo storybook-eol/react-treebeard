@@ -1,9 +1,11 @@
+/* eslint-disable */
 'use strict';
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {StyleRoot} from 'radium';
+import update from 'immutability-helper';
 import {Treebeard, decorators} from '../src/index';
 
 import data from './data';
@@ -45,6 +47,16 @@ NodeViewer.propTypes = {
     node: PropTypes.object
 };
 
+function buildUpdatePattern(path, value) {
+    const pattern = {};
+    const tmp = path.reduce((acc, p) => {
+        acc[p] = {};
+        return acc[p];
+    }, pattern)
+    tmp['$set'] = value;
+    return pattern;
+}
+
 class DemoTree extends React.Component {
     constructor() {
         super();
@@ -53,19 +65,20 @@ class DemoTree extends React.Component {
         this.onToggle = this.onToggle.bind(this);
     }
 
-    onToggle(node, toggled) {
-        const {cursor} = this.state;
-
-        if (cursor) {
-            cursor.active = false;
-        }
-
-        node.active = true;
-        if (node.children) {
-            node.toggled = toggled;
-        }
-
-        this.setState({cursor: node});
+    onToggle(node, toggled, indexPath) {
+        this.setState((prevState) => {
+            let data = prevState.data
+            if (this.prevIndexPath) {
+              data = update(data, buildUpdatePattern(this.prevIndexPath.concat(['active']), false));
+            }
+            data = update(data, buildUpdatePattern(indexPath.concat(['active']), true));
+            if (node.children) {
+              data = update(data, buildUpdatePattern(indexPath.concat(['toggled']), toggled));
+            }
+            return { data, cursor: node }
+        }, () => {
+            this.prevIndexPath = indexPath
+        });
     }
 
     onFilterMouseUp(e) {
