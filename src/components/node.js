@@ -152,4 +152,8 @@ TreeNode.propTypes = {
     ])).isRequired
 };
 
+TreeNode.defaultProps = {
+    indexPath: []
+};
+
 export default TreeNode;
