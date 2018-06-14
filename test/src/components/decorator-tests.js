@@ -33,7 +33,7 @@ describe('container decorator component', () => {
         const clickable = container.clickableRef;
         TestUtils.Simulate.click(clickable);
 
-        onClick.should.be.called.once;
+        onClick.calledOnce;
     });
 
     it('should render the toggle decorator not terminal', () => {

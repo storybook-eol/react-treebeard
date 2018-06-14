@@ -51,7 +51,7 @@ describe('node component', () => {
         );
         treeNode.onClick();
 
-        onToggle.should.be.called.once;
+        onToggle.calledOnce;
     });
 
     it('should not throw an exception if a callback is not registered on click', () => {
