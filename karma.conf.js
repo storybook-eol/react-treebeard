@@ -24,19 +24,26 @@ module.exports = function(config) {
             require('karma-webpack'),
             require('istanbul-instrumenter-loader'),
             require('karma-mocha'),
-            require('karma-coverage'),
             require('karma-chrome-launcher'),
             require('karma-firefox-launcher'),
             require('karma-sourcemap-loader'),
-            require('karma-spec-reporter')
+            require('karma-spec-reporter'),
+            require('karma-coverage-istanbul-reporter')
         ],
-        reporters: ['spec', 'coverage'],
-        coverageReporter: {
-            dir: 'coverage/',
-            reporters: [
-                { type: 'html', subdir: 'report-html' },
-                { type: 'lcov', subdir: 'report-lcov' }
-            ]
+        reporters: ['coverage-istanbul', 'spec'],
+        coverageIstanbulReporter: {
+          dir: 'coverage/',
+          fixWebpackSourcePaths: true,
+          reports: ['lcov', 'html'],
+          skipFilesWithNoCoverage: true,
+          'report-config': {
+            html: {
+              subdir: 'report-html',
+            },
+            lcov: {
+              subdir: 'report-lcov'
+            }
+          }
         },
         port: 9876,
         colors: true,
