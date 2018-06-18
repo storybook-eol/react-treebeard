@@ -101,6 +101,26 @@ Sets the treeview styling. Defaults to `src/themes/default`.
 
 Sets the treeview animations. Set to `false` if you want to turn off animations. See [velocity-react](https://github.com/twitter-fabric/velocity-react) for more details. Defaults to `src/themes/animations`.
 
+#### enableCheckbox
+`PropTypes.bool`
+Enable / disable checkbox element for each node. Defaults to `false`.
+
+#### checkboxField
+`PropTypes.string`
+To set the checkbox field value which need to be used. Defaults to `name`.
+
+#### handleCheckbox
+`PropTypes.func`
+
+Callback function when a checbox is checked / unchecked. Passes 2 attributes: the data node and it's checked boolean value.
+
+```
+handleCheckbox(node, isChecked) {
+    node.checked = isChecked;
+    this.setState({cursor: node});
+}
+```
+
 #### decorators
 `PropTypes.object`
 
@@ -157,6 +177,7 @@ const decorators = {
     loading: '[optional] boolean',
     decorators: '[optional] object',
     animations: '[optional] object'
+    checked: '[optional] boolean'
 },
 ```
 #### id
@@ -179,3 +200,6 @@ Loading flag. It will populate the treeview with the loading component. Useful w
 
 #### decorators / animations
 Attach specific decorators / animations to a node. Provides the low level functionality to create visuals on a node-by-node basis. These structures are the same as the top level props, described above.
+
+#### checked
+Checked flag. Validate node checkbox should display as checked or not .

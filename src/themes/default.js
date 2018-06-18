@@ -12,6 +12,11 @@ export default {
             fontSize: '14px'
         },
         node: {
+            checkbox: {
+                float: 'left',
+                marginRight: '5px',
+                marginTop: '6px'
+            },
             base: {
                 position: 'relative'
             },
@@ -19,7 +24,7 @@ export default {
                 cursor: 'pointer',
                 position: 'relative',
                 padding: '0px 5px',
-                display: 'block'
+                display: 'inline-block'
             },
             activeLink: {
                 background: '#31363F'

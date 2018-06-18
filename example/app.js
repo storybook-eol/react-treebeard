@@ -49,8 +49,14 @@ class DemoTree extends React.Component {
     constructor() {
         super();
 
-        this.state = {data};
+        this.state = {data, withCheckbox: false};
         this.onToggle = this.onToggle.bind(this);
+        this.withCheckbox = this.withCheckbox.bind(this);
+        this.handleCheckbox = this.handleCheckbox.bind(this);
+    }
+
+    withCheckbox() {
+        this.setState({ withCheckbox: !this.state.withCheckbox });
     }
 
     onToggle(node, toggled) {
@@ -78,6 +84,11 @@ class DemoTree extends React.Component {
         this.setState({data: filtered});
     }
 
+    handleCheckbox(node, isChecked) {
+        node.checked = isChecked;
+        this.setState({cursor: node});
+    }
+
     render() {
         const {data: stateData, cursor} = this.state;
 
@@ -95,9 +106,13 @@ class DemoTree extends React.Component {
                     </div>
                 </div>
                 <div style={styles.component}>
+                    <input type="checkbox" onChange={this.withCheckbox} /> <span style={{ color: '#9da5ab' }}>With Checkbox?</span>
+                    <br />
                     <Treebeard data={stateData}
                                decorators={decorators}
-                               onToggle={this.onToggle}/>
+                               onToggle={this.onToggle}
+                               enableCheckbox={this.state.withCheckbox}
+                               handleCheckbox={this.handleCheckbox} />
                 </div>
                 <div style={styles.component}>
                     <NodeViewer node={cursor}/>
