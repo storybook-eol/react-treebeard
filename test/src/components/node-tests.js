@@ -130,6 +130,27 @@ describe('node component', () => {
         component.should.exist;
     });
 
+    it('should pass original node object as originalNode prop to Container decorator', (done) => {
+        const node = {children: []};
+        class ContainerDecorator extends React.Component {
+            componentDidMount() {
+                this.props.originalNode.should.equal(node);
+                done();
+            }
+            render() {
+                return <div/>;
+            }
+        }
+        const decorators = {
+            Container: ContainerDecorator
+        };
+        const treeNode = TestUtils.renderIntoDocument(
+            <TreeNode {...defaults}
+                      decorators={decorators}
+                      node={node}/>
+        );
+    });
+
     it('should render a list item at the top level', () => {
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}/>
