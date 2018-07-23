@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {VelocityTransitionGroup} from 'velocity-react';
 
+import Tree from './tree';
 import NodeHeader from './header';
 
 class TreeNode extends React.Component {
@@ -90,7 +91,7 @@ class TreeNode extends React.Component {
     }
 
     renderChildren(decorators) {
-        const {animations, decorators: propDecorators, node, style} = this.props;
+        const {node, ...props} = this.props;
 
         if (node.loading) {
             return this.renderLoading(decorators);
@@ -102,16 +103,10 @@ class TreeNode extends React.Component {
         }
 
         return (
-            <ul style={style.subtree}
-                ref={ref => this.subtreeRef = ref}>
-                {children.map((child, index) => <TreeNode {...this._eventBubbles()}
-                                                          animations={animations}
-                                                          decorators={propDecorators}
-                                                          key={child.id || index}
-                                                          node={child}
-                                                          style={style}/>
-                )}
-            </ul>
+            <Tree {...props}
+                  event={this._eventBubbles()}
+                  treeRef={ref => this.subtreeRef = ref}
+                  data={children}/>
         );
     }
 
