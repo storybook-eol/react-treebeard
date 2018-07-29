@@ -13,14 +13,14 @@ import * as filters from './filter';
 const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
 
 // Example: Customising The Header Decorator To Include Icons
-decorators.Header = ({style, node}) => {
+decorators.Header = ({style, node, onClick}) => {
     const iconType = node.children ? 'folder' : 'file-text';
     const iconClass = `fa fa-${iconType}`;
     const iconStyle = {marginRight: '5px'};
 
     return (
         <div style={style.base}>
-            <div style={style.title}>
+            <div style={style.title} onClick={onClick}>
                 <i className={iconClass} style={iconStyle}/>
 
                 {node.name}
@@ -53,7 +53,7 @@ class DemoTree extends React.Component {
         this.onSelect = this.onSelect.bind(this);
     }
 
-    onSelect(node, toggled) {
+    onSelect(node) {
         const {cursor} = this.state;
 
         if (cursor) {
@@ -61,11 +61,12 @@ class DemoTree extends React.Component {
         }
 
         node.active = true;
-        if (node.children) {
-            node.toggled = toggled;
-        }
 
         this.setState({cursor: node});
+    }
+
+    onOpen(node) {
+        console.log('open', node);
     }
 
     onFilterMouseUp(e) {
@@ -97,7 +98,8 @@ class DemoTree extends React.Component {
                 <div style={styles.component}>
                     <Treebeard data={stateData}
                                decorators={decorators}
-                               onSelect={this.onSelect} />
+                               onSelect={this.onSelect}
+                               onOpen={this.onOpen} />
                 </div>
                 <div style={styles.component}>
                     <NodeViewer node={cursor}/>

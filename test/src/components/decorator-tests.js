@@ -6,7 +6,6 @@ import React from 'react';
 import TestUtils from 'react-dom/test-utils';
 
 import {VelocityComponent} from 'velocity-react';
-import sinon from 'sinon';
 
 import defaultDecorators from '../../../src/components/decorators';
 
@@ -24,18 +23,6 @@ const defaults = {
 const Container = defaultDecorators.Container;
 
 describe('container decorator component', () => {
-    it('should render a clickable element with a click event handler', () => {
-        const onClick = sinon.spy();
-        const container = TestUtils.renderIntoDocument(
-            <Container {...defaults}
-                       onClick={onClick}/>
-        );
-        const clickable = container.clickableRef;
-        TestUtils.Simulate.click(clickable);
-
-        onClick.should.be.called.once;
-    });
-
     it('should render the toggle decorator not terminal', () => {
         class toggleType extends React.Component {
             render() {

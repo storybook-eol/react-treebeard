@@ -11,6 +11,22 @@ class TreeNode extends React.Component {
         super();
 
         this.onClick = this.onClick.bind(this);
+        this.onOpen = this.onOpen.bind(this);
+    }
+
+    onOpen() {
+        console.log('treenode', 'onopen');
+        const {node, onOpen} = this.props;
+
+        if (node.children) {
+            node.toggled = !node.toggled;
+        }
+
+        if (onOpen) {
+            onOpen(node);
+        }
+
+        this.setState({node: node});
     }
 
     onClick() {
@@ -68,7 +84,7 @@ class TreeNode extends React.Component {
             return this.renderChildren(decorators, animations);
         }
 
-        const {animation, duration, ...restAnimationInfo} = animations.drawer;
+        const {...restAnimationInfo} = animations.drawer;
         return (
             <VelocityTransitionGroup {...restAnimationInfo}
                                      ref={ref => this.velocityRef = ref}>
@@ -85,6 +101,7 @@ class TreeNode extends React.Component {
                         decorators={decorators}
                         node={Object.assign({}, node)}
                         onClick={this.onClick}
+                        onOpen={this.onOpen}
                         style={style}/>
         );
     }
@@ -128,10 +145,11 @@ class TreeNode extends React.Component {
     }
 
     _eventBubbles() {
-        const {onSelect} = this.props;
+        const {onSelect, onOpen} = this.props;
 
         return {
-            onSelect
+            onSelect,
+            onOpen
         };
     }
 }
@@ -144,7 +162,8 @@ TreeNode.propTypes = {
         PropTypes.object,
         PropTypes.bool
     ]).isRequired,
-    onSelect: PropTypes.func
+    onSelect: PropTypes.func,
+    onOpen: PropTypes.func
 };
 
 export default TreeNode;
