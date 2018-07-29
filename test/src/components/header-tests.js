@@ -134,5 +134,4 @@ describe('header component', () => {
 
         global.should.not.exist(container.props.style.container[1]);
     });
-
 });

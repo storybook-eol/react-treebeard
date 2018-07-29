@@ -57,9 +57,9 @@ class TreeExample extends React.Component {
     constructor(props){
         super(props);
         this.state = {};
-        this.onToggle = this.onToggle.bind(this);
+        this.onSelect = this.onSelect.bind(this);
     }
-    onToggle(node, toggled){
+    onSelect(node, toggled){
         if(this.state.cursor){this.state.cursor.active = false;}
         node.active = true;
         if(node.children){ node.toggled = toggled; }
@@ -69,7 +69,7 @@ class TreeExample extends React.Component {
         return (
             <Treebeard
                 data={data}
-                onToggle={this.onToggle}
+                onSelect={this.onSelect}
             />
         );
     }
@@ -86,7 +86,7 @@ ReactDOM.render(<TreeExample/>, content);
 
 Data that drives the tree view. State-driven effects can be built by manipulating the attributes in this object. Also supports an array for multiple nodes at the root level. An example can be found in `example/data.js`
 
-#### onToggle
+#### onSelect
 `PropTypes.func`
 
 Callback function when a node is toggled / clicked. Passes 2 attributes: the data node and it's toggled boolean state.

@@ -34,12 +34,12 @@ describe('treebeard component', () => {
     it('should pass the top level tree node the associated props', () => {
         const treebeard = TestUtils.renderIntoDocument(
             <Treebeard data={defaults}
-                       onToggle={() => null}/>
+                       onSelect={() => null}/>
         );
         const node = TestUtils.findRenderedComponentWithType(treebeard, TreeNode);
 
         node.props.node.should.equal(treebeard.props.data);
-        node.props.onToggle.should.equal(treebeard.props.onToggle);
+        node.props.onSelect.should.equal(treebeard.props.onSelect);
     });
 
     it('should use the default theme if none specified', () => {
