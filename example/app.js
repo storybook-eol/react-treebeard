@@ -50,10 +50,10 @@ class DemoTree extends React.Component {
         super();
 
         this.state = {data};
-        this.onToggle = this.onToggle.bind(this);
+        this.onSelect = this.onSelect.bind(this);
     }
 
-    onToggle(node, toggled) {
+    onSelect(node, toggled) {
         const {cursor} = this.state;
 
         if (cursor) {
@@ -97,7 +97,7 @@ class DemoTree extends React.Component {
                 <div style={styles.component}>
                     <Treebeard data={stateData}
                                decorators={decorators}
-                               onToggle={this.onToggle}/>
+                               onSelect={this.onSelect} />
                 </div>
                 <div style={styles.component}>
                     <NodeViewer node={cursor}/>
