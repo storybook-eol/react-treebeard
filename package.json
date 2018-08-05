@@ -1,6 +1,6 @@
 {
-  "name": "react-treebeard",
-  "version": "2.1.0",
+  "name": "@dnfeitosa/react-treee",
+  "version": "0.0.1",
   "description": "React Tree View Component",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexcurtis/react-treebeard.git"
+    "url": "git+https://github.com/dnfeitosa/react-treee.git"
   },
   "keywords": [
     "react",
@@ -26,12 +26,12 @@
     "customisable",
     "fast"
   ],
-  "author": "Alex Curtis",
+  "author": "Diego Feitosa",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alexcurtis/react-treebeard/issues"
+    "url": "https://github.com/dnfeitosa/react-treee/issues"
   },
-  "homepage": "https://github.com/alexcurtis/react-treebeard#readme",
+  "homepage": "https://github.com/dnfeitosa/react-treee#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",

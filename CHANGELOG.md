@@ -1,6 +1,7 @@
 # Change log
 
-### vNEXT
+### v0.0.1 Fork, Rename and Re-release (2018-08-04)
+- Forked from @storybooks/react-treebeard and rebranded as @dnfeitosa/react-treee.
 
 ### v2.1.0
 - Add `React 16.0` to peerDependencies [PR #102](https://github.com/alexcurtis/react-treebeard/pull/102)
