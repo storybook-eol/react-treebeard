@@ -29,29 +29,29 @@ describe('node component', () => {
 
     it('should invert the toggle state on click', (done) => {
         const node = {toggled: true};
-        const onToggle = (toggledNode, toggled) => {
+        const onSelect = (toggledNode, toggled) => {
             toggled.should.equal(!toggledNode.toggled);
             done();
         };
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode {...defaults}
                       node={node}
-                      onToggle={onToggle}/>
+                      onSelect={onSelect}/>
         );
         treeNode.onClick();
     });
 
-    it('should call the onToggle callback once if it is registered on click', () => {
-        const onToggle = sinon.spy();
+    it('should call the onSelect callback once if it is registered on click', () => {
+        const onSelect = sinon.spy();
         const treeNode = TestUtils.renderIntoDocument(
             <TreeNode
                 {...defaults}
-                onToggle={onToggle}
+                onSelect={onSelect}
             />
         );
         treeNode.onClick();
 
-        onToggle.should.be.called.once;
+        onSelect.should.be.called.once;
     });
 
     it('should not throw an exception if a callback is not registered on click', () => {

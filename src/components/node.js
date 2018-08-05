@@ -11,14 +11,30 @@ class TreeNode extends React.Component {
         super();
 
         this.onClick = this.onClick.bind(this);
+        this.onOpen = this.onOpen.bind(this);
+    }
+
+    onOpen() {
+        console.log('treenode', 'onopen');
+        const {node, onOpen} = this.props;
+
+        if (node.children) {
+            node.toggled = !node.toggled;
+        }
+
+        if (onOpen) {
+            onOpen(node);
+        }
+
+        this.setState({node: node});
     }
 
     onClick() {
-        const {node, onToggle} = this.props;
+        const {node, onSelect} = this.props;
         const {toggled} = node;
 
-        if (onToggle) {
-            onToggle(node, !toggled);
+        if (onSelect) {
+            onSelect(node, !toggled);
         }
     }
 
@@ -68,7 +84,7 @@ class TreeNode extends React.Component {
             return this.renderChildren(decorators, animations);
         }
 
-        const {animation, duration, ...restAnimationInfo} = animations.drawer;
+        const {...restAnimationInfo} = animations.drawer;
         return (
             <VelocityTransitionGroup {...restAnimationInfo}
                                      ref={ref => this.velocityRef = ref}>
@@ -85,6 +101,7 @@ class TreeNode extends React.Component {
                         decorators={decorators}
                         node={Object.assign({}, node)}
                         onClick={this.onClick}
+                        onOpen={this.onOpen}
                         style={style}/>
         );
     }
@@ -128,10 +145,11 @@ class TreeNode extends React.Component {
     }
 
     _eventBubbles() {
-        const {onToggle} = this.props;
+        const {onSelect, onOpen} = this.props;
 
         return {
-            onToggle
+            onSelect,
+            onOpen
         };
     }
 }
@@ -144,7 +162,8 @@ TreeNode.propTypes = {
         PropTypes.object,
         PropTypes.bool
     ]).isRequired,
-    onToggle: PropTypes.func
+    onSelect: PropTypes.func,
+    onOpen: PropTypes.func
 };
 
 export default TreeNode;

@@ -12,13 +12,13 @@ Loading.propTypes = {
     style: PropTypes.object
 };
 
-const Toggle = ({style}) => {
+const Toggle = ({style, onOpen}) => {
     const {height, width} = style;
     const midHeight = height * 0.5;
     const points = `0,0 0,${height} ${width},${midHeight}`;
 
     return (
-        <div style={style.base}>
+        <div style={style.base} onClick={onOpen}>
             <div style={style.wrapper}>
                 <svg height={height} width={width}>
                     <polygon points={points}
@@ -29,12 +29,13 @@ const Toggle = ({style}) => {
     );
 };
 Toggle.propTypes = {
-    style: PropTypes.object
+    style: PropTypes.object,
+    onOpen: PropTypes.func
 };
 
-const Header = ({node, style}) => {
+const Header = ({node, style, onClick}) => {
     return (
-        <div style={style.base}>
+        <div style={style.base} onClick={onClick}>
             <div style={style.title}>
                 {node.name}
             </div>
@@ -43,6 +44,7 @@ const Header = ({node, style}) => {
 };
 Header.propTypes = {
     style: PropTypes.object,
+    onClient: PropTypes.func,
     node: PropTypes.object.isRequired
 };
 
@@ -52,12 +54,13 @@ class Container extends React.Component {
         const {style, decorators, terminal, onClick, node} = this.props;
 
         return (
-            <div onClick={onClick}
-                 ref={ref => this.clickableRef = ref}
+            <div ref={ref => this.clickableRef = ref}
                  style={style.container}>
                 {!terminal ? this.renderToggle() : null}
 
-                <decorators.Header node={node}
+                <decorators.Header onClick={onClick}
+                                   ref={ref => this.clickableRef = ref}
+                                   node={node}
                                    style={style.header}/>
             </div>
         );
@@ -80,16 +83,17 @@ class Container extends React.Component {
     }
 
     renderToggleDecorator() {
-        const {style, decorators} = this.props;
+        const {style, decorators, onOpen} = this.props;
 
-        return <decorators.Toggle style={style.toggle}/>;
+        return <decorators.Toggle onOpen={onOpen} style={style.toggle}/>;
     }
 }
 Container.propTypes = {
     style: PropTypes.object.isRequired,
     decorators: PropTypes.object.isRequired,
     terminal: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
+    onOpen: PropTypes.func,
     animations: PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.bool
