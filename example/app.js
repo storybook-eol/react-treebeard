@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {Treebeard, decorators} from '../src/index';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 
 import data from './data';

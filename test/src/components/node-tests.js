@@ -149,6 +149,8 @@ describe('node component', () => {
         const node = {toggled: true};
         const treeNode = TestUtils.renderIntoDocument(<TreeNode {...defaults} node={node}/>);
 
+        console.dir(treeNode, { depth: null });
+
         treeNode.subtreeRef.should.exist;
     });
 
