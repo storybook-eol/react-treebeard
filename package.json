@@ -1,6 +1,6 @@
 {
-  "name": "react-treebeard",
-  "version": "2.1.0",
+  "name": "@ndelangen/react-treebeard",
+  "version": "3.0.0",
   "description": "React Tree View Component",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,10 @@
     "example": "webpack-dev-server --content-base ./example/ --config ./example/webpack.config.js"
   },
   "peerDependencies": {
+    "@emotion/styled": "^9.1.3",
     "emotion": "^9.1.3",
     "react": "^15.5.4 || ^16.0.0",
-    "react-dom": "^15.5.4 || ^16.0.0",
-    "@emotion/styled": "^9.1.3"
+    "react-dom": "^15.5.4 || ^16.0.0"
   },
   "repository": {
     "type": "git",
@@ -46,7 +46,6 @@
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^3.4.0",
     "del": "^2.0.2",
-    "emotion": "^9.1.3",
     "eslint": "^1.8.0",
     "eslint-loader": "^1.1.0",
     "eslint-plugin-react": "^3.6.3",
@@ -82,8 +81,8 @@
     "@emotion/styled": "0.10.5",
     "babel-runtime": "^6.23.0",
     "deep-equal": "^1.0.1",
-    "shallowequal": "^0.2.2",
     "prop-types": "^15.6.2",
+    "shallowequal": "^1.1.0",
     "velocity-react": "^1.3.1"
   }
 }
