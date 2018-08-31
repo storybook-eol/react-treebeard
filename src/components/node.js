@@ -3,15 +3,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {VelocityTransitionGroup} from 'velocity-react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import NodeHeader from './header';
 
 const Li = styled('li', {
-    shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
+    shouldForwardProp: prop => ['className', 'children', 'ref'].indexOf(prop) !== -1
 })(({style}) => style);
 const Ul = styled('ul', {
-    shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
+    shouldForwardProp: prop => ['className', 'children', 'ref'].indexOf(prop) !== -1
 })(({style}) => style);
 
 class TreeNode extends React.Component {
