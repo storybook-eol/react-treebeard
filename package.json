@@ -1,6 +1,6 @@
 {
   "name": "@ndelangen/react-treebeard",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "React Tree View Component",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,7 @@
     "example": "webpack-dev-server --content-base ./example/ --config ./example/webpack.config.js"
   },
   "peerDependencies": {
-    "@emotion/styled": "^9.1.3",
-    "emotion": "^9.1.3",
+    "@emotion/styled": "~0.10.5",
     "react": "^15.5.4 || ^16.0.0",
     "react-dom": "^15.5.4 || ^16.0.0"
   },
@@ -77,8 +76,8 @@
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
-    "@emotion/core": "0.13.0",
-    "@emotion/styled": "0.10.5",
+    "@emotion/core": "~0.13.0",
+    "@emotion/styled": "~0.10.5",
     "babel-runtime": "^6.23.0",
     "deep-equal": "^1.0.1",
     "prop-types": "^15.6.2",

@@ -10,7 +10,7 @@
     "@emotion/stylis" "^0.7.0"
     "@emotion/utils" "^0.8.1"
 
-"@emotion/core@0.13.0":
+"@emotion/core@~0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@emotion/core/-/core-0.13.0.tgz#199b08ed25b8e72fbaa46f2de4fc58d1ab4c0f3b"
   dependencies:
@@ -62,7 +62,7 @@
     "@emotion/serialize" "^0.9.0"
     "@emotion/utils" "^0.8.1"
 
-"@emotion/styled@0.10.5":
+"@emotion/styled@~0.10.5":
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/@emotion/styled/-/styled-0.10.5.tgz#4a0d3e5c80f8e80112af6d398ca06098e5b82775"
   dependencies:
