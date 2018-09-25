@@ -1,5 +1,5 @@
 {
-  "name": "@ndelangen/react-treebeard",
+  "name": "react-treebeard",
   "version": "3.1.0",
   "description": "React Tree View Component",
   "main": "index.js",
