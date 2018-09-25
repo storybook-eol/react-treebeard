@@ -1,12 +1,12 @@
 language: node_js
 
 node_js:
-  - 5
   - 6
-  - stable
+  - 8
+  - 10
 
 script:
-  - npm run-script test-travis
+  - npm run test-travis
 
 before_script:
   - export DISPLAY=:99.0
