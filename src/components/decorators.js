@@ -12,9 +12,9 @@ const Polygon = styled('polygon', {
     shouldForwardProp: prop => ['className', 'children', 'points'].indexOf(prop) !== -1
 })((({style}) => style));
 
-const Loading = styled(({ className }) => {
+const Loading = styled(({className}) => {
     return <div className={className}>loading...</div>;
-})(({ style }) => style);
+})(({style}) => style);
 
 Loading.propTypes = {
     style: PropTypes.object
@@ -57,15 +57,17 @@ Header.propTypes = {
 class Container extends React.Component {
     render() {
         const {style, decorators, terminal, onClick, node} = this.props;
-
+        const containerStyle = Object.assign({}, ...style.container);
         return (
-            <div onClick={onClick}
-                 ref={ref => this.clickableRef = ref}
-                 style={style.container}>
+            <div
+                onClick={onClick}
+                ref={ref => this.clickableRef = ref}
+                style={containerStyle}>
                 {!terminal ? this.renderToggle() : null}
-
-                <decorators.Header node={node}
-                                   style={style.header}/>
+                <decorators.Header
+                    node={node}
+                    style={style.header}
+                />
             </div>
         );
     }
@@ -92,6 +94,7 @@ class Container extends React.Component {
         return <decorators.Toggle style={style.toggle}/>;
     }
 }
+
 Container.propTypes = {
     style: PropTypes.object.isRequired,
     decorators: PropTypes.object.isRequired,

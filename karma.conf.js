@@ -1,9 +1,9 @@
 'use strict';
 
-var webpack = require('webpack');
-var webpackCfg = require('./webpack.config.test.js');
+const webpack = require('webpack');
+const webpackCfg = require('./webpack.config.test.js');
 
-module.exports = function(config) {
+module.exports = function (config) {
     config.set({
         basePath: '',
         frameworks: ['mocha'],
@@ -34,8 +34,8 @@ module.exports = function(config) {
         coverageReporter: {
             dir: 'coverage/',
             reporters: [
-                { type: 'html', subdir: 'report-html' },
-                { type: 'lcov', subdir: 'report-lcov' }
+                {type: 'html', subdir: 'report-html'},
+                {type: 'lcov', subdir: 'report-lcov'}
             ]
         },
         port: 9876,
@@ -44,5 +44,5 @@ module.exports = function(config) {
         autoWatch: true,
         browsers: ['Chrome'],
         singleRun: false
-    })
-}
+    });
+};
