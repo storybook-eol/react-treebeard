@@ -1,6 +1,4 @@
-'use strict';
-
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {VelocityComponent} from 'velocity-react';
 import styled from '@emotion/styled';
@@ -12,9 +10,9 @@ const Polygon = styled('polygon', {
     shouldForwardProp: prop => ['className', 'children', 'points'].indexOf(prop) !== -1
 })((({style}) => style));
 
-const Loading = styled(({ className }) => {
+const Loading = styled(({className}) => {
     return <div className={className}>loading...</div>;
-})(({ style }) => style);
+})(({style}) => style);
 
 Loading.propTypes = {
     style: PropTypes.object
@@ -36,6 +34,7 @@ const Toggle = ({style}) => {
         </Div>
     );
 };
+
 Toggle.propTypes = {
     style: PropTypes.object
 };
@@ -49,18 +48,19 @@ const Header = ({node, style}) => {
         </Div>
     );
 };
+
 Header.propTypes = {
     style: PropTypes.object,
     node: PropTypes.object.isRequired
 };
 
-class Container extends React.Component {
+class Container extends PureComponent {
     render() {
         const {style, decorators, terminal, onClick, node} = this.props;
 
         return (
             <div onClick={onClick}
-                 ref={ref => this.clickableRef = ref}
+                 ref={ref => {this.clickableRef = ref;}}
                  style={Object.assign({}, ...style.container)}>
                 {!terminal ? this.renderToggle() : null}
 
@@ -78,9 +78,10 @@ class Container extends React.Component {
         }
 
         return (
-            <VelocityComponent animation={animations.toggle.animation}
-                               duration={animations.toggle.duration}
-                               ref={ref => this.velocityRef = ref}>
+            <VelocityComponent
+                animation={animations.toggle.animation}
+                duration={animations.toggle.duration}
+                ref={ref => {this.velocityRef = ref;}}>
                 {this.renderToggleDecorator()}
             </VelocityComponent>
         );
@@ -92,6 +93,7 @@ class Container extends React.Component {
         return <decorators.Toggle style={style.toggle}/>;
     }
 }
+
 Container.propTypes = {
     style: PropTypes.object.isRequired,
     decorators: PropTypes.object.isRequired,

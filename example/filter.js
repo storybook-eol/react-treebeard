@@ -1,4 +1,4 @@
-'use strict';
+
 
 // Helper functions for filtering
 export const defaultMatcher = (filterText, node) => {

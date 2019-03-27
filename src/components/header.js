@@ -1,11 +1,9 @@
-'use strict';
-
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import shallowEqual from 'shallowequal';
 import deepEqual from 'deep-equal';
 
-class NodeHeader extends React.Component {
+class NodeHeader extends PureComponent {
     shouldComponentUpdate(nextProps) {
         const props = this.props;
         const nextPropKeys = Object.keys(nextProps);
@@ -33,12 +31,14 @@ class NodeHeader extends React.Component {
         const headerStyles = Object.assign({container}, style);
 
         return (
-            <decorators.Container animations={animations}
-                                  decorators={decorators}
-                                  node={node}
-                                  onClick={onClick}
-                                  style={headerStyles}
-                                  terminal={terminal}/>
+            <decorators.Container
+                animations={animations}
+                decorators={decorators}
+                node={node}
+                onClick={onClick}
+                style={headerStyles}
+                terminal={terminal}
+            />
         );
     }
 }
