@@ -61,7 +61,7 @@ class Container extends React.Component {
         return (
             <div onClick={onClick}
                  ref={ref => this.clickableRef = ref}
-                 style={style.container}>
+                 style={Object.assign({}, ...style.container)}>
                 {!terminal ? this.renderToggle() : null}
 
                 <decorators.Header node={node}
