@@ -1,11 +1,8 @@
-'use strict';
-
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {Treebeard, decorators} from '../src/index';
 import styled from '@emotion/styled';
-
 
 import data from './data';
 import styles from './styles';
@@ -13,7 +10,7 @@ import * as filters from './filter';
 
 const Div = styled('Div', {
     shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
-})(({ style }) => style);
+})(({style}) => style);
 
 const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
 
@@ -34,7 +31,7 @@ decorators.Header = ({style, node}) => {
     );
 };
 
-class NodeViewer extends React.Component {
+class NodeViewer extends PureComponent {
     render() {
         const style = styles.viewer;
         let json = JSON.stringify(this.props.node, null, 4);
@@ -46,11 +43,12 @@ class NodeViewer extends React.Component {
         return <Div style={style.base}>{json}</Div>;
     }
 }
+
 NodeViewer.propTypes = {
     node: PropTypes.object
 };
 
-class DemoTree extends React.Component {
+class DemoTree extends PureComponent {
     constructor() {
         super();
 
