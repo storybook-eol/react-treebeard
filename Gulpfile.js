@@ -1,9 +1,7 @@
-'use strict';
-
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var babel = require('gulp-babel');
-var eslint= require('gulp-eslint');
+var eslint = require('gulp-eslint');
 var open = require('gulp-open');
 var del = require('del');
 var url = require('url');
@@ -58,7 +56,7 @@ gulp.task('webpack-dev-server', function(){
 gulp.task('lint', function(){
     return gulp.src(['src/**/*.js', 'test/**/*.js'])
         .pipe(eslint())
-        .pipe(eslint.format())
+        .pipe(eslint.format());
 });
 
 gulp.task('watch', function() {

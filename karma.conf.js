@@ -1,6 +1,3 @@
-'use strict';
-
-var webpack = require('webpack');
 var webpackCfg = require('./webpack.config.test.js');
 
 module.exports = function(config) {
@@ -44,5 +41,5 @@ module.exports = function(config) {
         autoWatch: true,
         browsers: ['Chrome'],
         singleRun: false
-    })
-}
+    });
+};

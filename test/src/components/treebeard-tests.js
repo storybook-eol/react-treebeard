@@ -1,6 +1,5 @@
 /*  eslint no-unused-expressions:0  */
 
-'use strict';
 
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';

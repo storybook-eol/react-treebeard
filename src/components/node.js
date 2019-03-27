@@ -1,6 +1,4 @@
-'use strict';
-
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {VelocityTransitionGroup} from 'velocity-react';
 import styled from '@emotion/styled';
@@ -14,10 +12,9 @@ const Ul = styled('ul', {
     shouldForwardProp: prop => ['className', 'children', 'ref'].indexOf(prop) !== -1
 })(({style}) => style);
 
-class TreeNode extends React.Component {
-    constructor() {
-        super();
-
+class TreeNode extends PureComponent {
+    constructor(props) {
+        super(props);
         this.onClick = this.onClick.bind(this);
     }
 
@@ -58,10 +55,9 @@ class TreeNode extends React.Component {
         const animations = this.animations();
 
         return (
-            <Li innerRef={ref => this.topLevelRef = ref}
+            <Li innerRef={ref => {this.topLevelRef = ref;}}
                 style={style.base}>
                 {this.renderHeader(decorators, animations)}
-
                 {this.renderDrawer(decorators, animations)}
             </Li>
         );
@@ -76,10 +72,10 @@ class TreeNode extends React.Component {
             return this.renderChildren(decorators, animations);
         }
 
-        const {animation, duration, ...restAnimationInfo} = animations.drawer;
+        const {...restAnimationInfo} = animations.drawer;
         return (
             <VelocityTransitionGroup {...restAnimationInfo}
-                                     ref={ref => this.velocityRef = ref}>
+                                     ref={ref => {this.velocityRef = ref;}}>
                 {toggled ? this.renderChildren(decorators, animations) : null}
             </VelocityTransitionGroup>
         );
@@ -111,13 +107,17 @@ class TreeNode extends React.Component {
 
         return (
             <Ul style={style.subtree}
-                ref={ref => this.subtreeRef = ref}>
-                {children.map((child, index) => <TreeNode {...this._eventBubbles()}
-                                                          animations={animations}
-                                                          decorators={propDecorators}
-                                                          key={child.id || index}
-                                                          node={child}
-                                                          style={style}/>
+                ref={ref => {this.subtreeRef = ref;}}>
+                {children.map((child, index) => (
+                        <TreeNode
+                            {...this._eventBubbles()}
+                            animations={animations}
+                            decorators={propDecorators}
+                            key={child.id || index}
+                            node={child}
+                            style={style}
+                        />
+                    )
                 )}
             </Ul>
         );

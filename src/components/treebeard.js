@@ -1,6 +1,4 @@
-'use strict';
-
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 import styled from '@emotion/styled';
@@ -14,7 +12,7 @@ const Ul = styled('ul', {
     shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
 })((({style}) => style));
 
-class TreeBeard extends React.Component {
+class TreeBeard extends PureComponent {
     render() {
         const {animations, decorators, data: propsData, onToggle, style} = this.props;
         let data = propsData;
@@ -25,14 +23,15 @@ class TreeBeard extends React.Component {
         }
         return (
             <Ul style={style.tree.base}
-                ref={ref => this.treeBaseRef = ref}>
+                ref={ref => {this.treeBaseRef = ref;}}>
                 {data.map((node, index) =>
-                    <TreeNode animations={animations}
-                              decorators={decorators}
-                              key={node.id || index}
-                              node={node}
-                              onToggle={onToggle}
-                              style={style.tree.node}/>
+                    <TreeNode
+                        animations={animations}
+                        decorators={decorators}
+                        key={node.id || index}
+                        node={node}
+                        onToggle={onToggle}
+                        style={style.tree.node}/>
                 )}
             </Ul>
         );
