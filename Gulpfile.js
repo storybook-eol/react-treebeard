@@ -1,21 +1,21 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var babel = require('gulp-babel');
-var eslint = require('gulp-eslint');
-var open = require('gulp-open');
-var del = require('del');
-var url = require('url');
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const babel = require('gulp-babel');
+const eslint = require('gulp-eslint');
+const open = require('gulp-open');
+const del = require('del');
+const url = require('url');
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
 
-var webpackConfig = {
+const webpackConfig = {
     example: require('./example/webpack.config.js')
 };
 
-var WPACK_DEV_HOST = 'localhost';
-var WPACK_DEV_PORT = 8080;
+const WPACK_DEV_HOST = 'localhost';
+const WPACK_DEV_PORT = 8080;
 
-var urlBuilder = function(host, port, path){
+const urlBuilder = function(host, port, path){
     return url.format({
         protocol: 'http',
         hostname: host,
@@ -25,8 +25,8 @@ var urlBuilder = function(host, port, path){
 };
 
 gulp.task('open', function(){
-    var path = 'webpack-dev-server/index.html';
-    var uri = urlBuilder(WPACK_DEV_HOST, WPACK_DEV_PORT, path);
+    const path = 'webpack-dev-server/index.html';
+    const uri = urlBuilder(WPACK_DEV_HOST, WPACK_DEV_PORT, path);
     gulp.src('').pipe(open({ uri: uri }));
 });
 

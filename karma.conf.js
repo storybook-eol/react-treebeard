@@ -1,7 +1,8 @@
-var webpackCfg = require('./webpack.config.test.js');
+const webpackCfg = require('./webpack.config.test.js');
+const {TRAVIS} = process.env;
 
 module.exports = function(config) {
-    config.set({
+    const configuration = config.set({
         basePath: '',
         frameworks: ['mocha'],
         files: [
@@ -31,8 +32,8 @@ module.exports = function(config) {
         coverageReporter: {
             dir: 'coverage/',
             reporters: [
-                { type: 'html', subdir: 'report-html' },
-                { type: 'lcov', subdir: 'report-lcov' }
+                {type: 'html', subdir: 'report-html'},
+                {type: 'lcov', subdir: 'report-lcov'}
             ]
         },
         port: 9876,
@@ -40,6 +41,17 @@ module.exports = function(config) {
         logLevel: config.LOG_INFO,
         autoWatch: true,
         browsers: ['Chrome'],
+        customLaunchers: {
+            Chrome_travis_ci: {
+                base: 'Chrome',
+                flags: ['--no-sandbox']
+            }
+        },
         singleRun: false
     });
+    if (TRAVIS) {
+        configuration.browsers = ['Chrome_travis_ci'];
+    }
+
+    config.set(configuration);
 };

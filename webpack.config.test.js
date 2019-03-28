@@ -1,4 +1,5 @@
 module.exports = {
+    mode: 'development',
     cache: true,
     devtool: 'inline-source-map',
     module: {
