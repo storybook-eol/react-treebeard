@@ -22,7 +22,7 @@ class TreeBeard extends PureComponent {
             data = [data];
         }
         return (
-            <Ul style={style.tree.base}
+            <Ul style={{...defaultTheme.tree.base, ...style.tree.base}}
                 ref={ref => {this.treeBaseRef = ref;}}>
                 {data.map((node, index) =>
                     <TreeNode
@@ -31,7 +31,7 @@ class TreeBeard extends PureComponent {
                         key={node.id || index}
                         node={node}
                         onToggle={onToggle}
-                        style={style.tree.node}/>
+                        style={{...defaultTheme.tree.node, ...style.tree.node}}/>
                 )}
             </Ul>
         );
