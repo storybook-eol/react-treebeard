@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/storybooks/react-treebeard#readme",
   "devDependencies": {
+    "@commitlint/cli": "^7.5.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
@@ -53,6 +54,7 @@
     "gulp-eslint": "^1.0.0",
     "gulp-open": "^1.0.0",
     "gulp-util": "^3.0.7",
+    "husky": "^1.3.1",
     "istanbul": "^0.4.5",
     "istanbul-instrumenter-loader": "^0.2.0",
     "karma": "^1.7.0",
