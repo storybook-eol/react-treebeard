@@ -1,42 +1,27 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
 import styled from '@emotion/styled';
+import {castArray} from 'lodash';
 
-import TreeNode from './node';
-import defaultDecorators from './decorators';
 import defaultTheme from '../themes/default';
 import defaultAnimations from '../themes/animations';
+import defaultDecorators from './decorators';
+import TreeNode from './TreeNode';
 
 const Ul = styled('ul', {
     shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
 })((({style}) => style));
 
-class TreeBeard extends PureComponent {
-    render() {
-        const {animations, decorators, data: propsData, onToggle, style} = this.props;
-        let data = propsData;
-
-        // Support Multiple Root Nodes. Its not formally a tree, but its a use-case.
-        if (!Array.isArray(data)) {
-            data = [data];
-        }
-        return (
-            <Ul style={{...defaultTheme.tree.base, ...style.tree.base}}
-                ref={ref => {this.treeBaseRef = ref;}}>
-                {data.map((node, index) =>
-                    <TreeNode
-                        animations={animations}
-                        decorators={decorators}
-                        key={node.id || index}
-                        node={node}
-                        onToggle={onToggle}
-                        style={{...defaultTheme.tree.node, ...style.tree.node}}/>
-                )}
-            </Ul>
-        );
-    }
-}
+const TreeBeard = ({animations, decorators, data, onToggle, style}) => (
+    <Ul style={{...defaultTheme.tree.base, ...style.tree.base}}>
+        {castArray(data).map((node, index) =>
+            <TreeNode
+                {...{animations, decorators, node, onToggle}}
+                key={node.id || index}
+                style={{...defaultTheme.tree.node, ...style.tree.node}}/>
+        )}
+    </Ul>
+);
 
 TreeBeard.propTypes = {
     style: PropTypes.object,

@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import shallowEqual from 'shallowequal';
 import deepEqual from 'deep-equal';
 
-class NodeHeader extends PureComponent {
+class NodeHeader extends Component {
     shouldComponentUpdate(nextProps) {
         const props = this.props;
         const nextPropKeys = Object.keys(nextProps);
@@ -32,12 +32,8 @@ class NodeHeader extends PureComponent {
 
         return (
             <decorators.Container
-                animations={animations}
-                decorators={decorators}
-                node={node}
-                onClick={onClick}
+                {...{animations, decorators, node, onClick, terminal}}
                 style={headerStyles}
-                terminal={terminal}
             />
         );
     }
