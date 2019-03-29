@@ -8,7 +8,7 @@ import sinon from 'sinon';
 import {VelocityTransitionGroup as TransitionGroup} from 'velocity-react';
 
 import NodeHeader from '../../../src/components/header';
-import TreeNode from '../../../src/components/node';
+import TreeNode from '../../../src/components/TreeNode';
 
 import {createAnimations, createDecorators} from '../utils/factory';
 
