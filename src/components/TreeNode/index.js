@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import {isArray} from 'lodash';
 
+import defaultAnimations from '../../themes/animations';
+import NodeHeader from '../header';
 import Drawer from './Drawer';
-import Header from './Header';
 import Loading from './Loading';
 
 const Li = styled('li', {
@@ -27,7 +28,9 @@ class TreeNode extends PureComponent {
     animations() {
         const {animations, node} = this.props;
         if (!animations) {
-            return false;
+            return {
+                toggle: defaultAnimations.toggle(this.props, 0)
+            };
         }
         const animation = Object.assign({}, animations, node.animations);
         return {
@@ -105,7 +108,7 @@ class TreeNode extends PureComponent {
                 this.topLevelRef = ref;
             }}
                 style={style.base}>
-                <Header {...{decorators, animations, node, style}} onClick={() => this.onClick()}/>
+                <NodeHeader {...{decorators, animations, node, style}} onClick={() => this.onClick()}/>
                 {this.renderDrawer(decorators, animations)}
             </Li>
         );

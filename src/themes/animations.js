@@ -1,9 +1,7 @@
-
-
 export default {
-    toggle: ({node: {toggled}}) => ({
+    toggle: ({node: {toggled}}, duration = 300) => ({
         animation: {rotateZ: toggled ? 90 : 0},
-        duration: 300
+        duration: duration
     }),
     drawer: (/* props */) => ({
         enter: {
