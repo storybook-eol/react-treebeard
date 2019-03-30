@@ -14,12 +14,13 @@ const Ul = styled('ul', {
 
 const TreeBeard = ({animations, decorators, data, onToggle, style}) => (
     <Ul style={{...defaultTheme.tree.base, ...style.tree.base}}>
-        {castArray(data).map((node, index) =>
+        {castArray(data).map(node => (
             <TreeNode
-                {...{animations, decorators, node, onToggle}}
-                key={node.id || index}
-                style={{...defaultTheme.tree.node, ...style.tree.node}}/>
-        )}
+                {...{decorators, node, onToggle, animations}}
+                key={node.id}
+                style={{...defaultTheme.tree.node, ...style.tree.node}}
+            />
+        ))}
     </Ul>
 );
 

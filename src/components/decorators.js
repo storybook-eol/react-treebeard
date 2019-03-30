@@ -27,8 +27,7 @@ const Toggle = ({style}) => {
         <Div style={style.base}>
             <Div style={style.wrapper}>
                 <svg height={height} width={width}>
-                    <Polygon points={points}
-                             style={style.arrow}/>
+                    <Polygon points={points} style={style.arrow}/>
                 </svg>
             </Div>
         </Div>
