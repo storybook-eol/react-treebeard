@@ -2,23 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {VelocityTransitionGroup} from 'velocity-react';
 
-const Drawer = ({restAnimationInfo, children, ref}) => (
+const Drawer = ({restAnimationInfo, children, reference}) => (
     <VelocityTransitionGroup
         {...restAnimationInfo}
-        ref={ref}
+        ref={reference}
     >
         {children}
     </VelocityTransitionGroup>
 );
 
 Drawer.propTypes = {
-    restAnimationInfo: PropTypes.object.isRequired,
+    restAnimationInfo: PropTypes.shape({}).isRequired,
     children: PropTypes.oneOfType([
         PropTypes.func,
-        PropTypes.arrayOf(PropTypes.func, PropTypes.object),
-        PropTypes.object
+        PropTypes.arrayOf(PropTypes.func, PropTypes.shape({})),
+        PropTypes.shape({})
     ]),
-    ref: PropTypes.func.isRequired
+    reference: PropTypes.shape({}).isRequired
 };
 
 export default Drawer;

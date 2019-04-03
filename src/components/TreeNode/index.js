@@ -16,6 +16,11 @@ const Ul = styled('ul', {
 })(({style}) => style);
 
 class TreeNode extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.velocityRef = React.createRef();
+    }
+
     onClick() {
         const {node, onToggle} = this.props;
         const {toggled} = node;
@@ -58,9 +63,7 @@ class TreeNode extends PureComponent {
 
         const {...restAnimationInfo} = animations.drawer;
         return (
-            <Drawer restAnimationInfo={{...restAnimationInfo}} ref={ref => {
-                this.velocityRef = ref;
-            }}>
+            <Drawer restAnimationInfo={{...restAnimationInfo}} reference={this.velocityRef}>
                 {toggled ? this.renderChildren(decorators, animations) : null}
             </Drawer>
         );
