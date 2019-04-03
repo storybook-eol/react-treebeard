@@ -1,11 +1,8 @@
 /*  eslint no-unused-expressions:0  */
-
-
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
 
 import {VelocityComponent} from 'velocity-react';
-import sinon from 'sinon';
 
 import defaultDecorators from '../../../src/components/decorators';
 
@@ -25,11 +22,13 @@ const Container = defaultDecorators.Container;
 describe('container decorator component', () => {
     it('should render a clickable element with a click event handler', () => {
         const onClick = sinon.spy();
+        console.log('onClick', onClick);
         const container = TestUtils.renderIntoDocument(
             <Container {...defaults}
                        onClick={onClick}/>
         );
-        const clickable = container.clickableRef;
+        const clickable = container.
+        ;
         TestUtils.Simulate.click(clickable);
 
         onClick.should.be.called.once;

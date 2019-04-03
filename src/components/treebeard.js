@@ -14,6 +14,7 @@ const Ul = styled('ul', {
 
 const TreeBeard = ({animations, decorators, data, onToggle, style}) => (
     <Ul style={{...defaultTheme.tree.base, ...style.tree.base}}>
+        {console.log(data)}
         {castArray(data).map(node => (
             <TreeNode
                 {...{decorators, node, onToggle, animations}}
