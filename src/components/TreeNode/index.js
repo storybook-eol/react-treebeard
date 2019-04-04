@@ -19,6 +19,7 @@ class TreeNode extends PureComponent {
     constructor(props) {
         super(props);
         this.velocityRef = React.createRef();
+        this.subtreeRef = React.createRef();
     }
 
     onClick() {
@@ -85,9 +86,7 @@ class TreeNode extends PureComponent {
 
         return (
             <Ul style={style.subtree}
-                ref={ref => {
-                    this.subtreeRef = ref;
-                }}>
+                ref={this.subtreeRef}>
                 {children.map((child, index) => (
                         <TreeNode
                             {...{onToggle, animations, style}}
@@ -107,7 +106,7 @@ class TreeNode extends PureComponent {
         const animations = this.animations();
 
         return (
-            <Li innerRef={ref => {
+            <Li ref={ref => {
                 this.topLevelRef = ref;
             }}
                 style={style.base}>
