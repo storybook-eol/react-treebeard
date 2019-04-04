@@ -4,9 +4,9 @@
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
 
-import defaultDecorators from '../../../src/components/decorators';
+import defaultDecorators from '../../../src/components/Decorators';
 import TreeNode from '../../../src/components/TreeNode';
-import Treebeard from '../../../src/components/treebeard';
+import Treebeard from '../../../src/components';
 import defaultAnimations from '../../../src/themes/animations';
 import defaultTheme from '../../../src/themes/default';
 

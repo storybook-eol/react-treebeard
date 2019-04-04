@@ -12,7 +12,7 @@
     "example": "webpack-dev-server --content-base ./example/ --config ./example/webpack.config.js"
   },
   "peerDependencies": {
-    "@emotion/styled": "^0.10.6",
+    "@emotion/styled": "^10.0.10",
     "react": ">=16.7.0",
     "react-dom": ">=16.7.0"
   },
@@ -79,8 +79,8 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
-    "@emotion/core": "^0.13.1",
-    "@emotion/styled": "^0.10.6",
+    "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.10",
     "@babel/runtime": "^7.0.0",
     "deep-equal": "^1.0.1",
     "prop-types": "^15.6.2",

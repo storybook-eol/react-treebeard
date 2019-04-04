@@ -5,7 +5,7 @@ import {castArray} from 'lodash';
 
 import defaultTheme from '../themes/default';
 import defaultAnimations from '../themes/animations';
-import defaultDecorators from './decorators';
+import defaultDecorators from './Decorators';
 import TreeNode from './TreeNode';
 
 const Ul = styled('ul', {
