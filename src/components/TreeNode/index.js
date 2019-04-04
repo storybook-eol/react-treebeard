@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {createRef, PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import {isArray} from 'lodash';
@@ -18,8 +18,9 @@ const Ul = styled('ul', {
 class TreeNode extends PureComponent {
     constructor(props) {
         super(props);
-        this.velocityRef = React.createRef();
-        this.subtreeRef = React.createRef();
+        this.velocityRef = createRef();
+        this.subtreeRef = createRef();
+        this.topLevelRef = createRef();
     }
 
     onClick() {
@@ -106,9 +107,7 @@ class TreeNode extends PureComponent {
         const animations = this.animations();
 
         return (
-            <Li ref={ref => {
-                this.topLevelRef = ref;
-            }}
+            <Li ref={this.topLevelRef}
                 style={style.base}>
                 <NodeHeader {...{decorators, animations, node, style}} onClick={() => this.onClick()}/>
                 {this.renderDrawer(decorators, animations)}
