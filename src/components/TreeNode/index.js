@@ -89,14 +89,13 @@ class TreeNode extends PureComponent {
             <Ul style={style.subtree}
                 ref={this.subtreeRef}>
                 {children.map((child, index) => (
-                        <TreeNode
-                            {...{onToggle, animations, style}}
-                            decorators={propDecorators}
-                            key={child.id || index}
-                            node={child}
-                        />
-                    )
-                )}
+                    <TreeNode
+                        {...{onToggle, animations, style}}
+                        decorators={propDecorators}
+                        key={child.id || index}
+                        node={child}
+                    />
+                ))}
             </Ul>
         );
     }

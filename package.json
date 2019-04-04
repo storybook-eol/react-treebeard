@@ -9,6 +9,7 @@
     "babel": "rimraf lib && babel src/ -d lib/",
     "test": "karma start karma.conf.js",
     "test-travis": "karma start --browsers Firefox --single-run",
+    "lint": "eslint src/",
     "example": "webpack-dev-server --content-base ./example/ --config ./example/webpack.config.js"
   },
   "peerDependencies": {
