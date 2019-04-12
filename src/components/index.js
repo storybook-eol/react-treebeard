@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import {castArray} from 'lodash';
 
 import defaultTheme from '../themes/default';
@@ -8,12 +7,8 @@ import defaultAnimations from '../themes/animations';
 import defaultDecorators from './Decorators';
 import TreeNode from './TreeNode';
 
-const Ul = styled('ul', {
-    shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
-})((({style}) => style));
-
 const TreeBeard = ({animations, decorators, data, onToggle, style}) => (
-    <Ul style={{...defaultTheme.tree.base, ...style.tree.base}}>
+    <ul className={{...defaultTheme.tree.base, ...style.tree.base}}>
         {castArray(data).map(node => (
             <TreeNode
                 {...{decorators, node, onToggle, animations}}
@@ -21,7 +16,7 @@ const TreeBeard = ({animations, decorators, data, onToggle, style}) => (
                 style={{...defaultTheme.tree.node, ...style.tree.node}}
             />
         ))}
-    </Ul>
+    </ul>
 );
 
 TreeBeard.propTypes = {
