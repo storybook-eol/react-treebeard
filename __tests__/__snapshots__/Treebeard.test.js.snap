@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Treebeard/> should render correctly treebeard component with props 1`] = `
+<Styled(ul)
+  style={
+    Object {
+      "backgroundColor": "#21252B",
+      "color": "#9DA5AB",
+      "fontFamily": "lucida grande ,tahoma,verdana,arial,sans-serif",
+      "fontSize": "14px",
+      "listStyle": "none",
+      "margin": 0,
+      "padding": 0,
+    }
+  }
+>
+  <TreeNode
+    animations={
+      Object {
+        "drawer": [Function],
+        "toggle": [Function],
+      }
+    }
+    decorators={
+      Object {
+        "Container": [Function],
+        "Header": [Function],
+        "Loading": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "__emotion_base": [Function],
+          "__emotion_forwardProp": undefined,
+          "__emotion_real": [Circular],
+          "__emotion_styles": Array [
+            [Function],
+          ],
+          "defaultProps": undefined,
+          "displayName": "Styled(Component)",
+          "propTypes": Object {
+            "style": [Function],
+          },
+          "render": [Function],
+          "withComponent": [Function],
+        },
+        "Toggle": [Function],
+      }
+    }
+    key="1"
+    node={
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "name": "app.js",
+              },
+              Object {
+                "name": "data.js",
+              },
+              Object {
+                "name": "index.html",
+              },
+              Object {
+                "name": "styles.js",
+              },
+              Object {
+                "name": "webpack.config.js",
+              },
+            ],
+            "name": "example",
+          },
+          Object {
+            "children": Array [],
+            "loading": true,
+            "name": "node_modules",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "name": "decorators.js",
+                  },
+                  Object {
+                    "name": "treebeard.js",
+                  },
+                ],
+                "name": "components",
+              },
+              Object {
+                "name": "index.js",
+              },
+            ],
+            "name": "src",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "name": "animations.js",
+              },
+              Object {
+                "name": "default.js",
+              },
+            ],
+            "name": "themes",
+          },
+          Object {
+            "name": "Gulpfile.js",
+          },
+          Object {
+            "name": "index.js",
+          },
+          Object {
+            "name": "package.json",
+          },
+        ],
+        "id": 1,
+        "name": "react-treebeard",
+        "toggled": true,
+      }
+    }
+    style={
+      Object {
+        "activeLink": Object {
+          "background": "#31363F",
+        },
+        "base": Object {
+          "position": "relative",
+        },
+        "header": Object {
+          "base": Object {
+            "color": "#9DA5AB",
+            "display": "inline-block",
+            "verticalAlign": "top",
+          },
+          "connector": Object {
+            "borderBottom": "solid 2px black",
+            "borderLeft": "solid 2px black",
+            "height": "12px",
+            "left": "-21px",
+            "position": "absolute",
+            "top": "0px",
+            "width": "2px",
+          },
+          "title": Object {
+            "lineHeight": "24px",
+            "verticalAlign": "middle",
+          },
+        },
+        "link": Object {
+          "cursor": "pointer",
+          "display": "block",
+          "padding": "0px 5px",
+          "position": "relative",
+        },
+        "loading": Object {
+          "color": "#E2C089",
+        },
+        "subtree": Object {
+          "listStyle": "none",
+          "paddingLeft": "19px",
+        },
+        "toggle": Object {
+          "arrow": Object {
+            "fill": "#9DA5AB",
+            "strokeWidth": 0,
+          },
+          "base": Object {
+            "display": "inline-block",
+            "height": "24px",
+            "marginLeft": "-5px",
+            "position": "relative",
+            "verticalAlign": "top",
+            "width": "24px",
+          },
+          "height": 14,
+          "width": 14,
+          "wrapper": Object {
+            "height": "14px",
+            "left": "50%",
+            "margin": "-7px 0 0 -7px",
+            "position": "absolute",
+            "top": "50%",
+          },
+        },
+      }
+    }
+  />
+</Styled(ul)>
+`;
