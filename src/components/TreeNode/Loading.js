@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 
-const Ul = styled('ul', {
-    shouldForwardProp: prop => ['className', 'children', 'ref'].indexOf(prop) !== -1
-})(({style}) => style);
+import {Ul} from '../common';
 
 const Loading = ({style, decorators}) => (
     <Ul style={style.subtree}>

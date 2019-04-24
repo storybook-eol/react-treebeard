@@ -6,5 +6,7 @@ module.exports = {
     ],
     testPathIgnorePatterns: [
         '/node_modules/', '<rootDir>/__tests__/setup.js'
-    ]
+    ],
+    snapshotSerializers: ['enzyme-to-json/serializer'],
+    clearMocks: true
 };

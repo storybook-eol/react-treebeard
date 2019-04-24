@@ -1,4 +1,4 @@
-import React, {createRef, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {VelocityComponent} from 'velocity-react';
 
@@ -7,12 +7,6 @@ import Loading from './Loading';
 import Toggle from './Toggle';
 
 class Container extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.velocityRef = createRef();
-        this.clickableRef = createRef();
-    }
-
     renderToggle() {
         const {animations} = this.props;
 
@@ -24,7 +18,7 @@ class Container extends PureComponent {
             <VelocityComponent
                 animation={animations.toggle.animation}
                 duration={animations.toggle.duration}
-                ref={this.velocityRef}>
+            >
                 {this.renderToggleDecorator()}
             </VelocityComponent>
         );
@@ -40,7 +34,6 @@ class Container extends PureComponent {
         return (
             <div
                 onClick={onClick}
-                ref={this.clickableRef}
                 style={Object.assign({}, ...style.container)}>
                 {!terminal ? this.renderToggle() : null}
 

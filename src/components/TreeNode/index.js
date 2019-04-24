@@ -1,9 +1,10 @@
-import React, {createRef, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import {isArray} from 'lodash';
 
 import defaultAnimations from '../../themes/animations';
+import {Ul} from '../common';
 import NodeHeader from '../header';
 import Drawer from './Drawer';
 import Loading from './Loading';
@@ -11,22 +12,11 @@ import Loading from './Loading';
 const Li = styled('li', {
     shouldForwardProp: prop => ['className', 'children', 'ref'].indexOf(prop) !== -1
 })(({style}) => style);
-const Ul = styled('ul', {
-    shouldForwardProp: prop => ['className', 'children', 'ref'].indexOf(prop) !== -1
-})(({style}) => style);
 
 class TreeNode extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.velocityRef = createRef();
-        this.subtreeRef = createRef();
-        this.topLevelRef = createRef();
-    }
-
     onClick() {
         const {node, onToggle} = this.props;
         const {toggled} = node;
-
         if (onToggle) {
             onToggle(node, !toggled);
         }
@@ -47,7 +37,6 @@ class TreeNode extends PureComponent {
     }
 
     decorators() {
-        // Merge Any Node Based Decorators Into The Pack
         const {decorators, node} = this.props;
         let nodeDecorators = node.decorators || {};
 
@@ -65,7 +54,7 @@ class TreeNode extends PureComponent {
 
         const {...restAnimationInfo} = animations.drawer;
         return (
-            <Drawer restAnimationInfo={{...restAnimationInfo}} reference={this.velocityRef}>
+            <Drawer restAnimationInfo={{...restAnimationInfo}}>
                 {toggled ? this.renderChildren(decorators, animations) : null}
             </Drawer>
         );
@@ -86,8 +75,7 @@ class TreeNode extends PureComponent {
         }
 
         return (
-            <Ul style={style.subtree}
-                ref={this.subtreeRef}>
+            <Ul style={style.subtree}>
                 {children.map((child, index) => (
                     <TreeNode
                         {...{onToggle, animations, style}}
@@ -104,10 +92,8 @@ class TreeNode extends PureComponent {
         const {node, style} = this.props;
         const decorators = this.decorators();
         const animations = this.animations();
-
         return (
-            <Li ref={this.topLevelRef}
-                style={style.base}>
+            <Li style={style.base}>
                 <NodeHeader {...{decorators, animations, node, style}} onClick={() => this.onClick()}/>
                 {this.renderDrawer(decorators, animations)}
             </Li>

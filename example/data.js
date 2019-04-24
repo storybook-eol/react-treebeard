@@ -1,7 +1,6 @@
-
-
 export default {
     name: 'react-treebeard',
+    id: 1,
     toggled: true,
     children: [
         {
