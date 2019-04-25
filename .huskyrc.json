@@ -1,5 +1,6 @@
 {
   "hooks": {
-    "commit-msg": "commitlint -e"
+    "commit-msg": "commitlint -e",
+    "pre-push": "npm test"
   }
 }
