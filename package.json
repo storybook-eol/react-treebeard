@@ -8,6 +8,7 @@
     "lib": "npm run babel",
     "babel": "rimraf dist && babel src/ -d dist/",
     "test": "jest --config=jest.config.js",
+    "test:coverage": "jest --config=jest.config.js --coverage",
     "lint": "eslint src/",
     "example": "webpack-dev-server --content-base ./example/ --config ./example/webpack.config.js"
   },

@@ -45,13 +45,6 @@ class TreeNode extends PureComponent {
 
     renderDrawer(decorators, animations) {
         const {toggled} = this.props.node;
-        if (!animations) {
-            if (!toggled) {
-                return null;
-            }
-            return this.renderChildren(decorators, animations);
-        }
-
         const {...restAnimationInfo} = animations.drawer;
         return (
             <Drawer restAnimationInfo={{...restAnimationInfo}}>
