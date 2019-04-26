@@ -43,23 +43,6 @@ class TreeNode extends PureComponent {
         return Object.assign({}, decorators, nodeDecorators);
     }
 
-    renderDrawer(decorators, animations) {
-        const {toggled} = this.props.node;
-        if (!animations) {
-            if (!toggled) {
-                return null;
-            }
-            return this.renderChildren(decorators, animations);
-        }
-
-        const {...restAnimationInfo} = animations.drawer;
-        return (
-            <Drawer restAnimationInfo={{...restAnimationInfo}}>
-                {toggled ? this.renderChildren(decorators, animations) : null}
-            </Drawer>
-        );
-    }
-
     renderChildren(decorators) {
         const {animations, decorators: propDecorators, node, style, onToggle} = this.props;
 
@@ -92,24 +75,27 @@ class TreeNode extends PureComponent {
         const {node, style} = this.props;
         const decorators = this.decorators();
         const animations = this.animations();
+        const {...restAnimationInfo} = animations.drawer;
         return (
             <Li style={style.base}>
                 <NodeHeader {...{decorators, animations, node, style}} onClick={() => this.onClick()}/>
-                {this.renderDrawer(decorators, animations)}
+                <Drawer restAnimationInfo={{...restAnimationInfo}}>
+                    {node.toggled ? this.renderChildren(decorators, animations) : null}
+                </Drawer>
             </Li>
         );
     }
 }
 
 TreeNode.propTypes = {
+    onToggle: PropTypes.func,
     style: PropTypes.object.isRequired,
     node: PropTypes.object.isRequired,
     decorators: PropTypes.object.isRequired,
     animations: PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.bool
-    ]).isRequired,
-    onToggle: PropTypes.func
+    ]).isRequired
 };
 
 export default TreeNode;
