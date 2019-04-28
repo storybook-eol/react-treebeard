@@ -32,17 +32,28 @@ describe('<TreeNode/>', () => {
             simulateClickOnButton(wrapper);
             expect(clickFn()).toEqual(data);
         });
-        test('should return toggled boolean on false', () => {
+        test('should return toggled boolean in false', () => {
             const wrapper = shallow(renderComponent({onToggle: clickFn}));
             clickFn.mockImplementation((node, toggled) => toggled);
             simulateClickOnButton(wrapper);
             expect(clickFn.mock.calls[0][1]).toBe(false);
         });
     });
-    describe('Drawer when toggled is false', () => {
-        test('should be children size equal to zero', () => {
+    describe('Drawer', () => {
+        test('should children size to be equal to zero when toggled is false', () => {
             const wrapper = shallow(renderComponent({node: {...data, toggled: false}}));
             expect(wrapper.find('Drawer').children().length).toBe(0);
+        });
+        test('should return Loading component when node has property loading in true', () => {
+            const wrapper = shallow(renderComponent({node: {id: 1, name: 'test', toggled: true, loading: true}}));
+            const drawer = wrapper.find('Drawer');
+            expect(drawer.find('Loading').exists()).toBe(true)
+        });
+        test('should return seven TreeNode children', () => {
+            const wrapper = shallow(renderComponent());
+            const drawer = wrapper.find('Drawer');
+            const ul = drawer.children();
+            expect(ul.children()).toHaveLength(7);
         })
     });
     describe('animations method', () => {
