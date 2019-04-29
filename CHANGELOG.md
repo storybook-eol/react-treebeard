@@ -1,5 +1,8 @@
 # Change log
 
+### v3.2.2
+- Fix merge styles and destruct styles [PR #194](https://github.com/storybooks/react-treebeard/pull/194)
+
 ### v3.2.1
 - Fix merge styles broken on chrome v74 [PR #118](https://github.com/storybooks/react-treebeard/pull/118)
 
