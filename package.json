@@ -1,6 +1,6 @@
 {
   "name": "react-treebeard",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "React Tree View Component",
   "main": "index.js",
   "scripts": {

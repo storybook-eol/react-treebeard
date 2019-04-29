@@ -1,6 +1,7 @@
 # Change log
 
-### vNEXT
+### v3.2.1
+- Fix merge styles broken on chrome v74 [PR #118](https://github.com/storybooks/react-treebeard/pull/118)
 
 ### v3.2.0
 - Fix active link [PR #147](https://github.com/storybooks/react-treebeard/pull/147)
