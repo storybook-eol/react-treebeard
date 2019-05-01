@@ -27,13 +27,16 @@ class NodeHeader extends Component {
         const {animations, decorators, node, onClick, style} = this.props;
         const {active, children} = node;
         const terminal = !children;
-        const container = Object.assign(style.link, active ? style.activeLink : {});
-        const headerStyles = Object.assign({container}, style);
-
+        let styles;
+        if (active) {
+            styles = Object.assign(style, {container: {...style.link, ...style.activeLink}});
+        } else {
+            styles = style;
+        }
         return (
             <decorators.Container
                 {...{animations, decorators, node, onClick, terminal}}
-                style={headerStyles}
+                style={styles}
             />
         );
     }
