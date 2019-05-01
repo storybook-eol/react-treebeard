@@ -1,5 +1,10 @@
 # Change log
 
+### v3.2.3
+- Fix background when node is active [PR #196](https://github.com/storybooks/react-treebeard/pull/196)
+- Add unit testing (Treebeard, TreeNode and NodeHeader)
+- Add pre-push to husky for run test
+
 ### v3.2.2
 - Fix merge styles and destruct styles [PR #194](https://github.com/storybooks/react-treebeard/pull/194)
 
