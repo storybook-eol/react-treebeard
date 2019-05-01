@@ -5,7 +5,7 @@ import {isArray} from 'lodash';
 
 import defaultAnimations from '../../themes/animations';
 import {Ul} from '../common';
-import NodeHeader from '../header';
+import NodeHeader from '../NodeHeader';
 import Drawer from './Drawer';
 import Loading from './Loading';
 
