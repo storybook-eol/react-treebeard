@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import NodeHeader from '../src/components/header';
+import NodeHeader from '../src/components/NodeHeader';
 import defaultTheme from '../src/themes/default';
 import defaultDecorators from '../src/components/Decorators';
 import defaultAnimations from '../src/themes/animations';
