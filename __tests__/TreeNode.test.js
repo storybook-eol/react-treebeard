@@ -9,22 +9,29 @@ import data from '../example/data';
 
 const onToggle = jest.fn();
 
-const renderComponent = (props = {}) => <TreeNode
-    node={data}
-    decorators={defaultDecorators}
-    animations={defaultAnimations}
-    style={defaultTheme}
-    onToggle={onToggle}
-    {...props}
-/>;
-
-const simulateClickOnHeader = wrapper => wrapper.find('NodeHeader').simulate('click');
+const renderComponent = (props = {}) => {
+    const wrapper = shallow(
+        <TreeNode
+            node={data}
+            decorators={defaultDecorators}
+            animations={defaultAnimations}
+            style={defaultTheme}
+            onToggle={onToggle}
+            {...props}
+        />
+    );
+    wrapper.nodeHeader = () => wrapper.find('NodeHeader');
+    wrapper.drawer = () => wrapper.find('Drawer');
+    wrapper.loading = () => wrapper.drawer().find('Loading');
+    wrapper.simulateClickOnHeader = () => wrapper.nodeHeader().simulate('click');
+    return wrapper;
+};
 
 describe('<TreeNode/>', () => {
     describe('when NodeHeader is clicked', () => {
         it('should call onToggle with the selected node and toggled in false', () => {
-            const wrapper = shallow(renderComponent());
-            simulateClickOnHeader(wrapper);
+            const wrapper = renderComponent();
+            wrapper.simulateClickOnHeader();
             expect(onToggle).toHaveBeenCalled();
             expect(onToggle).toBeCalledWith(data, false);
         });
@@ -33,27 +40,25 @@ describe('<TreeNode/>', () => {
     describe('> <Drawer/>', () => {
         describe('when toggle is false', () => {
             it('should have children.size to be 0', () => {
-                const wrapper = shallow(renderComponent({
+                const wrapper = renderComponent({
                     node: {...data, toggled: false}
-                }));
-                expect(wrapper.find('Drawer').children().length).toBe(0);
+                });
+                expect(wrapper.drawer().children().length).toBe(0);
             });
         });
 
         describe('when node has property loading in true', () => {
             it('should render a Loading component', () => {
-                const wrapper = shallow(renderComponent({
+                const wrapper = renderComponent({
                     node: {id: 1, name: 'test', toggled: true, loading: true}
-                }));
-                const drawer = wrapper.find('Drawer');
-                expect(drawer.find('Loading').exists()).toBe(true);
+                });
+                expect(wrapper.loading().exists()).toBe(true);
             });
         });
 
         it('should return seven TreeNode children', () => {
-            const wrapper = shallow(renderComponent());
-            const drawer = wrapper.find('Drawer');
-            const ul = drawer.children();
+            const wrapper = renderComponent();
+            const ul = wrapper.drawer().children();
             expect(ul.children()).toHaveLength(7);
         });
     });
@@ -63,10 +68,10 @@ describe('<TreeNode/>', () => {
             describe('and toggled is false', () => {
                 describe('and animations is called', () => {
                     it('should return an animation object with rotateZ=0 and duration=0', () => {
-                        const wrapper = shallow(renderComponent({
+                        const wrapper = renderComponent({
                             animations: false,
                             node: {...data, toggled: false}
-                        }));
+                        });
                         const animations = wrapper.instance().animations();
                         expect(animations).toEqual({
                             toggle: {
@@ -81,7 +86,7 @@ describe('<TreeNode/>', () => {
             describe('and toggled is true', () => {
                 describe('and animations is called', () => {
                     it('should return an animation object with rotateZ=90 and duration=0', () => {
-                        const wrapper = shallow(renderComponent({animations: false}));
+                        const wrapper = renderComponent({animations: false});
                         const animations = wrapper.instance().animations();
                         expect(animations).toEqual({
                             toggle: {
@@ -99,7 +104,7 @@ describe('<TreeNode/>', () => {
         describe('when node decorators not exists', () => {
             describe('and decorators is called', () => {
                 it('should return defaultDecorators', () => {
-                    const wrapper = shallow(renderComponent({animations: false}));
+                    const wrapper = renderComponent({animations: false});
                     const decorators = wrapper.instance().decorators();
                     expect(decorators).toEqual(defaultDecorators);
                 });
