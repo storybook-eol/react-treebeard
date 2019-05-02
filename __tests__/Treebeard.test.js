@@ -6,7 +6,7 @@ import Treebeard from '../src/components';
 import data from '../example/data';
 
 describe('<Treebeard/>', () => {
-    test('should render correctly treebeard component with props', () => {
+    it('should match default snapshot', () => {
         const wrapper = shallow(<Treebeard data={castArray(data)}/>);
         expect(wrapper).toMatchSnapshot();
     });
