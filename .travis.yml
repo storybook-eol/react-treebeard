@@ -12,7 +12,8 @@ script:
   - npm run lint
   - npm run test
   - commitlint-travis
-  - npm run lib
+  - npm run build
+  - npm run build-example
 
 notifications:
   email: false

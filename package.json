@@ -4,14 +4,14 @@
   "description": "React Tree View Component",
   "main": "index.js",
   "scripts": {
-    "prepublish": "npm run lib",
-    "lib": "npm run babel",
-    "babel": "rimraf dist && babel src/ -d dist/",
+    "prepublish": "npm run build",
+    "build": "rimraf dist && babel src/ --out-dir dist/",
     "test": "jest --config=jest.config.js",
     "test:watch": "jest --config=jest.config.js --watch",
     "test:coverage": "jest --config=jest.config.js --coverage",
     "lint": "eslint .",
-    "example": "webpack-dev-server --content-base ./example/ --config ./example/webpack.config.js"
+    "example": "webpack-dev-server --content-base ./example/ --config ./example/webpack.config.js",
+    "build-example": "webpack --content-base ./example/ --config ./example/webpack.config.js --output ./dist/example.js"
   },
   "peerDependencies": {
     "@babel/runtime": ">=7.0.0",
@@ -47,7 +47,7 @@
     "@commitlint/travis-cli": "^7.5.2",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
-    "babel-loader": "^7.1.1",
+    "babel-loader": "^8.0.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "del": "^4.1.1",
@@ -71,6 +71,7 @@
     "react-hot-loader": "^4.8.4",
     "rimraf": "^2.6.3",
     "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
