@@ -104,7 +104,7 @@ exports[`<Treebeard/> should match default snapshot 1`] = `
             "name": "themes",
           },
           Object {
-            "name": "Gulpfile.js",
+            "name": "gulpfile.js",
           },
           Object {
             "name": "index.js",

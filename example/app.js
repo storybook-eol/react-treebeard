@@ -15,7 +15,7 @@ const Div = styled('Div', {
 const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
 
 // Example: Customising The Header Decorator To Include Icons
-decorators.Header = ({style, node}) => {
+const Header = ({style, node}) => {
     const iconType = node.children ? 'folder' : 'file-text';
     const iconClass = `fa fa-${iconType}`;
     const iconStyle = {marginRight: '5px'};
@@ -30,6 +30,13 @@ decorators.Header = ({style, node}) => {
         </Div>
     );
 };
+
+Header.propTypes = {
+    node: PropTypes.object,
+    style: PropTypes.object,
+};
+
+decorators.Header = Header;
 
 class NodeViewer extends PureComponent {
     render() {
@@ -49,9 +56,8 @@ NodeViewer.propTypes = {
 };
 
 class DemoTree extends PureComponent {
-    constructor() {
-        super();
-
+    constructor(props) {
+        super(props);
         this.state = {data};
         this.onToggle = this.onToggle.bind(this);
     }
@@ -76,7 +82,7 @@ class DemoTree extends PureComponent {
         if (!filter) {
             return this.setState({data});
         }
-        var filtered = filters.filterTree(data, filter);
+        let filtered = filters.filterTree(data, filter);
         filtered = filters.expandFilteredNodes(filtered, filter);
         this.setState({data: filtered});
     }
@@ -89,18 +95,22 @@ class DemoTree extends PureComponent {
                 <Div style={styles.searchBox}>
                     <Div className="input-group">
                         <span className="input-group-addon">
-                          <i className="fa fa-search"/>
+                            <i className="fa fa-search"/>
                         </span>
-                        <input className="form-control"
-                               onKeyUp={this.onFilterMouseUp.bind(this)}
-                               placeholder="Search the tree..."
-                               type="text"/>
+                        <input
+                            className="form-control"
+                            onKeyUp={this.onFilterMouseUp.bind(this)}
+                            placeholder="Search the tree..."
+                            type="text"
+                        />
                     </Div>
                 </Div>
                 <Div style={styles.component}>
-                    <Treebeard data={stateData}
-                               decorators={decorators}
-                               onToggle={this.onToggle}/>
+                    <Treebeard
+                        data={stateData}
+                        decorators={decorators}
+                        onToggle={this.onToggle}
+                    />
                 </Div>
                 <Div style={styles.component}>
                     <NodeViewer node={cursor}/>

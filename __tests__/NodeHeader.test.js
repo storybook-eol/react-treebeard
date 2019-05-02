@@ -10,7 +10,8 @@ import data from '../example/data';
 const onClick = jest.fn();
 
 const renderComponent = (props = {}) => {
-    const wrapper = shallow(<NodeHeader
+    const wrapper = shallow(
+        <NodeHeader
             node={data}
             decorators={defaultDecorators}
             animations={defaultAnimations}

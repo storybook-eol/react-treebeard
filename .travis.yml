@@ -11,6 +11,8 @@ after_script:
 script:
   - npm run lint
   - npm run test
+  - commitlint-travis
+  - npm run lib
 
 notifications:
   email: false
