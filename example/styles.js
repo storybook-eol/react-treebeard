@@ -1,5 +1,3 @@
-
-
 export default {
     component: {
         width: '50%',

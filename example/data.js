@@ -38,7 +38,7 @@ export default {
                 { name: 'default.js' }
             ]
         },
-        { name: 'Gulpfile.js' },
+        { name: 'gulpfile.js' },
         { name: 'index.js' },
         { name: 'package.json' }
     ]
