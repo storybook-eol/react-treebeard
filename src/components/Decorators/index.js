@@ -34,7 +34,8 @@ class Container extends PureComponent {
         return (
             <div
                 onClick={onClick}
-                style={node.active ? {...style.container} : {...style.link}}>
+                style={node.active ? {...style.container} : {...style.link}}
+            >
                 {!terminal ? this.renderToggle() : null}
                 <decorators.Header node={node} style={style.header}/>
             </div>

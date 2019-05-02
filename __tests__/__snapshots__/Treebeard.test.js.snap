@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Treebeard/> should render correctly treebeard component with props 1`] = `
+exports[`<Treebeard/> should match default snapshot 1`] = `
 <Styled(ul)
   style={
     Object {
