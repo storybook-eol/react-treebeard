@@ -2,3 +2,16 @@ _site
 coverage
 node_modules
 npm-debug.log
+__tests__
+.eslintignore
+.eslintrc.js
+.huskyrc.json
+.travis.yml
+commitlint.config.js
+Gulpfile.js
+index.js
+example
+jest.config.js
+src/
+.idea
+*.md
