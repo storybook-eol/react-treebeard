@@ -9,37 +9,41 @@ import data from '../example/data';
 
 const onClick = jest.fn();
 
-const renderComponent = (props = {}) => <NodeHeader
-    node={data}
-    decorators={defaultDecorators}
-    animations={defaultAnimations}
-    style={defaultTheme}
-    onClick={onClick}
-    {...props}
-/>;
+const renderComponent = (props = {}) => {
+    const wrapper = shallow(<NodeHeader
+            node={data}
+            decorators={defaultDecorators}
+            animations={defaultAnimations}
+            style={defaultTheme}
+            onClick={onClick}
+            {...props}
+        />
+    );
+    wrapper.container = () => wrapper.find('Container');
+
+    return wrapper;
+};
 
 const style = {...defaultTheme.tree.node, ...{activeLink: {background: 'red'}}};
-
-const container = wrapper => wrapper.find('Container');
 
 describe('<NodeHeader/>', () => {
     describe('when node.active is false', () => {
         it('should set Container\'s style prop to own style prop', () => {
-            const wrapper = shallow(renderComponent({
+            const wrapper = renderComponent({
                 node: {...data, active: false},
                 style
-            }));
-            expect(container(wrapper).props().style).toBe(style);
+            });
+            expect(wrapper.container().props().style).toBe(style);
         });
     });
 
     describe('when node.active is true', () => {
         it('should set Container\'s style prop to active link', () => {
-            const wrapper = shallow(renderComponent({
+            const wrapper = renderComponent({
                 node: {...data, active: true},
                 style
-            }));
-            expect(container(wrapper).props().style).toEqual({
+            });
+            expect(wrapper.container().props().style).toEqual({
                 ...style,
                 container: {...style.link, ...style.activeLink}
             });
@@ -48,18 +52,18 @@ describe('<NodeHeader/>', () => {
 
     describe('when node not contains children', () => {
         it('should set Container\'s terminal prop to true', () => {
-            const wrapper = shallow(renderComponent({
+            const wrapper = renderComponent({
                 node: {...data, children: null},
                 style
-            }));
-            expect(container(wrapper).props().terminal).toBe(true);
+            });
+            expect(wrapper.container().props().terminal).toBe(true);
         });
     });
 
     describe('when node contains children', () => {
         it('should set Container\'s terminal prop to false', () => {
-            const wrapper = shallow(renderComponent({style}));
-            expect(container(wrapper).props().terminal).toBe(false);
+            const wrapper = renderComponent({style});
+            expect(wrapper.container().props().terminal).toBe(false);
         });
     });
 });

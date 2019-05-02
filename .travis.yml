@@ -9,6 +9,7 @@ after_script:
   - npm install coveralls && cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls
 
 script:
+  - npm run lint
   - npm run test
 
 notifications:
