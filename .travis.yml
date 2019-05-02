@@ -7,11 +7,11 @@ node_js:
 install:
   - npm install
 
+  script:
+  - npm run test:coverage
+
 after_script:
   - npm install coveralls && cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls
-
-script:
-  - npm run test
 
 notifications:
   email: false
