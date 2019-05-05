@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 import {castArray} from 'lodash';
 
 import Treebeard from '../src/components';
-import data from '../example/data';
+import data from './mocks/data';
 
 const renderComponent = (props = {}) => shallow(
     <Treebeard data={castArray(data)} {...props}/>

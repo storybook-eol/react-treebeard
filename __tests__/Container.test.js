@@ -4,8 +4,8 @@ import {shallow} from 'enzyme';
 import {decorators} from '../src';
 import Container from '../src/components/Decorators/Container';
 import animations from '../src/themes/animations';
-import data from '../example/data';
 import style from '../src/themes/default';
+import data from './mocks/data';
 
 const onClick = jest.fn();
 
