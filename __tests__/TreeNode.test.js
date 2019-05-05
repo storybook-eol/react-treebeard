@@ -5,7 +5,7 @@ import TreeNode from '../src/components/TreeNode';
 import defaultTheme from '../src/themes/default';
 import defaultAnimations from '../src/themes/animations';
 import defaultDecorators from '../src/components/Decorators';
-import data from '../example/data';
+import data from './mocks/data';
 
 const onToggle = jest.fn();
 
@@ -29,15 +29,29 @@ const renderComponent = (props = {}) => {
 
 describe('<TreeNode/>', () => {
     describe('when NodeHeader is clicked', () => {
-        it('should call onToggle with the selected node and toggled in false', () => {
+        it('should call onToggle', () => {
             const wrapper = renderComponent();
             wrapper.simulateClickOnHeader();
             expect(onToggle).toHaveBeenCalled();
-            expect(onToggle).toBeCalledWith(data, false);
+        });
+        describe('and node.toggle is true', () => {
+            it('should return the selected node and toggled in false', () => {
+                const wrapper = renderComponent();
+                wrapper.simulateClickOnHeader();
+                expect(onToggle).toBeCalledWith(data, false);
+            });
+        });
+        describe('and node.toggle is false', () => {
+            it('should return the selected node and toggled in true', () => {
+                const node = {...data, toggled: false};
+                const wrapper = renderComponent({node});
+                wrapper.simulateClickOnHeader();
+                expect(onToggle).toBeCalledWith(node, true);
+            });
         });
     });
 
-    describe('> <Drawer/>', () => {
+    describe('<Drawer/>', () => {
         describe('when toggle is false', () => {
             it('should have children.size to be 0', () => {
                 const wrapper = renderComponent({
@@ -100,7 +114,7 @@ describe('<TreeNode/>', () => {
         });
     });
 
-    describe('> decorators', () => {
+    describe('decorators', () => {
         describe('when node decorators not exists', () => {
             describe('and decorators is called', () => {
                 it('should return defaultDecorators', () => {

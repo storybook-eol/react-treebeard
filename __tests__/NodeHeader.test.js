@@ -5,7 +5,7 @@ import NodeHeader from '../src/components/NodeHeader';
 import defaultTheme from '../src/themes/default';
 import defaultDecorators from '../src/components/Decorators';
 import defaultAnimations from '../src/themes/animations';
-import data from '../example/data';
+import data from './mocks/data';
 
 const onClick = jest.fn();
 
