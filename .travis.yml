@@ -6,14 +6,12 @@ node_js:
   - "12"
 
 after_script:
-  - npm install coveralls && cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls
+  - npm install coveralls && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
 
 script:
   - npm run lint
   - npm run test
   - commitlint-travis
-  - npm run build
-  - npm run build-example
 
 notifications:
   email: false
