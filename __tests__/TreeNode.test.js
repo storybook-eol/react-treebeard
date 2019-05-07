@@ -52,15 +52,22 @@ describe('<TreeNode/>', () => {
     });
 
     describe('<Drawer/>', () => {
-        describe('when toggle is false', () => {
-            it('should have children.size to be 0', () => {
+        describe('when node`s toggle is false', () => {
+            it('should children size equal to 0', () => {
                 const wrapper = renderComponent({
                     node: {...data, toggled: false}
                 });
-                expect(wrapper.drawer().children().length).toBe(0);
+                const drawer = wrapper.drawer();
+                expect(drawer.children()).toHaveLength(0);
             });
         });
-
+        describe('when node`s toggle is false', () => {
+            it('should children size equal to 7', () => {
+                const wrapper = renderComponent();
+                const ul = wrapper.drawer().children();
+                expect(ul.children()).toHaveLength(7);
+            });
+        });
         describe('when node has property loading in true', () => {
             it('should render a Loading component', () => {
                 const wrapper = renderComponent({
@@ -68,12 +75,6 @@ describe('<TreeNode/>', () => {
                 });
                 expect(wrapper.loading().exists()).toBe(true);
             });
-        });
-
-        it('should return seven TreeNode children', () => {
-            const wrapper = renderComponent();
-            const ul = wrapper.drawer().children();
-            expect(ul.children()).toHaveLength(7);
         });
     });
 
