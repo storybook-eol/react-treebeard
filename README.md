@@ -16,9 +16,7 @@ An online example from the `/example` directory can be found here: [Here](http:/
 
 ### Quick Start
 ```javascript
-'use strict';
-
-import React from 'react';
+import React, {PureComponent} from 'react';
 import ReactDOM from 'react-dom';
 import {Treebeard} from 'react-treebeard';
 
@@ -53,19 +51,26 @@ const data = {
     ]
 };
 
-class TreeExample extends React.Component {
+class TreeExample extends PureComponent {
     constructor(props){
         super(props);
-        this.state = {};
-        this.onToggle = this.onToggle.bind(this);
+        this.state = {data};
     }
+    
     onToggle(node, toggled){
-        if(this.state.cursor){this.state.cursor.active = false;}
+        const {cursor, data} = this.state;
+        if (cursor) {
+            this.setState(() => ({cursor, active: false}));
+        }
         node.active = true;
-        if(node.children){ node.toggled = toggled; }
-        this.setState({ cursor: node });
+        if (node.children) { 
+            node.toggled = toggled; 
+        }
+        this.setState(() => ({cursor: node, data: Object.assign({}, data)}));
     }
+    
     render(){
+        const {data} = this.state;
         return (
             <Treebeard
                 data={data}
