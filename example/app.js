@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, {Fragment, PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import {Treebeard, decorators} from '../src/index';
+import {Treebeard, decorators} from '../src';
 import styled from '@emotion/styled';
 
 import data from './data';
@@ -63,10 +63,10 @@ class DemoTree extends PureComponent {
     }
 
     onToggle(node, toggled) {
-        const {cursor} = this.state;
+        const {cursor, data} = this.state;
 
         if (cursor) {
-            cursor.active = false;
+            this.setState(() => ({cursor, active: false}));
         }
 
         node.active = true;
@@ -74,24 +74,23 @@ class DemoTree extends PureComponent {
             node.toggled = toggled;
         }
 
-        this.setState({cursor: node});
+        this.setState(() => ({cursor: node, data: Object.assign({}, data)}));
     }
 
-    onFilterMouseUp(e) {
-        const filter = e.target.value.trim();
+    onFilterMouseUp({target: {value}}) {
+        const filter = value.trim();
         if (!filter) {
-            return this.setState({data});
+            return this.setState(() => ({data}));
         }
         let filtered = filters.filterTree(data, filter);
         filtered = filters.expandFilteredNodes(filtered, filter);
-        this.setState({data: filtered});
+        this.setState(() => ({data: filtered}));
     }
 
     render() {
-        const {data: stateData, cursor} = this.state;
-
+        const {data, cursor} = this.state;
         return (
-            <Div>
+            <Fragment>
                 <Div style={styles.searchBox}>
                     <Div className="input-group">
                         <span className="input-group-addon">
@@ -107,7 +106,7 @@ class DemoTree extends PureComponent {
                 </Div>
                 <Div style={styles.component}>
                     <Treebeard
-                        data={stateData}
+                        data={data}
                         decorators={decorators}
                         onToggle={this.onToggle}
                     />
@@ -115,7 +114,7 @@ class DemoTree extends PureComponent {
                 <Div style={styles.component}>
                     <NodeViewer node={cursor}/>
                 </Div>
-            </Div>
+            </Fragment>
         );
     }
 }
