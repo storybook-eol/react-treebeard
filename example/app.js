@@ -1,59 +1,13 @@
 import React, {Fragment, PureComponent} from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import {Treebeard, decorators} from '../src';
-import styled from '@emotion/styled';
 
+import {Treebeard, decorators} from '../src';
+import {Div} from '../src/components/common';
 import data from './data';
 import styles from './styles';
 import * as filters from './filter';
-
-const Div = styled('Div', {
-    shouldForwardProp: prop => ['className', 'children'].indexOf(prop) !== -1
-})(({style}) => style);
-
-const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
-
-// Example: Customising The Header Decorator To Include Icons
-const Header = ({style, node}) => {
-    const iconType = node.children ? 'folder' : 'file-text';
-    const iconClass = `fa fa-${iconType}`;
-    const iconStyle = {marginRight: '5px'};
-
-    return (
-        <Div style={style.base}>
-            <Div style={style.title}>
-                <i className={iconClass} style={iconStyle}/>
-
-                {node.name}
-            </Div>
-        </Div>
-    );
-};
-
-Header.propTypes = {
-    node: PropTypes.object,
-    style: PropTypes.object,
-};
-
-decorators.Header = Header;
-
-class NodeViewer extends PureComponent {
-    render() {
-        const style = styles.viewer;
-        let json = JSON.stringify(this.props.node, null, 4);
-
-        if (!json) {
-            json = HELP_MSG;
-        }
-
-        return <Div style={style.base}>{json}</Div>;
-    }
-}
-
-NodeViewer.propTypes = {
-    node: PropTypes.object
-};
+import Header from './Header';
+import NodeViewer from './NodeViewer';
 
 class DemoTree extends PureComponent {
     constructor(props) {
@@ -107,7 +61,7 @@ class DemoTree extends PureComponent {
                 <Div style={styles.component}>
                     <Treebeard
                         data={data}
-                        decorators={decorators}
+                        decorators={{...decorators, Header}}
                         onToggle={this.onToggle}
                     />
                 </Div>
