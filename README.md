@@ -84,6 +84,34 @@ const content = document.getElementById('content');
 ReactDOM.render(<TreeExample/>, content);
 ```
 
+If you use react-hooks you should do something like this:
+```javascript
+import React, {useState} from 'react';
+const TreeExample = () => {
+    const [data, setData] = useState(data);
+    const [cursor, setCursor] = useState(false);
+    
+    const onToggle = (node, toggled) => {
+        if (cursor) {
+            cursor.active = false;
+        }
+        node.active = true;
+        if (node.children) {
+            node.toggled = toggled;
+        }
+        setCursor(node);
+        setData(Object.assign({}, data))
+    }
+    
+    return (
+       <Treebeard data={data} onToggle={onToggle}/>
+    )
+}
+
+const content = document.getElementById('content');
+ReactDOM.render(<TreeExample/>, content);
+```
+
 ### Prop Values
 
 #### data
