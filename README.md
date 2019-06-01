@@ -12,7 +12,7 @@ npm install react-treebeard --save
 
 ### [Example](http://storybookjs.github.io/react-treebeard/)
 
-An online example from the `/example` directory can be found here: [Here](http://storybooks.github.io/react-treebeard/)
+An online example from the `/example` directory can be found here: [Here](http://storybookjs.github.io/react-treebeard/)
 
 ### Quick Start
 ```javascript
