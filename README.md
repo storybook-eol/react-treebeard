@@ -55,6 +55,7 @@ class TreeExample extends PureComponent {
     constructor(props){
         super(props);
         this.state = {data};
+        this.onToggle = this.onToggle.bind(this);
     }
     
     onToggle(node, toggled){
