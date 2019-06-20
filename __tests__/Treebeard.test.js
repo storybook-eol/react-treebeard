@@ -1,13 +1,16 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {castArray} from 'lodash';
 
 import Treebeard from '../src/components';
 import data from './mocks/data';
 
-const renderComponent = (props = {}) => shallow(
-    <Treebeard data={castArray(data)} {...props}/>
-);
+const renderComponent = (props = {}) => {
+    const wrapper = shallow(
+        <Treebeard data={props.data || data} {...props}/>
+    );
+    wrapper.treeNode = () => wrapper.find('TreeNode');
+    return wrapper;
+};
 
 describe('<Treebeard/>', () => {
     it('should match default snapshot', () => {
