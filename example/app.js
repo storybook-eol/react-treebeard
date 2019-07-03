@@ -14,10 +14,11 @@ class DemoTree extends PureComponent {
         super(props);
         this.state = {data};
         this.onToggle = this.onToggle.bind(this);
+        this.onClickHeader = this.onClickHeader.bind(this);
     }
 
     onToggle(node, toggled) {
-        const {cursor, data} = this.state;
+        const {data, cursor} = this.state;
 
         if (cursor) {
             this.setState(() => ({cursor, active: false}));
@@ -28,7 +29,11 @@ class DemoTree extends PureComponent {
             node.toggled = toggled;
         }
 
-        this.setState(() => ({cursor: node, data: Object.assign({}, data)}));
+        this.setState(() => ({data: Object.assign({}, data)}));
+    }
+
+    onClickHeader(node) {
+        this.setState(() => ({cursor: node}));
     }
 
     onFilterMouseUp({target: {value}}) {
@@ -62,7 +67,9 @@ class DemoTree extends PureComponent {
                     <Treebeard
                         data={data}
                         decorators={{...decorators, Header}}
+                        separateToggleEvent={true}
                         onToggle={this.onToggle}
+                        onClickHeader={this.onClickHeader}
                     />
                 </Div>
                 <Div style={styles.component}>

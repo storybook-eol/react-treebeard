@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import {Div} from '../common';
 
-const Header = ({node, style}) => (
-    <Div style={style.base}>
+const Header = ({node, style, onClick}) => (
+    <Div style={style.base} onClick={onClick ? () => onClick() : null}>
         <Div style={style.title}>
             {node.name}
         </Div>
@@ -13,7 +13,8 @@ const Header = ({node, style}) => (
 
 Header.propTypes = {
     style: PropTypes.object,
-    node: PropTypes.object.isRequired
+    node: PropTypes.object.isRequired,
+    onClick: PropTypes.func,
 };
 
 export default Header;

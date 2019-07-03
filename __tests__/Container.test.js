@@ -14,6 +14,9 @@ const renderComponent = (props = {}) => {
         {...{decorators, onClick, animations}}
         node={data}
         style={style.tree.node}
+        onClick={onClick}
+        onClickToggle={onClick}
+        onClickHeader={onClick}
         {...props}
     />);
     wrapper.Toggle = () => wrapper.find('Toggle');
@@ -28,7 +31,11 @@ describe('<Container/>', () => {
             expect(
                 wrapper
                     .children()
-                    .contains(<decorators.Header node={data} style={style.tree.node.header}/>)
+                    .contains(<decorators.Header
+                      node={data}
+                      style={style.tree.node.header}
+                      onClick={onClick}
+                        />)
             ).toBe(true);
         });
     });

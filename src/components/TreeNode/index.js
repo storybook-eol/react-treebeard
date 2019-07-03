@@ -11,10 +11,18 @@ import Drawer from './Drawer';
 import Loading from './Loading';
 
 const Li = styled('li', {
-    shouldForwardProp: prop => ['className', 'children', 'ref'].indexOf(prop) !== -1
+    shouldForwardProp: prop => ['className', 'children', 'ref'].indexOf(prop) !== -1,
 })(({style}) => style);
 
 class TreeNode extends PureComponent {
+
+    constructor() {
+        super();
+        this.onClick = this.onClick.bind(this);
+        this.onClickToggle = this.onClickToggle.bind(this);
+        this.onClickHeader = this.onClickHeader.bind(this);
+    }
+
     onClick() {
         const {node, onToggle} = this.props;
         const {toggled} = node;
@@ -23,17 +31,32 @@ class TreeNode extends PureComponent {
         }
     }
 
+    onClickToggle() {
+        const {node, onToggle} = this.props;
+        if (onToggle) {
+            const {toggled} = node;
+            onToggle(node, !toggled);
+        }
+    }
+
+    onClickHeader() {
+        const {node, onClickHeader} = this.props;
+        if (onClickHeader) {
+            onClickHeader(node);
+        }
+    }
+
     animations() {
         const {animations, node} = this.props;
         if (!animations) {
             return {
-                toggle: defaultAnimations.toggle(this.props, 0)
+                toggle: defaultAnimations.toggle(this.props, 0),
             };
         }
         const animation = Object.assign({}, animations, node.animations);
         return {
             toggle: animation.toggle(this.props),
-            drawer: animation.drawer(this.props)
+            drawer: animation.drawer(this.props),
         };
     }
 
@@ -45,7 +68,14 @@ class TreeNode extends PureComponent {
     }
 
     renderChildren(decorators) {
-        const {animations, decorators: propDecorators, node, style, onToggle} = this.props;
+        const {
+            animations, decorators: propDecorators,
+            node,
+            style,
+            separateToggleEvent,
+            onToggle,
+            onClickHeader,
+        } = this.props;
 
         if (node.loading) {
             return (
@@ -62,7 +92,7 @@ class TreeNode extends PureComponent {
             <Ul style={style.subtree}>
                 {children.map(child => (
                     <TreeNode
-                        {...{onToggle, animations, style}}
+                        {...{separateToggleEvent, onToggle, onClickHeader, animations, style}}
                         decorators={propDecorators}
                         key={child.id || randomString()}
                         node={child}
@@ -73,13 +103,18 @@ class TreeNode extends PureComponent {
     }
 
     render() {
-        const {node, style} = this.props;
+        const {node, style, separateToggleEvent} = this.props;
         const decorators = this.decorators();
         const animations = this.animations();
         const {...restAnimationInfo} = animations.drawer;
         return (
             <Li style={style.base}>
-                <NodeHeader {...{decorators, animations, node, style}} onClick={() => this.onClick()}/>
+                <NodeHeader
+                    {...{decorators, animations, node, style}}
+                    onClick={separateToggleEvent ? null : () => this.onClick()}
+                    onClickHeader={separateToggleEvent ? () => this.onClickHeader() : null}
+                    onClickToggle={separateToggleEvent ? () => this.onClickToggle() : null}
+                />
                 <Drawer restAnimationInfo={{...restAnimationInfo}}>
                     {node.toggled ? this.renderChildren(decorators, animations) : null}
                 </Drawer>
@@ -89,14 +124,16 @@ class TreeNode extends PureComponent {
 }
 
 TreeNode.propTypes = {
+    separateToggleEvent: PropTypes.bool,
     onToggle: PropTypes.func,
+    onClickHeader: PropTypes.func,
     style: PropTypes.object.isRequired,
     node: PropTypes.object.isRequired,
     decorators: PropTypes.object.isRequired,
     animations: PropTypes.oneOfType([
         PropTypes.object,
-        PropTypes.bool
-    ]).isRequired
+        PropTypes.bool,
+    ]).isRequired,
 };
 
 export default TreeNode;

@@ -21,19 +21,22 @@ class Container extends PureComponent {
     }
 
     renderToggleDecorator() {
-        const {style, decorators} = this.props;
-        return <decorators.Toggle style={style.toggle}/>;
+        const {style, decorators, onClickToggle} = this.props;
+        return <decorators.Toggle style={style.toggle} onClick={onClickToggle ? () => onClickToggle() : null}/>;
     }
 
     render() {
-        const {style, decorators, terminal, onClick, node} = this.props;
+        const {style, decorators, terminal, onClick, onClickHeader, node} = this.props;
         return (
             <div
-                onClick={onClick}
+                onClick={onClick ? () => onClick() : null}
                 style={node.active ? {...style.container} : {...style.link}}
             >
                 {!terminal ? this.renderToggle() : null}
-                <decorators.Header node={node} style={style.header}/>
+                <decorators.Header
+                    node={node}
+                    style={style.header}
+                    onClick={onClickHeader} />
             </div>
         );
     }
@@ -43,12 +46,14 @@ Container.propTypes = {
     style: PropTypes.object.isRequired,
     decorators: PropTypes.object.isRequired,
     terminal: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
+    onClickToggle: PropTypes.func,
+    onClickHeader: PropTypes.func,
     animations: PropTypes.oneOfType([
         PropTypes.object,
-        PropTypes.bool
+        PropTypes.bool,
     ]).isRequired,
-    node: PropTypes.object.isRequired
+    node: PropTypes.object.isRequired,
 };
 
 export default Container;
