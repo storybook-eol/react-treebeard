@@ -21,6 +21,7 @@ exports[`<Treebeard/> should match default snapshot 1`] = `
         "toggle": [Function],
       }
     }
+    customStyles={Object {}}
     decorators={
       Object {
         "Container": [Function],

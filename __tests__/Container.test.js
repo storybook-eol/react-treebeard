@@ -8,11 +8,15 @@ import style from '../src/themes/default';
 import data from './mocks/data';
 
 const onClick = jest.fn();
+const onSelect = jest.fn();
 
 const renderComponent = (props = {}) => {
     const wrapper = shallow(<Container
-        {...{decorators, onClick, animations}}
         node={data}
+        decorators={decorators}
+        onClick={onClick}
+        animations={animations}
+        onSelect={onSelect}
         style={style.tree.node}
         {...props}
     />);
@@ -28,7 +32,9 @@ describe('<Container/>', () => {
             expect(
                 wrapper
                     .children()
-                    .contains(<decorators.Header node={data} style={style.tree.node.header}/>)
+                    .contains(
+                        <decorators.Header node={data} style={style.tree.node.header}/>
+                    )
             ).toBe(true);
         });
     });

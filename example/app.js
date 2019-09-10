@@ -1,5 +1,6 @@
 import React, {Fragment, PureComponent} from 'react';
 import ReactDOM from 'react-dom';
+import {includes} from 'lodash';
 
 import {Treebeard, decorators} from '../src';
 import {Div} from '../src/components/common';
@@ -14,6 +15,7 @@ class DemoTree extends PureComponent {
         super(props);
         this.state = {data};
         this.onToggle = this.onToggle.bind(this);
+        this.onSelect = this.onSelect.bind(this);
     }
 
     onToggle(node, toggled) {
@@ -27,6 +29,22 @@ class DemoTree extends PureComponent {
         if (node.children) {
             node.toggled = toggled;
         }
+
+        this.setState(() => ({cursor: node, data: Object.assign({}, data)}));
+    }
+
+    onSelect(node) {
+        const {cursor, data} = this.state;
+
+        if (cursor) {
+            this.setState(() => ({cursor, active: false}));
+            if (!includes(cursor.children, node)) {
+                cursor.toggled = false;
+                cursor.selected = false;
+            }
+        }
+
+        node.selected = true;
 
         this.setState(() => ({cursor: node, data: Object.assign({}, data)}));
     }
@@ -61,8 +79,16 @@ class DemoTree extends PureComponent {
                 <Div style={styles.component}>
                     <Treebeard
                         data={data}
-                        decorators={{...decorators, Header}}
                         onToggle={this.onToggle}
+                        onSelect={this.onSelect}
+                        decorators={{...decorators, Header}}
+                        customStyles={{
+                            header: {
+                                title: {
+                                    color: 'red'
+                                }
+                            }
+                        }}
                     />
                 </Div>
                 <Div style={styles.component}>
