@@ -8,23 +8,24 @@ const Polygon = styled('polygon', {
     shouldForwardProp: prop => ['className', 'children', 'points'].indexOf(prop) !== -1
 })((({style}) => style));
 
-const Toggle = ({style}) => {
+const Toggle = ({style, onClick}) => {
     const {height, width} = style;
     const midHeight = height * 0.5;
     const points = `0,0 0,${height} ${width},${midHeight}`;
 
     return (
-        <Div style={style.base}>
+        <div style={style.base} onClick={onClick}>
             <Div style={style.wrapper}>
                 <svg {...{height, width}}>
                     <Polygon points={points} style={style.arrow}/>
                 </svg>
             </Div>
-        </Div>
+        </div>
     );
 };
 
 Toggle.propTypes = {
+    onClick: PropTypes.func.isRequired,
     style: PropTypes.object
 };
 
