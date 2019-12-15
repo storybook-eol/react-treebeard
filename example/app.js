@@ -1,6 +1,6 @@
 import React, {Fragment, PureComponent} from 'react';
 import ReactDOM from 'react-dom';
-import {includes} from 'lodash';
+import includes from 'lodash/includes';
 
 import {Treebeard, decorators} from '../src';
 import {Div} from '../src/components/common';

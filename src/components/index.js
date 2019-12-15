@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {castArray} from 'lodash';
+import castArray from 'lodash/castArray';
 
 import defaultTheme from '../themes/default';
 import defaultAnimations from '../themes/animations';
