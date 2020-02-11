@@ -115,7 +115,7 @@ exports[`<Treebeard/> should match default snapshot 1`] = `
           },
         ],
         "id": 1,
-        "name": "react-treebeard",
+        "name": "react-filetree-lite",
         "toggled": true,
       }
     }

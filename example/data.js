@@ -1,5 +1,5 @@
 export default {
-    name: 'react-treebeard',
+    name: 'react-filetree-lite',
     id: 1,
     toggled: true,
     children: [

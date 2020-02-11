@@ -1,24 +1,29 @@
-# react-treebeard
+# react-filetree-lite
 
-[![Build Status](https://travis-ci.org/storybookjs/react-treebeard.svg?branch=master)](https://travis-ci.org/storybookjs/react-treebeard) [![Coverage Status](https://coveralls.io/repos/storybookjs/react-treebeard/badge.svg?branch=master&service=github)](https://coveralls.io/github/storybookjs/react-treebeard?branch=master)
+[![Build Status](https://travis-ci.org/kaushiknishchay/react-treebeard.svg?branch=master)](https://travis-ci.org/kaushiknishchay/react-treebeard) 
+
+[![Bundle size](https://badgen.net/bundlephobia/minzip/react-filetree-lite)]()
+
+[![Coverage Status](https://coveralls.io/repos/kaushiknishchay/react-treebeard/badge.svg?branch=master&service=github)](https://coveralls.io/github/kaushiknishchay/react-treebeard?branch=master)
+
+
+
+## It is forked version of react-treebeard. This build has been optimized so that the package size is minimum.
 
 React Tree View Component. Data-Driven, Fast, Efficient and Customisable.
+
 
 ### Install
 
 ```
-npm install react-treebeard --save
+npm install react-filetree-lite --save
 ```
-
-### [Example](http://storybookjs.github.io/react-treebeard/)
-
-An online example from the `/example` directory can be found here: [Here](http://storybookjs.github.io/react-treebeard/)
 
 ### Quick Start
 ```javascript
 import React, {PureComponent} from 'react';
 import ReactDOM from 'react-dom';
-import {Treebeard} from 'react-treebeard';
+import {Treebeard} from 'react-filetree-lite';
 
 const data = {
     name: 'root',
