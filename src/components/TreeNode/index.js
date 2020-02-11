@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import {isArray, isFunction} from 'lodash';
+import isArray from 'lodash/isArray';
+import isFunction from 'lodash/isFunction';
 
 import defaultAnimations from '../../themes/animations';
 import {randomString} from '../../util';
