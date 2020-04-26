@@ -18,6 +18,7 @@ const renderComponent = (props = {}) => {
         animations={animations}
         onSelect={onSelect}
         style={style.tree.node}
+        depth={0}
         {...props}
     />);
     wrapper.Toggle = () => wrapper.find('Toggle');
@@ -33,7 +34,7 @@ describe('<Container/>', () => {
                 wrapper
                     .children()
                     .contains(
-                        <decorators.Header node={data} style={style.tree.node.header}/>
+                        <decorators.Header onSelect={onSelect} depth={0} node={data} style={style.tree.node.header}/>
                     )
             ).toBe(true);
         });

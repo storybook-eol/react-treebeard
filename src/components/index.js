@@ -18,6 +18,7 @@ const TreeBeard = ({
                 decorators={decorators}
                 node={node}
                 onToggle={onToggle}
+                depth={0}
                 animations={animations}
                 onSelect={onSelect}
                 customStyles={customStyles}

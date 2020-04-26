@@ -17,6 +17,7 @@ const renderComponent = (props = {}) => {
             animations={defaultAnimations}
             style={defaultTheme}
             onClick={onClick}
+            depth={0}
             {...props}
         />
     );

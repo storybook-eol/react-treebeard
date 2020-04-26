@@ -15,7 +15,8 @@ Header.propTypes = {
     onSelect: PropTypes.func,
     style: PropTypes.object,
     customStyles: PropTypes.object,
-    node: PropTypes.object.isRequired
+    node: PropTypes.object.isRequired,
+    depth: PropTypes.number.isRequired,
 };
 
 Header.defaultProps = {

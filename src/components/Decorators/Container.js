@@ -24,12 +24,13 @@ class Container extends PureComponent {
 
     render() {
         const {
-            style, decorators, terminal, node, onSelect, customStyles
+            style, decorators, terminal, node, onSelect, customStyles, depth
         } = this.props;
         return (
             <div style={node.active ? {...style.container} : {...style.link}}>
                 {!terminal ? this.renderToggle() : null}
-                <decorators.Header node={node} style={style.header} customStyles={customStyles} onSelect={onSelect}/>
+                <decorators.Header
+                    node={node} style={style.header} customStyles={customStyles} onSelect={onSelect} depth={depth}/>
             </div>
         );
     }
@@ -46,7 +47,8 @@ Container.propTypes = {
         PropTypes.object,
         PropTypes.bool
     ]).isRequired,
-    node: PropTypes.object.isRequired
+    node: PropTypes.object.isRequired,
+    depth: PropTypes.number.isRequired,
 };
 
 Container.defaultProps = {

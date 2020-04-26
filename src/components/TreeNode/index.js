@@ -45,7 +45,7 @@ class TreeNode extends PureComponent {
 
     renderChildren(decorators) {
         const {
-            animations, decorators: propDecorators, node, style, onToggle, onSelect, customStyles
+            animations, decorators: propDecorators, node, style, onToggle, onSelect, customStyles, depth
         } = this.props;
 
         if (node.loading) {
@@ -64,6 +64,7 @@ class TreeNode extends PureComponent {
                 {children.map(child => (
                     <TreeNode
                         onSelect={onSelect}
+                        depth={depth + 1}
                         onToggle={onToggle}
                         animations={animations}
                         style={style}
@@ -79,7 +80,7 @@ class TreeNode extends PureComponent {
 
     render() {
         const {
-            node, style, onSelect, customStyles
+            node, style, onSelect, customStyles, depth
         } = this.props;
         const decorators = this.decorators();
         const animations = this.animations();
@@ -90,6 +91,7 @@ class TreeNode extends PureComponent {
                     decorators={decorators}
                     animations={animations}
                     node={node}
+                    depth={depth}
                     style={style}
                     customStyles={customStyles}
                     onClick={() => this.onClick()}
@@ -107,6 +109,7 @@ TreeNode.propTypes = {
     onSelect: PropTypes.func,
     onToggle: PropTypes.func,
     style: PropTypes.object.isRequired,
+    depth: PropTypes.number.isRequired,
     customStyles: PropTypes.object,
     node: PropTypes.object.isRequired,
     decorators: PropTypes.object.isRequired,

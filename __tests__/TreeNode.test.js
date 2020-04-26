@@ -17,6 +17,7 @@ const renderComponent = (props = {}) => {
             animations={defaultAnimations}
             style={defaultTheme}
             onToggle={onToggle}
+            depth={0}
             {...props}
         />
     );
@@ -123,6 +124,14 @@ describe('<TreeNode/>', () => {
                     expect(decorators).toEqual(defaultDecorators);
                 });
             });
+        });
+    });
+
+    describe('depth', () => {
+        it('should propagate depth', () => {
+            const wrapper = renderComponent({animations: false});
+            expect(wrapper.nodeHeader().prop('depth')).toBe(0);
+            expect(wrapper.drawer().children().children('TreeNode').first().prop('depth')).toBe(1);
         });
     });
 });

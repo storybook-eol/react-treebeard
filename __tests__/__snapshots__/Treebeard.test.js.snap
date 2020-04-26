@@ -45,6 +45,7 @@ exports[`<Treebeard/> should match default snapshot 1`] = `
         "Toggle": [Function],
       }
     }
+    depth={0}
     key="1"
     node={
       Object {
