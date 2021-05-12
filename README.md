@@ -179,6 +179,17 @@ const decorators = {
 <Treebeard data={...} decorators={decorators}/>
 ```
 
+#### makeKeyProp
+Optional prop to generate your own [React key props](https://reactjs.org/docs/lists-and-keys.html). Function that takes the node as the only param. Example:
+```jsx
+<Treebeard
+    data={data}
+    onToggle={this.onToggle}
+    onSelect={this.onSelect}
+    makeKeyProp={(node) => node.yourUniqueId}
+/>
+```
+
 ### Data Attributes
 
 ```javascript

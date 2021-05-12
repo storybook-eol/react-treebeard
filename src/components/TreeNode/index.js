@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import {isArray, isFunction} from 'lodash';
 
 import defaultAnimations from '../../themes/animations';
-import {randomString} from '../../util';
+import {makeKeyProp} from '../../util';
 import {Ul} from '../common';
 import NodeHeader from '../NodeHeader';
 import Drawer from './Drawer';
@@ -45,7 +45,7 @@ class TreeNode extends PureComponent {
 
     renderChildren(decorators) {
         const {
-            animations, decorators: propDecorators, node, style, onToggle, onSelect, customStyles
+            animations, decorators: propDecorators, node, style, onToggle, onSelect, customStyles, makeKeyProp
         } = this.props;
 
         if (node.loading) {
@@ -69,7 +69,7 @@ class TreeNode extends PureComponent {
                         style={style}
                         customStyles={customStyles}
                         decorators={propDecorators}
-                        key={child.id || randomString()}
+                        key={makeKeyProp(child)}
                         node={child}
                     />
                 ))}
@@ -113,11 +113,13 @@ TreeNode.propTypes = {
     animations: PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.bool
-    ]).isRequired
+    ]).isRequired,
+    makeKeyProp: PropTypes.func
 };
 
 TreeNode.defaultProps = {
-    customStyles: {}
+    customStyles: {},
+    makeKeyProp
 };
 
 export default TreeNode;
