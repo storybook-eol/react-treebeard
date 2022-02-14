@@ -4,13 +4,13 @@ import {castArray} from 'lodash';
 
 import defaultTheme from '../themes/default';
 import defaultAnimations from '../themes/animations';
-import {randomString} from '../util';
+import {makeKeyProp} from '../util';
 import {Ul} from './common';
 import defaultDecorators from './Decorators';
 import TreeNode from './TreeNode';
 
 const TreeBeard = ({
-    animations, decorators, data, onToggle, style, onSelect, customStyles
+    animations, decorators, data, onToggle, style, onSelect, customStyles, makeKeyProp
 }) => (
     <Ul style={{...defaultTheme.tree.base, ...style.tree.base}}>
         {castArray(data).map(node => (
@@ -21,7 +21,8 @@ const TreeBeard = ({
                 animations={animations}
                 onSelect={onSelect}
                 customStyles={customStyles}
-                key={node.id || randomString()}
+                makeKeyProp={makeKeyProp}
+                key={makeKeyProp(node)}
                 style={{...defaultTheme.tree.node, ...style.tree.node}}
             />
         ))}
@@ -41,14 +42,16 @@ TreeBeard.propTypes = {
     ]),
     onToggle: PropTypes.func,
     onSelect: PropTypes.func,
-    decorators: PropTypes.object
+    decorators: PropTypes.object,
+    makeKeyProp: PropTypes.func
 };
 
 TreeBeard.defaultProps = {
     style: defaultTheme,
     animations: defaultAnimations,
     decorators: defaultDecorators,
-    customStyles: {}
+    customStyles: {},
+    makeKeyProp
 };
 
 export default TreeBeard;

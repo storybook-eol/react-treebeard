@@ -1,3 +1,7 @@
+import makeKeyProp from './makeKeyProp';
 import randomString from './randomString';
 
-export {randomString};
+export {
+    makeKeyProp,
+    randomString
+};

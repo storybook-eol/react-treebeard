@@ -29,13 +29,7 @@ describe('<Container/>', () => {
     describe('when terminal is true', () => {
         it('should contains a decorators.Header into their children', () => {
             const wrapper = renderComponent({terminal: true});
-            expect(
-                wrapper
-                    .children()
-                    .contains(
-                        <decorators.Header node={data} style={style.tree.node.header}/>
-                    )
-            ).toBe(true);
+            expect(wrapper.find('Header').dive().text()).toBe('react-treebeard');
         });
     });
     describe('when terminal is false', () => {
